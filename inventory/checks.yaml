@@ -1,6 +1,5 @@
 # Uptime/Rundeck check catalog: defaults and checks only.
 # Groups and NetBox: inventory/inventory.yaml (Ansible format).
-# Manual nodes: rundeck/resources/nodes.local.yaml (tags + hc_ping_* from hc-provision).
 #
 # Each check: path = script relative to SCM_BASE_DIR (resolved at runtime).
 # Stable id for tags/jobs/Uptime = basename without extension (stem).
@@ -18,10 +17,10 @@ defaults:
     workflow_strategy: node-first
     sequence_keepgoing: false
   python_bastion:
-    username: hcuser
-    hostname: 127.0.0.1
-    port: 8022
-    ssh_key_storage_path: keys/project/healthchecks/python-bastion/hcuser.key
+    username: houston
+    hostname: python_bastion
+    port: 22
+    ssh_key_storage_path: keys/project/houston/python-bastion/houston.key
 
 checks:
   - path: check-shell/apt_unattended_upgrades_disabled.sh
