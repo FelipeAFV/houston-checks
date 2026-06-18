@@ -1,0 +1,57 @@
+# houston-provision configuration (non-secret). Edit in Git; not overridden by env.
+# Secrets via env / Key Storage: UPTIME_API_TOKEN, NETBOX_TOKEN,
+# SCM_GIT_PASSWORD.
+# rundeck_scripts_dir defaults to {scm.base_dir}/rundeck/provisioning/scripts when omitted.
+
+scm:
+  base_dir: /home/rundeck/server/data/provision
+  auto_push: true
+  git_username: rundeck
+
+provision:
+  dry_run: false
+  check_script_base: /var/tmp/rundeck
+
+uptime:
+  grace: 3600
+  tz: UTC
+  api_base_url: http://127.0.0.1:3000
+  ui_public_root: http://127.0.0.1:3000
+  ping_base_url: http://127.0.0.1:3000
+  upsert_workers: 4
+
+rundeck:
+  resources_path: ""
+  job_group: houston
+  job_group_groups: houston-groups
+  jobs:
+    job_timeout: 20m
+    ssh_connect_timeout_ms: 60000
+    ssh_command_timeout_ms: 300000
+    node_threadcount: 10
+    workflow_strategy: node-first
+    sequence_keepgoing: false
+
+netbox:
+  url: https://whiteinventory-provcluster.buit.tcloud.telefonica.co
+  curl_secure: false
+  curl_max_time: 180
+  curl_connect_timeout: 30
+
+python_bastion:
+  username: houston
+  hostname: python_bastion
+  port: 22
+  ssh_key_storage_path: keys/project/houston/python-bastion/houston.key
+
+ssh:
+  key_storage_default: keys/project/houston/cobuit/prov.key
+  key_storage_by_site:
+    cobuit: keys/project/houston/cobuit/prov.key
+    cotobe: keys/project/houston/cotobe/prov.key
+
+switch_ssh:
+  username: ocnos
+  port: 22
+  request_tty: true
+  password_key_storage_path: keys/project/houston/switch/ocnos.password

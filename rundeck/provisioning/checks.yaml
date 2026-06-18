@@ -1,0 +1,16 @@
+# Uptime/Rundeck check catalog: checks only.
+# Operational defaults: rundeck/provisioning/config.yaml.
+# Groups and NetBox: rundeck/provisioning/inventory.yaml (Ansible format).
+#
+# Each check: path = script relative to SCM_BASE_DIR (resolved at runtime).
+# Stable id for tags/jobs/Uptime = basename without extension (stem).
+
+checks:
+  - path: check-shell/apt_unattended_upgrades_disabled.sh
+    schedule: "30 11 * * *"
+    groups: [storage-server, provisioning-server]
+
+  - path: check-shell/ufw.sh
+    schedule: "*/15 * * * *"
+    grace: 900
+    groups: [provisioning-server]

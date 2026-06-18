@@ -1,0 +1,63 @@
+- defaultTab: nodes
+  description: |
+    Provision checks to Uptime and Rundeck from this repo.
+
+    Non-secret settings: rundeck/provisioning/config.yaml (committed in Git).
+    Secrets (job options / Key Storage): UPTIME_API_TOKEN,
+    NETBOX_TOKEN, SCM_GIT_PASSWORD.
+
+    SCM_BASE_DIR locates the Git checkout (rundeck/provisioning/config.yaml). Default matches
+    Rundeck Git SCM Import Base Directory.
+  executionEnabled: true
+  group: houston-system
+  loglevel: INFO
+  name: houston-provision
+  scheduleEnabled: true
+  schedule:
+    time:
+      hour: '*/6'
+      minute: '15'
+      seconds: '0'
+    weekday:
+      day: '*'
+    month: '*'
+    year: '*'
+  nodefilters:
+    dispatch:
+      keepgoing: false
+      threadcount: '1'
+    filter: 'name: local'
+  options:
+    - name: SCM_BASE_DIR
+      description: |
+        Git SCM checkout path (must contain rundeck/provisioning/config.yaml).
+        Default on rundeck-data volume: /home/rundeck/server/data/provision.
+      value: /home/rundeck/server/data/provision
+      required: true
+    - name: UPTIME_API_TOKEN
+      description: Uptime API token (write scope). Key Storage keys/project/houston/provision/UPTIME_API_TOKEN.
+      storagePath: keys/project/houston/provision/UPTIME_API_TOKEN
+      secure: true
+      valueExposed: true
+      required: true
+    - name: NETBOX_TOKEN
+      description: NetBox API token when inventory uses NETBOX role groups and netbox_url is set in config.yaml.
+      value: ''
+      secure: true
+      valueExposed: true
+      required: false
+    - name: SCM_GIT_PASSWORD
+      description: Git HTTPS token for scm_auto_push (Key Storage).
+      storagePath: keys/project/houston/git_password
+      secure: true
+      valueExposed: true
+      required: false
+  sequence:
+    strategy: node-first
+    keepgoing: false
+    commands:
+      - description: Run houston-provision (reads rundeck/provisioning/config.yaml).
+        nodeStep: true
+        type: localexec
+        configuration:
+          command: /home/rundeck/server/data/provision/rundeck/provisioning/scripts/run-provision.sh

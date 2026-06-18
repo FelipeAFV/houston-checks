@@ -1,0 +1,87 @@
+# Ansible-style inventory: groups (tags), provision vars, and optional static hosts.
+# Check catalog: rundeck/provisioning/checks.yaml (defaults + checks referencing group names below).
+#
+# NetBox role groups (all.children): group id = NetBox device role slug (e.g. storage-server).
+# Switches add vars.netbox_kind: switch. Logical-only groups use vars.local_only: true.
+# houston-provision derives role_slugs / switch_role_slugs from those group ids.
+#
+# Vars merge Ansible-style: all.vars → group.vars (override) → host vars.
+# Example: border-leaf-switch.vars.switch_ssh.username overrides all.vars.switch_ssh.
+
+---
+all:
+  children:
+    openstack_lab:
+      vars:
+        local_only: true
+        tags: [OPENSTACK]
+      hosts: {}
+    web_servers:
+      vars:
+        local_only: true
+        tags: [WEB_SERVERS]
+      hosts: {}
+    border-leaf-switch:
+      vars:
+        netbox_kind: switch
+      hosts: {}
+    control-server:
+      vars: {}
+      hosts: {}
+    customer-edge-switch:
+      vars:
+        netbox_kind: switch
+      hosts: {}
+    firewall:
+      vars: {}
+      hosts: {}
+    server:
+      vars: {}
+      hosts: {}
+    lab-server:
+      vars:
+        local_only: true
+        tags: [SERVER_LAB]
+      hosts: {}
+    generic-switch:
+      vars:
+        netbox_kind: switch
+      hosts: {}
+    hybrid-provisioning-server:
+      vars: {}
+      hosts: {}
+    infra-server:
+      vars: {}
+      hosts: {}
+    management-switch:
+      vars:
+        netbox_kind: switch
+      hosts: {}
+    master-server:
+      vars: {}
+      hosts: {}
+    provisioning-server:
+      vars: {}
+      hosts: {}
+    server-leaf-switch:
+      vars:
+        netbox_kind: switch
+      hosts: {}
+    server-load-balancer:
+      vars: {}
+      hosts: {}
+    spine-switch:
+      vars:
+        netbox_kind: switch
+      hosts: {}
+    storage-server:
+      vars: {}
+      hosts: {}
+    tenant-server:
+      vars: {}
+      hosts: {}
+    worker-server:
+      vars: {}
+      hosts: {}
+  vars:
+    node_username: whitestack
