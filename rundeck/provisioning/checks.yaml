@@ -86,3 +86,11 @@ checks:
   - path: check-python/nodes_statuses.py
     schedule: "*/15 * * * *"
     groups: [kubernetes-cluster]
+
+  - path: check-shell/ocnos_vp_lag.sh
+    schedule: "40 */6 * * *"
+    groups: [border-leaf-switch, server-leaf-switch]
+
+  - path: check-shell/ocnos_vxlan_mac.sh
+    schedule: "40 */6 * * *"
+    groups: [border-leaf-switch, server-leaf-switch]

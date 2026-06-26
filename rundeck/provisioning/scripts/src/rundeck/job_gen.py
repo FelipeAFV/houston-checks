@@ -75,6 +75,7 @@ def emit_per_check(
     """Render a per-check Rundeck job YAML and write it to the SCM repo."""
     job_dir = Path(cfg.scm_base_dir) / "rundeck/jobs/per-check"
     tpl_dir = Path(cfg.rundeck_scripts_dir) / "templates"
+    spec = catalog_spec or {}
     out = job_dir / f"{check_id}.yaml"
     tokens: dict[str, str] = {
         "CHECK_ID": check_id,
@@ -97,9 +98,16 @@ def emit_per_check(
         tpl = tpl_dir / "per-check-python.yaml.tpl"
     elif executor == "python_bastion":
         tpl = tpl_dir / "per-check-python-bastion.yaml.tpl"
+        tokens["SWITCH_PASSWORD_KEY_STORAGE"] = jg.switch_password_key_storage
+        tokens.update(cfg.python_job_tokens())
     elif executor == "shell_bastion":
         tpl = tpl_dir / "per-check-shell-bastion.yaml.tpl"
         tokens["SWITCH_PASSWORD_KEY_STORAGE"] = jg.switch_password_key_storage
+    elif spec.get("openstack"):
+        tpl = tpl_dir / "per-check-openstack.yaml.tpl"
+    out = job_dir / f"{check_id}.yaml"
+    if spec.get("openstack"):
+        tokens.update(cfg.openstack_job_tokens())
     render_template(tpl, out, tokens)
 
 

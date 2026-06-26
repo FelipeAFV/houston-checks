@@ -79,6 +79,7 @@
             mv "${_py}" /tmp/rundeck/check-python/
           done
           export NODE_NAME='@node.name@'
+          export NODE_TAGS='@node.tags@'
           export JOB_EXECID='@job.execid@'
           export TARGET_HOST='@node.target_host@'
           export TARGET_USER='@node.target_user@'

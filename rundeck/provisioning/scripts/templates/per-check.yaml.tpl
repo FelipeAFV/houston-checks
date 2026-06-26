@@ -92,6 +92,7 @@
           chmod +x "${NODE_BASE}/__CHECK_ID__.sh" 2>/dev/null || true
           find "${NODE_BASE}/lib" -type f -name '*.sh' -exec chmod a+x {} + 2>/dev/null || true
           export NODE_NAME='@node.name@'
+          export NODE_TAGS='@node.tags@'
           export JOB_EXECID='@job.execid@'
           export TARGET_HOST='@node.target_host@'
           export TARGET_USER='@node.target_user@'
