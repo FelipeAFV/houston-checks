@@ -20,9 +20,10 @@
     keepgoing: __SEQUENCE_KEEPGOING__
     commands:
       - script: |
-          mkdir -p /tmp/rundeck/scripts/lib /tmp/rundeck
+          NODE_BASE='__CHECK_SCRIPT_BASE__'
+          mkdir -p "${NODE_BASE}/scripts/lib" "${NODE_BASE}/check-python" "${NODE_BASE}/capture"
         scriptInterpreter: /bin/bash
-        description: 'Create /tmp/rundeck paths on python bastion (Copy File does not mkdir -p).'
+        description: 'Create check paths on the node (Copy File/SCP does not mkdir -p).'
         errorhandler:
           nodeStep: true
           type: localexec
@@ -31,10 +32,10 @@
               __RUNDECK_SCRIPTS_DIR__/curl-step.sh fail "${node.uptime_ping___CHECK_ID__}"
       - nodeStep: true
         type: copyfile
-        description: 'Copy run-check-step.sh to python bastion.'
+        description: 'Copy run-check-step.sh to the node.'
         configuration:
           sourcePath: __RUNDECK_SCRIPTS_DIR__/run-check-step.sh
-          destinationPath: /tmp/rundeck/scripts/
+          destinationPath: '__CHECK_SCRIPT_BASE__/scripts/'
           recursive: 'false'
           echo: 'true'
         errorhandler:
@@ -45,10 +46,10 @@
               __RUNDECK_SCRIPTS_DIR__/curl-step.sh fail "${node.uptime_ping___CHECK_ID__}"
       - nodeStep: true
         type: copyfile
-        description: 'Copy lib/check-capture.sh to python bastion.'
+        description: 'Copy lib/check-capture.sh to the node.'
         configuration:
           sourcePath: __RUNDECK_SCRIPTS_DIR__/lib/check-capture.sh
-          destinationPath: /tmp/rundeck/scripts/lib/
+          destinationPath: '__CHECK_SCRIPT_BASE__/scripts/lib/'
           recursive: 'false'
           echo: 'true'
         errorhandler:
@@ -59,10 +60,10 @@
               __RUNDECK_SCRIPTS_DIR__/curl-step.sh fail "${node.uptime_ping___CHECK_ID__}"
       - nodeStep: true
         type: copyfile
-        description: 'Copy check-python/ tree to python bastion.'
+        description: 'Copy check-python/ tree (dest must be parent dir to avoid check-python/check-python nesting).'
         configuration:
           sourcePath: __SCM_BASE_DIR__/check-python
-          destinationPath: /tmp/rundeck/
+          destinationPath: '__CHECK_SCRIPT_BASE__/'
           recursive: 'true'
           echo: 'true'
         errorhandler:
@@ -72,26 +73,19 @@
             command: >
               __RUNDECK_SCRIPTS_DIR__/curl-step.sh fail "${node.uptime_ping___CHECK_ID__}"
       - script: |
-          chmod +x /tmp/rundeck/scripts/run-check-step.sh 2>/dev/null || true
-          mkdir -p /tmp/rundeck/check-python
-          for _py in /tmp/rundeck/*.py; do
-            [[ -e "${_py}" ]] || continue
-            mv "${_py}" /tmp/rundeck/check-python/
-          done
+          NODE_BASE='__CHECK_SCRIPT_BASE__'
+          chmod +x "${NODE_BASE}/scripts/run-check-step.sh" 2>/dev/null || true
           export NODE_NAME='@node.name@'
           export JOB_EXECID='@job.execid@'
-          export TARGET_HOST='@node.target_host@'
-          export TARGET_USER='@node.target_user@'
-          export TARGET_PORT='@node.target_port@'
           set +e
-          /tmp/rundeck/scripts/run-check-step.sh python __CHECK_ID__ /tmp/rundeck/check-python
+          "${NODE_BASE}/scripts/run-check-step.sh" python __CHECK_ID__ "${NODE_BASE}/check-python"
           CHECK_RC=$?
           set -e
           printf 'CHECK_RC=%s\n' "${CHECK_RC}"
           printf 'RUNDECK:DATA:check_rc=%s\n' "${CHECK_RC}"
           exit 0
         scriptInterpreter: /bin/bash
-        description: 'Remote exec on python bastion: run check-python/__CHECK_ID__.py (TARGET_* for remote hosts). Always exits 0 so the curl step receives log-filter data.'
+        description: 'Remote exec: run check-python/__CHECK_ID__.py locally on the node. Always exits 0 so the curl step receives log-filter data.'
         plugins:
           LogFilter:
             - type: key-value-data

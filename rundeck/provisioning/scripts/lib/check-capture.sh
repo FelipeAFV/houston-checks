@@ -24,7 +24,8 @@ capture_log() {
 }
 
 capture_init() {
-  CAPTURE_DIR="${CAPTURE_DIR:-/tmp/check-capture}"
+  local base="${CHECK_DIR:-${CHECK_SCRIPT_BASE:-/var/tmp/rundeck}}"
+  CAPTURE_DIR="${CAPTURE_DIR:-${base}/capture}"
   mkdir -p "${CAPTURE_DIR}"
   local node_slug exec_slug
   node_slug=$(capture_slug "${NODE_NAME:-${RD_NODE_NAME:-nohost}}")
@@ -89,6 +90,13 @@ capture_run() {
     python3 "${script_path}" 2>&1 | tee -a "${CAPTURE_FILE}"
   fi
   local rc=${PIPESTATUS[0]}
+  if [[ "$rc" -eq 0 ]]; then
+    local declared_rc
+    declared_rc=$(grep -E '^CHECK_RC=[0-9]+$' "${CAPTURE_FILE}" 2>/dev/null | tail -1 | cut -d= -f2-)
+    if [[ -n "$declared_rc" ]]; then
+      rc=$declared_rc
+    fi
+  fi
   set -e
   capture_log "finished rc=${rc}"
   capture_emit_b64

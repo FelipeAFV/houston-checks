@@ -6,7 +6,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from src.check_registry import netmiko_from_registry
 from src.configs.config import Config
 from src.utils.util import log
 
@@ -27,8 +26,6 @@ class JobGenDefaults:
     bastion_port: str
     bastion_key_storage: str
     bastion_ssh_keypath: str
-    netmiko_device_type: str
-    netmiko_command: str
     switch_password_key_storage: str
 
 
@@ -37,7 +34,6 @@ def load_rundeck_defaults(
     checks_meta: dict[str, dict[str, Any]],
 ) -> JobGenDefaults:
     """Parse config.yaml and return a :class:`JobGenDefaults` ready for use."""
-    nm = netmiko_from_registry(checks_meta)
     keepgoing = cfg.rundeck_sequence_keepgoing
     return JobGenDefaults(
         scm_base_dir=str(cfg.scm_base_dir),
@@ -52,8 +48,6 @@ def load_rundeck_defaults(
         bastion_port=str(cfg.python_bastion_port),
         bastion_key_storage=str(cfg.python_bastion_ssh_key_storage_path),
         bastion_ssh_keypath="",
-        netmiko_device_type=nm["device_type"],
-        netmiko_command=nm["command"],
         switch_password_key_storage=str(cfg.switch_ssh_password_key_storage_path),
     )
 
@@ -81,13 +75,6 @@ def emit_per_check(
     """Render a per-check Rundeck job YAML and write it to the SCM repo."""
     job_dir = Path(cfg.scm_base_dir) / "rundeck/jobs/per-check"
     tpl_dir = Path(cfg.rundeck_scripts_dir) / "templates"
-    spec = catalog_spec or {}
-    tpl = tpl_dir / "per-check.yaml.tpl"
-    if executor == "python_bastion":
-        tpl = tpl_dir / "per-check-python-bastion.yaml.tpl"
-        tokens["SWITCH_PASSWORD_KEY_STORAGE"] = jg.switch_password_key_storage
-    elif spec.get("openstack"):
-        tpl = tpl_dir / "per-check-openstack.yaml.tpl"
     out = job_dir / f"{check_id}.yaml"
     tokens: dict[str, str] = {
         "CHECK_ID": check_id,
@@ -96,16 +83,23 @@ def emit_per_check(
         "EXECUTOR": executor,
         "JOB_GROUP": cfg.rundeck_job_group,
         "SCM_BASE_DIR": jg.scm_base_dir,
-        "RUNDECK_SCRIPTS_DIR": cfg.rundeck_scripts_dir,
+        "RUNDECK_SCRIPTS_DIR": f"{jg.scm_base_dir.rstrip('/')}/rundeck/provisioning/scripts",
         "JOB_TIMEOUT": jg.job_timeout,
         "SSH_CONNECT_TIMEOUT_MS": jg.ssh_connect_timeout_ms,
         "SSH_COMMAND_TIMEOUT_MS": jg.ssh_command_timeout_ms,
         "NODE_THREADCOUNT": jg.node_threadcount,
         "WORKFLOW_STRATEGY": jg.workflow_strategy,
         "SEQUENCE_KEEPGOING": jg.sequence_keepgoing,
+        "CHECK_SCRIPT_BASE": str(cfg.check_script_base or "/var/tmp/rundeck"),
     }
-    if spec.get("openstack"):
-        tokens.update(cfg.openstack_job_tokens())
+    tpl = tpl_dir / "per-check.yaml.tpl"
+    if executor == "python":
+        tpl = tpl_dir / "per-check-python.yaml.tpl"
+    elif executor == "python_bastion":
+        tpl = tpl_dir / "per-check-python-bastion.yaml.tpl"
+    elif executor == "shell_bastion":
+        tpl = tpl_dir / "per-check-shell-bastion.yaml.tpl"
+        tokens["SWITCH_PASSWORD_KEY_STORAGE"] = jg.switch_password_key_storage
     render_template(tpl, out, tokens)
 
 

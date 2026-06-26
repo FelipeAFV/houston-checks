@@ -75,3 +75,14 @@ checks:
     schedule: "40 */6 * * *"
     groups: [storage-server]
     one_host: true
+  - path: check-python/lscpu_vulnerabilities.py
+    schedule: "0 7 * * *"
+    groups: [provisioning-server, control-server, tenant-server, infra-server, storage-server]
+
+  - path: check-python/kolla_configuration_files_format.py
+    schedule: "30 7 * * *"
+    groups: [tenant-server, control-server, infra-server]
+
+  - path: check-python/nodes_statuses.py
+    schedule: "*/15 * * * *"
+    groups: [kubernetes-cluster]

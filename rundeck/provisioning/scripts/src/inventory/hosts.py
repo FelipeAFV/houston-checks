@@ -287,8 +287,9 @@ def effective_host_spec(
         kind = "switch" if nk == "switch" else "server"
     spec["kind"] = kind
 
+    resolved_site = site_key or str(ctx.get("site") or "").lower()
     ssh = dict(spec.get("ssh") or {}) if isinstance(spec.get("ssh"), dict) else {}
-    derived = ssh_from_context(cfg, ctx, kind=kind, site_key=site_key)
+    derived = ssh_from_context(cfg, ctx, kind=kind, site_key=resolved_site)
     for key, val in derived.items():
         if key not in ssh or ssh.get(key) in ("", None):
             ssh[key] = val

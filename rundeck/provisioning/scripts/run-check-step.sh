@@ -3,17 +3,18 @@
 #
 # Usage: run-check-step.sh shell <check_id> [check_shell_dir]
 #        run-check-step.sh python <check_id> [check_python_dir]
-# Env: NODE_NAME, JOB_EXECID; python mode also TARGET_*, NETMIKO_*.
+# Env: NODE_NAME, JOB_EXECID.
 
 MODE="${1:?missing mode (shell|python)}"
 CHECK_ID="${2:?missing check id}"
 
 case "${MODE}" in
   shell)
-    CHECK_DIR="${3:-${CHECK_SHELL_DIR:-/tmp/rundeck/check-shell}}"
+    CHECK_DIR="${3:-${CHECK_SHELL_DIR:-${CHECK_SCRIPT_BASE:-/var/tmp/rundeck}}}"
     ;;
   python)
-    CHECK_DIR="${3:-${CHECK_PYTHON_DIR:-/tmp/rundeck/check-python}}"
+    CHECK_DIR="${3:-${CHECK_PYTHON_DIR:-${CHECK_SCRIPT_BASE:+${CHECK_SCRIPT_BASE}/check-python}}}"
+    CHECK_DIR="${CHECK_DIR:-/var/tmp/rundeck/check-python}"
     ;;
   *)
     printf '[check] mode must be shell or python, got %s\n' "${MODE}" >&2

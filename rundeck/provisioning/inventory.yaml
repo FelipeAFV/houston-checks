@@ -83,5 +83,12 @@ all:
     worker-server:
       vars: {}
       hosts: {}
+    kubernetes-cluster:
+      vars: {}
+      hosts:
+        deployer:
+          hostname:
   vars:
     node_username: whitestack
+    local_only_groups:
+      - kubernetes-cluster

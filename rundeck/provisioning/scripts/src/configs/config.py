@@ -5,7 +5,7 @@ Non-secret settings are read from ``rundeck/provisioning/config.yaml`` under ``S
 environment variables or Rundeck job options.
 
 Secrets (``UPTIME_API_TOKEN``, ``NETBOX_TOKEN``,
-``OPENSTACK_PASSWORD``, ``SCM_GIT_PASSWORD``, optional ``NETBOX_TOKEN_FILE``)
+``SCM_GIT_PASSWORD``, optional ``NETBOX_TOKEN_FILE``)
 are supplied via env / Key Storage only.
 
 ``SCM_BASE_DIR`` (or ``PROVISION_CONFIG_PATH``) is only used to locate
@@ -16,9 +16,8 @@ from __future__ import annotations
 
 import os
 import re
-from dataclasses import dataclass, fields
-
-from typing import Any
+from dataclasses import dataclass, field, fields
+from typing import Any, Callable
 
 from src.utils.util import fatal, load_yaml_file
 
@@ -58,6 +57,60 @@ _INT_FIELDS = frozenset({
 
 _HTTP_BASE_URL_RE = re.compile(r"^https?://[^/\s'\"]+(?:/[^\s'\"]*)?$")
 
+# (yaml_key, cfg_attr, caster) per nested config block in config.yaml
+_NESTED_BLOCKS: dict[str, list[tuple[str, str, Callable[[Any], Any]]]] = {
+    "uptime": [
+        ("grace", "uptime_grace", int),
+        ("tz", "uptime_tz", str),
+        ("api_base_url", "uptime_api_base_url", str),
+        ("ui_public_root", "uptime_ui_public_root", str),
+        ("ping_base_url", "uptime_ping_base_url", str),
+        ("upsert_workers", "uptime_upsert_workers", int),
+    ],
+    "scm": [
+        ("base_dir", "scm_base_dir", str),
+        ("auto_push", "scm_auto_push", bool),
+        ("git_username", "scm_git_username", str),
+    ],
+    "provision": [
+        ("dry_run", "dry_run", bool),
+        ("check_script_base", "check_script_base", str),
+    ],
+    "netbox": [
+        ("url", "netbox_url", str),
+        ("curl_secure", "curl_secure", bool),
+        ("curl_max_time", "netbox_curl_max_time", int),
+        ("curl_connect_timeout", "netbox_curl_connect_timeout", int),
+    ],
+    "python_bastion": [
+        ("username", "python_bastion_username", str),
+        ("hostname", "python_bastion_hostname", str),
+        ("port", "python_bastion_port", int),
+        ("ssh_key_storage_path", "python_bastion_ssh_key_storage_path", str),
+    ],
+    "switch_ssh": [
+        ("username", "switch_ssh_username", str),
+        ("port", "switch_ssh_port", int),
+        ("request_tty", "switch_ssh_request_tty", bool),
+        ("password_key_storage_path", "switch_ssh_password_key_storage_path", str),
+    ],
+}
+
+_RUNDECK_TOP_LEVEL = [
+    ("resources_path", "rundeck_resources_path", str),
+    ("job_group", "rundeck_job_group", str),
+    ("job_group_groups", "rundeck_job_group_groups", str),
+]
+
+_RUNDECK_JOBS = [
+    ("job_timeout", "rundeck_job_timeout", str),
+    ("ssh_connect_timeout_ms", "rundeck_ssh_connect_timeout_ms", str),
+    ("ssh_command_timeout_ms", "rundeck_ssh_command_timeout_ms", str),
+    ("node_threadcount", "rundeck_node_threadcount", str),
+    ("workflow_strategy", "rundeck_workflow_strategy", str),
+    ("sequence_keepgoing", "rundeck_sequence_keepgoing", lambda v: v),
+]
+
 
 def _apply_yaml(cfg: Config, data: dict) -> None:
     """Populate ``cfg`` fields from a flat YAML mapping (snake_case keys)."""
@@ -75,42 +128,20 @@ def _apply_yaml(cfg: Config, data: dict) -> None:
             setattr(cfg, f.name, str(raw))
 
 
-def _apply_openstack_block(cfg: Config, data: dict) -> None:
-    """Map nested ``openstack:`` from config.yaml onto flat Config fields."""
-    block = data.get("openstack")
+def _apply_nested_block(
+    cfg: Config,
+    data: dict,
+    block_name: str,
+    specs: list[tuple[str, str, Callable[[Any], Any]]],
+) -> None:
+    """Map keys from ``data[block_name]`` onto ``cfg`` attributes."""
+    block = data.get(block_name)
     if not isinstance(block, dict):
         return
-    mapping = {
-        "auth_url": "openstack_auth_url",
-        "username": "openstack_username",
-        "project_name": "openstack_project_name",
-        "user_domain_name": "openstack_user_domain_name",
-        "project_domain_name": "openstack_project_domain_name",
-        "interface": "openstack_interface",
-        "identity_api_version": "openstack_identity_api_version",
-    }
-    for src, dst in mapping.items():
-        val = block.get(src)
+    for yaml_key, attr, cast in specs:
+        val = block.get(yaml_key)
         if val is not None:
-            setattr(cfg, dst, str(val))
-
-
-def _apply_uptime_block(cfg: Config, data: dict) -> None:
-    block = data.get("uptime")
-    if not isinstance(block, dict):
-        return
-    if block.get("grace") is not None:
-        cfg.uptime_grace = int(block["grace"])
-    if block.get("tz") is not None:
-        cfg.uptime_tz = str(block["tz"])
-    if block.get("api_base_url") is not None:
-        cfg.uptime_api_base_url = str(block["api_base_url"])
-    if block.get("ui_public_root") is not None:
-        cfg.uptime_ui_public_root = str(block["ui_public_root"])
-    if block.get("ping_base_url") is not None:
-        cfg.uptime_ping_base_url = str(block["ping_base_url"])
-    if block.get("upsert_workers") is not None:
-        cfg.uptime_upsert_workers = int(block["upsert_workers"])
+            setattr(cfg, attr, cast(val))
 
 
 def _rundeck_jobs_source(data: dict) -> dict[str, Any] | None:
@@ -124,112 +155,28 @@ def _rundeck_jobs_source(data: dict) -> dict[str, Any] | None:
     return legacy if isinstance(legacy, dict) else None
 
 
-def _apply_rundeck_jobs_block(cfg: Config, data: dict) -> None:
-    block = _rundeck_jobs_source(data)
-    if not block:
-        return
-    mapping = {
-        "job_timeout": "rundeck_job_timeout",
-        "ssh_connect_timeout_ms": "rundeck_ssh_connect_timeout_ms",
-        "ssh_command_timeout_ms": "rundeck_ssh_command_timeout_ms",
-        "node_threadcount": "rundeck_node_threadcount",
-        "workflow_strategy": "rundeck_workflow_strategy",
-        "sequence_keepgoing": "rundeck_sequence_keepgoing",
-    }
-    for src, dst in mapping.items():
-        val = block.get(src)
-        if val is not None:
-            setattr(cfg, dst, str(val) if dst != "rundeck_sequence_keepgoing" else val)
+def _apply_config_from_yaml(cfg: Config, data: dict) -> None:
+    """Populate ``cfg`` from nested blocks in config.yaml."""
+    _apply_yaml(cfg, data)
+    for block_name, specs in _NESTED_BLOCKS.items():
+        _apply_nested_block(cfg, data, block_name, specs)
 
+    _apply_nested_block(cfg, data, "rundeck", _RUNDECK_TOP_LEVEL)
 
-def _apply_python_bastion_block(cfg: Config, data: dict) -> None:
-    block = data.get("python_bastion")
-    if not isinstance(block, dict):
-        return
-    if block.get("username") is not None:
-        cfg.python_bastion_username = str(block["username"])
-    if block.get("hostname") is not None:
-        cfg.python_bastion_hostname = str(block["hostname"])
-    if block.get("port") is not None:
-        cfg.python_bastion_port = int(block["port"])
-    if block.get("ssh_key_storage_path") is not None:
-        cfg.python_bastion_ssh_key_storage_path = str(block["ssh_key_storage_path"])
+    jobs_block = _rundeck_jobs_source(data)
+    if isinstance(jobs_block, dict):
+        for yaml_key, attr, cast in _RUNDECK_JOBS:
+            val = jobs_block.get(yaml_key)
+            if val is not None:
+                setattr(cfg, attr, cast(val))
 
-
-def _apply_ssh_block(cfg: Config, data: dict) -> None:
-    block = data.get("ssh")
-    if not isinstance(block, dict):
-        return
-    if block.get("key_storage_default") is not None:
-        cfg.ssh_key_storage_default = str(block["key_storage_default"])
-    by_site = block.get("key_storage_by_site")
-    if isinstance(by_site, dict):
-        cfg.ssh_key_storage_by_site = {str(k): str(v) for k, v in by_site.items() if v}
-
-
-def _apply_switch_ssh_block(cfg: Config, data: dict) -> None:
-    block = data.get("switch_ssh")
-    if not isinstance(block, dict):
-        return
-    if block.get("username") is not None:
-        cfg.switch_ssh_username = str(block["username"])
-    if block.get("port") is not None:
-        cfg.switch_ssh_port = int(block["port"])
-    if block.get("request_tty") is not None:
-        cfg.switch_ssh_request_tty = bool(block["request_tty"])
-    if block.get("password_key_storage_path") is not None:
-        cfg.switch_ssh_password_key_storage_path = str(block["password_key_storage_path"])
-
-
-def _apply_scm_block(cfg: Config, data: dict) -> None:
-    block = data.get("scm")
-    if not isinstance(block, dict):
-        return
-    if block.get("base_dir") is not None:
-        cfg.scm_base_dir = str(block["base_dir"])
-    if block.get("auto_push") is not None:
-        cfg.scm_auto_push = bool(block["auto_push"])
-    if block.get("git_username") is not None:
-        cfg.scm_git_username = str(block["git_username"])
-
-
-def _apply_provision_block(cfg: Config, data: dict) -> None:
-    block = data.get("provision")
-    if not isinstance(block, dict):
-        return
-    if block.get("dry_run") is not None:
-        cfg.dry_run = bool(block["dry_run"])
-    if block.get("check_script_base") is not None:
-        cfg.check_script_base = str(block["check_script_base"])
-
-
-def _apply_rundeck_block(cfg: Config, data: dict) -> None:
-    block = data.get("rundeck")
-    if not isinstance(block, dict):
-        return
-    mapping = {
-        "resources_path": "rundeck_resources_path",
-        "job_group": "rundeck_job_group",
-        "job_group_groups": "rundeck_job_group_groups",
-    }
-    for src, dst in mapping.items():
-        val = block.get(src)
-        if val is not None:
-            setattr(cfg, dst, str(val))
-
-
-def _apply_netbox_block(cfg: Config, data: dict) -> None:
-    block = data.get("netbox")
-    if not isinstance(block, dict):
-        return
-    if block.get("url") is not None:
-        cfg.netbox_url = str(block["url"])
-    if block.get("curl_secure") is not None:
-        cfg.curl_secure = bool(block["curl_secure"])
-    if block.get("curl_max_time") is not None:
-        cfg.netbox_curl_max_time = int(block["curl_max_time"])
-    if block.get("curl_connect_timeout") is not None:
-        cfg.netbox_curl_connect_timeout = int(block["curl_connect_timeout"])
+    ssh_block = data.get("ssh")
+    if isinstance(ssh_block, dict):
+        if ssh_block.get("key_storage_default") is not None:
+            cfg.ssh_key_storage_default = str(ssh_block["key_storage_default"])
+        by_site = ssh_block.get("key_storage_by_site")
+        if isinstance(by_site, dict):
+            cfg.ssh_key_storage_by_site = {str(k): str(v) for k, v in by_site.items() if v}
 
 
 def _finalize_paths(cfg: Config) -> None:
@@ -251,7 +198,6 @@ def _apply_env_secrets(cfg: Config) -> None:
         ("uptime_api_token", "UPTIME_API_TOKEN"),
         ("netbox_token", "NETBOX_TOKEN"),
         ("scm_git_password", "SCM_GIT_PASSWORD"),
-        ("openstack_password", "OPENSTACK_PASSWORD"),
     ):
         val = _opt_env(env_name)
         if val:
@@ -286,14 +232,6 @@ class Config:
     rundeck_job_group: str = "houston"
     rundeck_job_group_groups: str = "houston-groups"
     uptime_upsert_workers: int = 0
-    openstack_auth_url: str = ""
-    openstack_username: str = ""
-    openstack_project_name: str = ""
-    openstack_user_domain_name: str = "Default"
-    openstack_project_domain_name: str = "Default"
-    openstack_interface: str = "public"
-    openstack_identity_api_version: str = "3"
-    openstack_password: str = ""
     uptime_grace: int = 3600
     uptime_tz: str = "UTC"
     check_script_base: str = "/var/tmp/rundeck"
@@ -325,18 +263,6 @@ class Config:
             return by_site[site_key]
         return self.ssh_key_storage_default
 
-    def openstack_job_tokens(self) -> dict[str, str]:
-        """Token map for per-check-openstack job template placeholders."""
-        return {
-            "OS_AUTH_URL": self.openstack_auth_url,
-            "OS_USERNAME": self.openstack_username,
-            "OS_PROJECT_NAME": self.openstack_project_name,
-            "OS_USER_DOMAIN_NAME": self.openstack_user_domain_name,
-            "OS_PROJECT_DOMAIN_NAME": self.openstack_project_domain_name,
-            "OS_INTERFACE": self.openstack_interface,
-            "OS_IDENTITY_API_VERSION": self.openstack_identity_api_version,
-        }
-
     @classmethod
     def from_env(cls) -> Config:
         """Build a :class:`Config` from rundeck/provisioning/config.yaml plus env secrets."""
@@ -351,17 +277,7 @@ class Config:
         if not isinstance(data, dict):
             fatal(f"provision config must be a YAML mapping: {config_path}")
         cfg = cls()
-        _apply_yaml(cfg, data)
-        _apply_scm_block(cfg, data)
-        _apply_provision_block(cfg, data)
-        _apply_uptime_block(cfg, data)
-        _apply_rundeck_block(cfg, data)
-        _apply_rundeck_jobs_block(cfg, data)
-        _apply_netbox_block(cfg, data)
-        _apply_python_bastion_block(cfg, data)
-        _apply_ssh_block(cfg, data)
-        _apply_switch_ssh_block(cfg, data)
-        _apply_openstack_block(cfg, data)
+        _apply_config_from_yaml(cfg, data)
         _finalize_paths(cfg)
         _apply_env_secrets(cfg)
         return cfg
