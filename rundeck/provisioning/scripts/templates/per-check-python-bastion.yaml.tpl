@@ -5,7 +5,7 @@
   loglevel: INFO
   name: houston - __CHECK_ID__
   nodeFilterEditable: false
-  scheduleEnabled: false
+__SCHEDULE_BLOCK__
   timeout: __JOB_TIMEOUT__
   nodefilters:
     dispatch:
@@ -85,7 +85,7 @@
           export TARGET_USER='@node.target_user@'
           export TARGET_PORT='@node.target_port@'
           set +e
-          /tmp/rundeck/scripts/run-check-step.sh python __CHECK_ID__ /tmp/rundeck/check-python
+          bash /tmp/rundeck/scripts/run-check-step.sh python __CHECK_ID__ /tmp/rundeck/check-python
           CHECK_RC=$?
           set -e
           printf 'CHECK_RC=%s\n' "${CHECK_RC}"

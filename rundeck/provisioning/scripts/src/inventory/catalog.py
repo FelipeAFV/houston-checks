@@ -34,9 +34,15 @@ class ChecksCatalog:
                 if not isinstance(entry, dict):
                     continue
                 rel = validate_catalog_path(entry)
-                check_id = paths.check_id_from_path(rel)
+                script_stem = paths.check_id_from_path(rel)
+                explicit_id = entry.get("id")
+                if explicit_id is not None:
+                    check_id = paths.validate_check_id(str(explicit_id))
+                else:
+                    check_id = script_stem
                 spec = dict(entry)
                 spec["path"] = rel
+                spec["script_stem"] = script_stem
                 by_id[check_id] = spec
                 for group_id in spec.get("groups") or []:
                     ids_by_group.setdefault(str(group_id), set()).add(check_id)

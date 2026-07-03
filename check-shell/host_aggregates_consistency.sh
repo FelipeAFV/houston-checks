@@ -13,18 +13,11 @@ if ! command -v jq >/dev/null 2>&1; then
   echo "jq is required but not found" >&2
   exit 1
 fi
-if [[ -z "${OS_AUTH_URL:-}" ]]; then
-  echo "OS_AUTH_URL is not set (configure openstack block in rundeck/provisioning/config.yaml)" >&2
-  exit 1
-fi
-if [[ -z "${OS_USERNAME:-}" ]]; then
-  echo "OS_USERNAME is not set" >&2
-  exit 1
-fi
-if [[ -z "${OS_PASSWORD:-}" ]]; then
-  echo "OS_PASSWORD is not set (configure OPENSTACK_PASSWORD in Rundeck Key Storage)" >&2
-  exit 1
-fi
+
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+# shellcheck source=lib/openstack_auth.sh
+source "${SCRIPT_DIR}/lib/openstack_auth.sh"
+load_openstack_credentials || exit 1
 
 err=$(mktemp)
 aggregates_json=$(openstack --insecure aggregate list -f json 2>"$err")
@@ -91,3 +84,4 @@ if [[ "$has_nova_aggregates" -eq 0 ]]; then
   exit 0
 fi
 printf 'Nova and Placement host aggregates are consistent\n'
+exit 0

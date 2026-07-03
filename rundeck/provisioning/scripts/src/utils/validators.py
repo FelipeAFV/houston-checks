@@ -6,8 +6,9 @@ import os
 
 from src.context import ProvisionContext
 from src.configs.config import Config
-from src.inventory import hosts
-from src.utils.util import fatal, log
+from src.inventory import hosts, paths
+from src.inventory.catalog import validate_catalog_path
+from src.utils.util import fatal, load_yaml_file, log
 
 
 def validate_paths(ctx: ProvisionContext) -> None:
@@ -114,20 +115,24 @@ def validate_catalog_against_inventory(ctx: ProvisionContext) -> None:
         one_host = spec.get("one_host")
         if one_host is not None and not isinstance(one_host, bool):
             fatal(f"check {check_id}: one_host must be a boolean")
-        if spec.get("openstack") is not None and not isinstance(spec.get("openstack"), bool):
-            fatal(f"check {check_id}: openstack must be a boolean")
-    has_openstack_checks = any(
-        spec.get("openstack") for spec in ctx.checks.by_id.values()
-    )
-    if has_openstack_checks:
-        cfg = ctx.cfg
-        if not cfg.openstack_auth_url:
-            fatal("openstack.auth_url is required in rundeck/provisioning/config.yaml (openstack checks in catalog)")
-        if not cfg.openstack_username:
-            fatal("openstack.username is required in rundeck/provisioning/config.yaml (openstack checks in catalog)")
-        if not cfg.openstack_project_name:
-            fatal("openstack.project_name is required in rundeck/provisioning/config.yaml (openstack checks in catalog)")
-        cfg.validate_http_base_url("openstack.auth_url", cfg.openstack_auth_url)
+        admin_rc = spec.get("admin_rc_path")
+        if admin_rc is not None and (not isinstance(admin_rc, str) or not str(admin_rc).strip()):
+            fatal(f"check {check_id}: admin_rc_path must be a non-empty string")
+        explicit_id = spec.get("id")
+        if explicit_id is not None and not isinstance(explicit_id, str):
+            fatal(f"check {check_id}: id must be a string")
+    seen_ids: set[str] = set()
+    data = load_yaml_file(ctx.cfg.checks_path)
+    for entry in (data.get("checks") if isinstance(data, dict) else []) or []:
+        if not isinstance(entry, dict):
+            continue
+        rel = validate_catalog_path(entry)
+        script_stem = paths.check_id_from_path(rel)
+        explicit_id = entry.get("id")
+        cid = paths.validate_check_id(str(explicit_id)) if explicit_id is not None else script_stem
+        if cid in seen_ids:
+            fatal(f"checks.yaml duplicate check id: {cid}")
+        seen_ids.add(cid)
     if not ctx.checks.validate_script_paths(ctx.cfg.scm_base_dir):
         fatal("checks.yaml path(s) invalid or script(s) missing under SCM_BASE_DIR")
 

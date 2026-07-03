@@ -16,5 +16,6 @@ if [ ! -f "${MAIN}" ]; then
   exit 1
 fi
 
+export SCM_BASE_DIR="${SCM_BASE}"
 export PYTHONPATH="${SCRIPTS_DIR}"
 exec /usr/bin/python3 -m src

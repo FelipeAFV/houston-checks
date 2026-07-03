@@ -26,19 +26,5 @@ def build_check_registry(checks: ChecksCatalog, scm_base: str) -> dict[str, dict
         merged["name"] = meta.get("name", check_id)
         merged["desc"] = meta.get("desc", "")
         merged["executor"] = meta["executor"]
-        if meta.get("netmiko"):
-            merged["netmiko"] = meta["netmiko"]
         registry[check_id] = merged
     return registry
-
-
-def netmiko_from_registry(registry: dict[str, dict[str, Any]]) -> dict[str, str]:
-    """Resolve Netmiko settings from registry script headers."""
-    for _check_id, spec in registry.items():
-        nm = spec.get("netmiko")
-        if isinstance(nm, dict) and nm.get("device_type") and nm.get("command"):
-            return {
-                "device_type": str(nm["device_type"]),
-                "command": str(nm["command"]),
-            }
-    return {"device_type": "", "command": ""}

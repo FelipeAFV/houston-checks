@@ -151,7 +151,7 @@ def main() -> int:
             continue
         error = validate_file(path, content, validators)
         if error:
-            malformed.append(f"{path}: {error}")
+            malformed.append(error)
         else:
             validated.append(path)
 

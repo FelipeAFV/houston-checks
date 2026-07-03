@@ -5,7 +5,7 @@
   loglevel: INFO
   name: houston - __CHECK_ID__
   nodeFilterEditable: false
-  scheduleEnabled: false
+__SCHEDULE_BLOCK__
   timeout: __JOB_TIMEOUT__
   nodefilters:
     dispatch:
@@ -21,7 +21,7 @@
     commands:
       - script: |
           NODE_BASE='__CHECK_SCRIPT_BASE__'
-          mkdir -p "${NODE_BASE}/scripts/lib" "${NODE_BASE}/check-python" "${NODE_BASE}/capture"
+          mkdir -p "${NODE_BASE}/scripts/lib" "${NODE_BASE}/check-python"
         scriptInterpreter: /bin/bash
         description: 'Create check paths on the node (Copy File/SCP does not mkdir -p).'
         errorhandler:
@@ -78,7 +78,7 @@
           export NODE_NAME='@node.name@'
           export JOB_EXECID='@job.execid@'
           set +e
-          "${NODE_BASE}/scripts/run-check-step.sh" python __CHECK_ID__ "${NODE_BASE}/check-python"
+          bash "${NODE_BASE}/scripts/run-check-step.sh" python __CHECK_ID__ "${NODE_BASE}/check-python"
           CHECK_RC=$?
           set -e
           printf 'CHECK_RC=%s\n' "${CHECK_RC}"

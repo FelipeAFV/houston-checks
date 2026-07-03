@@ -5,7 +5,7 @@
   loglevel: INFO
   name: houston - __CHECK_ID__
   nodeFilterEditable: false
-  scheduleEnabled: false
+__SCHEDULE_BLOCK__
   timeout: __JOB_TIMEOUT__
   options:
     - name: SWITCH_PASSWORD
@@ -28,7 +28,7 @@
     commands:
       - script: |
           NODE_BASE='__CHECK_SCRIPT_BASE__'
-          mkdir -p "${NODE_BASE}/scripts/lib" "${NODE_BASE}/lib" "${NODE_BASE}/capture"
+          mkdir -p "${NODE_BASE}/scripts/lib" "${NODE_BASE}/lib"
         scriptInterpreter: /bin/bash
         description: 'Create check paths on python bastion (Copy File does not mkdir -p).'
         errorhandler:
@@ -81,10 +81,10 @@
               __RUNDECK_SCRIPTS_DIR__/curl-step.sh fail "${node.uptime_ping___CHECK_ID__}"
       - nodeStep: true
         type: copyfile
-        description: 'Copy check-shell/lib/ to python bastion.'
+        description: 'Copy check-shell/lib/ contents into lib/ on the bastion (recursive copies folder contents, not the folder name).'
         configuration:
-          sourcePath: __SCM_BASE_DIR__/check-shell/lib
-          destinationPath: '__CHECK_SCRIPT_BASE__/'
+          sourcePath: __SCM_BASE_DIR__/check-shell/lib/
+          destinationPath: '__CHECK_SCRIPT_BASE__/lib/'
           recursive: 'true'
           echo: 'true'
         errorhandler:
@@ -106,7 +106,7 @@
           export TARGET_PORT='@node.target_port@'
           export TARGET_PASSWORD='@option.SWITCH_PASSWORD@'
           set +e
-          "${NODE_BASE}/scripts/run-check-step.sh" shell __CHECK_ID__ "${NODE_BASE}"
+          bash "${NODE_BASE}/scripts/run-check-step.sh" shell __CHECK_ID__ "${NODE_BASE}"
           CHECK_RC=$?
           set -e
           printf 'CHECK_RC=%s\n' "${CHECK_RC}"
