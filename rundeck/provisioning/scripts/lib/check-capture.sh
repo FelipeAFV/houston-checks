@@ -24,14 +24,8 @@ capture_log() {
 }
 
 capture_init() {
-  local base="${CHECK_DIR:-${CHECK_SCRIPT_BASE:-/var/tmp/rundeck}}"
-  CAPTURE_DIR="${CAPTURE_DIR:-${base}/capture}"
-  mkdir -p "${CAPTURE_DIR}"
-  local node_slug exec_slug
-  node_slug=$(capture_slug "${NODE_NAME:-${RD_NODE_NAME:-nohost}}")
-  exec_slug=$(capture_slug "${JOB_EXECID:-${RD_JOB_EXECID:-$$}}")
-  CAPTURE_FILE="${CAPTURE_DIR}/${CHECK_ID}.${exec_slug}.${node_slug}.log"
-  : >"${CAPTURE_FILE}"
+  CAPTURE_FILE=$(mktemp "${TMPDIR:-/tmp}/check-capture.${CHECK_ID}.XXXXXX")
+  trap 'rm -f "${CAPTURE_FILE}"' EXIT
 }
 
 capture_b64_file() {
@@ -100,5 +94,6 @@ capture_run() {
   set -e
   capture_log "finished rc=${rc}"
   capture_emit_b64
+  rm -f "${CAPTURE_FILE}"
   return "${rc}"
 }

@@ -33,6 +33,14 @@ def check_id_from_path(path: str) -> str:
     return Path(normalize_check_path(path)).stem
 
 
+def validate_check_id(check_id: str) -> str:
+    """Return check_id if it is a valid catalog/job slug."""
+    cid = str(check_id or "").strip()
+    if not cid or any(ch for ch in cid if not (ch.isalnum() or ch in "-_")):
+        raise ValueError(f"invalid check id: {check_id!r}")
+    return cid
+
+
 def resolve_check_path(scm_base: str, rel_path: str) -> Path:
     """Resolve a repo-relative check path to an absolute ``Path`` under SCM_BASE_DIR.
 

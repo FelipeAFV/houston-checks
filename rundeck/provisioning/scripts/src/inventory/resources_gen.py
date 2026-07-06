@@ -10,6 +10,7 @@ from src.inventory import hosts
 from src.inventory.bastion import bastion_connect_hostname, emit_bastion_ssh_key_attrs
 from src.inventory.tags import node_tag_tokens
 from src.rundeck.job_gen import JobGenDefaults
+from src.utils.util import log
 
 
 def pings_index(
@@ -91,10 +92,7 @@ def _render_node_entry(
         netbox_imported=netbox_imported,
         host_tags=None if netbox_imported else host_spec.get("tags"),
     )
-    check_script_base = (
-        (ssh.get("check_script_base") or ssh.get("script_path") or "")
-        or check_script_default
-    )
+    check_script_base = check_script_default
 
     lines: list[str] = [
         f"{hid}:",
@@ -143,6 +141,7 @@ def build_resources_yaml(
     """Write Rundeck resources YAML (nodes) from in-memory effective hosts."""
     pings_by_host = pings_index(pings)
     check_script_default = ctx.cfg.check_script_base or "/tmp/rundeck"
+    log(f"[rd] check_script_base={check_script_default}")
     checks_meta = ctx.ensure_checks_meta()
     python_bastion_check_ids = {
         cid

@@ -52,6 +52,42 @@ def load_rundeck_defaults(
     )
 
 
+def cron_to_schedule_block(cron: str) -> str:
+    """Convert a 5-field cron string to a Rundeck schedule YAML snippet."""
+    parts = cron.strip().split()
+    if len(parts) != 5:
+        raise ValueError(f"expected 5-field cron, got {len(parts)} fields: {cron!r}")
+    minute, hour, dom, month, dow = parts
+    if dom != "*":
+        raise ValueError(
+            f"day-of-month in cron is not supported for Rundeck job schedules: {cron!r}"
+        )
+
+    def quote(value: str) -> str:
+        return value.replace("'", "''")
+
+    return f"""  scheduleEnabled: true
+  schedule:
+    time:
+      hour: '{quote(hour)}'
+      minute: '{quote(minute)}'
+      seconds: '0'
+    weekday:
+      day: '{quote(dow)}'
+    month: '{quote(month)}'
+    year: '*'"""
+
+
+def schedule_block_for_check(catalog_spec: dict[str, Any] | None) -> str:
+    """Rundeck schedule YAML for a catalog check (from checks.yaml schedule field)."""
+    if not catalog_spec:
+        return "  scheduleEnabled: false"
+    cron = catalog_spec.get("schedule")
+    if not cron:
+        return "  scheduleEnabled: false"
+    return cron_to_schedule_block(str(cron))
+
+
 def render_template(tpl_path: Path, out_path: Path, tokens: dict[str, str]) -> None:
     """Replace ``__KEY__`` placeholders in a template file and write the result."""
     text = tpl_path.read_text(encoding="utf-8")
@@ -75,7 +111,6 @@ def emit_per_check(
     """Render a per-check Rundeck job YAML and write it to the SCM repo."""
     job_dir = Path(cfg.scm_base_dir) / "rundeck/jobs/per-check"
     tpl_dir = Path(cfg.rundeck_scripts_dir) / "templates"
-    spec = catalog_spec or {}
     out = job_dir / f"{check_id}.yaml"
     tokens: dict[str, str] = {
         "CHECK_ID": check_id,
@@ -92,37 +127,26 @@ def emit_per_check(
         "WORKFLOW_STRATEGY": jg.workflow_strategy,
         "SEQUENCE_KEEPGOING": jg.sequence_keepgoing,
         "CHECK_SCRIPT_BASE": str(cfg.check_script_base or "/var/tmp/rundeck"),
+        "SCHEDULE_BLOCK": schedule_block_for_check(catalog_spec),
+        "SCRIPT_STEM": (
+            str(catalog_spec.get("script_stem") or check_id) if catalog_spec else check_id
+        ),
+        "OPENSTACK_ADMIN_RC": (
+            str(catalog_spec.get("admin_rc_path") or "") if catalog_spec else ""
+        ),
     }
     tpl = tpl_dir / "per-check.yaml.tpl"
     if executor == "python":
         tpl = tpl_dir / "per-check-python.yaml.tpl"
     elif executor == "python_bastion":
         tpl = tpl_dir / "per-check-python-bastion.yaml.tpl"
-        tokens["SWITCH_PASSWORD_KEY_STORAGE"] = jg.switch_password_key_storage
-        tokens.update(cfg.python_job_tokens())
     elif executor == "shell_bastion":
         tpl = tpl_dir / "per-check-shell-bastion.yaml.tpl"
         tokens["SWITCH_PASSWORD_KEY_STORAGE"] = jg.switch_password_key_storage
-    elif spec.get("openstack"):
-        tpl = tpl_dir / "per-check-openstack.yaml.tpl"
-    out = job_dir / f"{check_id}.yaml"
-    if spec.get("openstack"):
-        tokens.update(cfg.openstack_job_tokens())
     render_template(tpl, out, tokens)
 
 
 def _jobrefs_yaml(cfg: Any, group_tag: str, check_ids: list[str]) -> str:
-    if len(check_ids) == 1:
-        check_id = check_ids[0]
-        return f"""      - jobref:
-          group: {cfg.rundeck_job_group}
-          name: houston - {check_id}
-          nodefilters:
-            filter: "tags: {group_tag}+check-{check_id}"
-            dispatch:
-              keepgoing: true
-              threadcount: 1
-"""
     parts = []
     for check_id in check_ids:
         parts.append(
@@ -130,7 +154,7 @@ def _jobrefs_yaml(cfg: Any, group_tag: str, check_ids: list[str]) -> str:
           group: {cfg.rundeck_job_group}
           name: houston - {check_id}
           nodefilters:
-            filter: "tags: check-{check_id} AND tags: {group_tag}"
+            filter: "tags: {group_tag}+check-{check_id}"
             dispatch:
               keepgoing: true
               threadcount: 1

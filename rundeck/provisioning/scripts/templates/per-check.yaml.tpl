@@ -5,7 +5,7 @@
   loglevel: INFO
   name: houston - __CHECK_ID__
   nodeFilterEditable: false
-  scheduleEnabled: false
+__SCHEDULE_BLOCK__
   timeout: __JOB_TIMEOUT__
   nodefilters:
     dispatch:
@@ -21,7 +21,7 @@
     commands:
       - script: |
           NODE_BASE='__CHECK_SCRIPT_BASE__'
-          mkdir -p "${NODE_BASE}/scripts/lib" "${NODE_BASE}/lib" "${NODE_BASE}/capture"
+          mkdir -p "${NODE_BASE}/scripts/lib" "${NODE_BASE}/lib"
         scriptInterpreter: /bin/bash
         description: 'Create check paths on the node (Copy File/SCP does not mkdir -p).'
         errorhandler:
@@ -60,10 +60,10 @@
               __RUNDECK_SCRIPTS_DIR__/curl-step.sh fail "${node.uptime_ping___CHECK_ID__}"
       - nodeStep: true
         type: copyfile
-        description: 'Copy check-shell/__CHECK_ID__.sh to the node.'
+        description: 'Copy check-shell/__SCRIPT_STEM__.sh to the node.'
         configuration:
-          sourcePath: __SCM_BASE_DIR__/check-shell/__CHECK_ID__.sh
-          destinationPath: '__CHECK_SCRIPT_BASE__/'
+          sourcePath: __SCM_BASE_DIR__/check-shell/__SCRIPT_STEM__.sh
+          destinationPath: '__CHECK_SCRIPT_BASE__/__CHECK_ID__.sh'
           recursive: 'false'
           echo: 'true'
         errorhandler:
@@ -74,10 +74,10 @@
               __RUNDECK_SCRIPTS_DIR__/curl-step.sh fail "${node.uptime_ping___CHECK_ID__}"
       - nodeStep: true
         type: copyfile
-        description: 'Copy check-shell/lib/ to the node (switch helpers, etc.).'
+        description: 'Copy check-shell/lib/ contents into lib/ on the node (recursive copies folder contents, not the folder name).'
         configuration:
-          sourcePath: __SCM_BASE_DIR__/check-shell/lib
-          destinationPath: '__CHECK_SCRIPT_BASE__/'
+          sourcePath: __SCM_BASE_DIR__/check-shell/lib/
+          destinationPath: '__CHECK_SCRIPT_BASE__/lib/'
           recursive: 'true'
           echo: 'true'
         errorhandler:
@@ -94,6 +94,7 @@
           export NODE_NAME='@node.name@'
           export NODE_TAGS='@node.tags@'
           export JOB_EXECID='@job.execid@'
+          export OPENSTACK_ADMIN_RC='__OPENSTACK_ADMIN_RC__'
           export TARGET_HOST='@node.target_host@'
           export TARGET_USER='@node.target_user@'
           export TARGET_PORT='@node.target_port@'
@@ -101,7 +102,7 @@
           if [[ -n "${TARGET_HOST}" ]]; then
             REMOTE="${TARGET_USER}@${TARGET_HOST}"
             SSH_OPTS=(-p "${TARGET_PORT:-22}" -o BatchMode=yes -o StrictHostKeyChecking=accept-new)
-            ssh "${SSH_OPTS[@]}" "${REMOTE}" "mkdir -p ${NODE_BASE}/scripts/lib ${NODE_BASE}/lib ${NODE_BASE}/capture"
+            ssh "${SSH_OPTS[@]}" "${REMOTE}" "mkdir -p ${NODE_BASE}/scripts/lib ${NODE_BASE}/lib"
             scp -P "${TARGET_PORT:-22}" -o BatchMode=yes -o StrictHostKeyChecking=accept-new \
               "${NODE_BASE}/scripts/run-check-step.sh" "${REMOTE}:${NODE_BASE}/scripts/"
             scp -P "${TARGET_PORT:-22}" -o BatchMode=yes -o StrictHostKeyChecking=accept-new -r \
@@ -113,11 +114,12 @@
             ssh "${SSH_OPTS[@]}" "${REMOTE}" \
               "chmod +x ${NODE_BASE}/scripts/run-check-step.sh ${NODE_BASE}/__CHECK_ID__.sh 2>/dev/null || true; \
                find ${NODE_BASE}/lib -type f -name '*.sh' -exec chmod a+x {} + 2>/dev/null || true; \
-               export NODE_NAME='${NODE_NAME}'; export JOB_EXECID='${JOB_EXECID}'; \
-               ${NODE_BASE}/scripts/run-check-step.sh shell __CHECK_ID__ ${NODE_BASE}"
+               export NODE_NAME='${NODE_NAME}'; export NODE_TAGS='${NODE_TAGS}'; export JOB_EXECID='${JOB_EXECID}'; \
+               export OPENSTACK_ADMIN_RC='${OPENSTACK_ADMIN_RC}'; \
+               bash ${NODE_BASE}/scripts/run-check-step.sh shell __CHECK_ID__ ${NODE_BASE}"
             CHECK_RC=$?
           else
-            "${NODE_BASE}/scripts/run-check-step.sh" shell __CHECK_ID__ "${NODE_BASE}"
+            bash "${NODE_BASE}/scripts/run-check-step.sh" shell __CHECK_ID__ "${NODE_BASE}"
             CHECK_RC=$?
           fi
           set -e

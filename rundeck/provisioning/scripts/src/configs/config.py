@@ -1,8 +1,8 @@
 """Configuration for houston-provision.
 
-Non-secret settings are read from ``rundeck/provisioning/config.yaml`` under ``SCM_BASE_DIR``
-(or ``PROVISION_CONFIG_PATH`` / ``CONFIG_PATH``).  They are not overridden by
-environment variables or Rundeck job options.
+Non-secret settings are read from ``rundeck/provisioning/config.yaml`` under the Git
+SCM checkout (``SCM_BASE_DIR``).  Optionally override the path with
+``PROVISION_CONFIG_PATH`` / ``CONFIG_PATH`` (legacy; not set in the default Helm chart).
 
 Secrets (``UPTIME_API_TOKEN``, ``NETBOX_TOKEN``,
 ``SCM_GIT_PASSWORD``, optional ``NETBOX_TOKEN_FILE``)

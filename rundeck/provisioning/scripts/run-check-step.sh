@@ -10,11 +10,11 @@ CHECK_ID="${2:?missing check id}"
 
 case "${MODE}" in
   shell)
-    CHECK_DIR="${3:-${CHECK_SHELL_DIR:-${CHECK_SCRIPT_BASE:-/var/tmp/rundeck}}}"
+    CHECK_DIR="${3:-${CHECK_SHELL_DIR:-${CHECK_SCRIPT_BASE:-/tmp/rundeck}}}"
     ;;
   python)
     CHECK_DIR="${3:-${CHECK_PYTHON_DIR:-${CHECK_SCRIPT_BASE:+${CHECK_SCRIPT_BASE}/check-python}}}"
-    CHECK_DIR="${CHECK_DIR:-/var/tmp/rundeck/check-python}"
+    CHECK_DIR="${CHECK_DIR:-/tmp/rundeck/check-python}"
     ;;
   *)
     printf '[check] mode must be shell or python, got %s\n' "${MODE}" >&2
