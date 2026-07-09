@@ -107,6 +107,15 @@
 
       - jobref:
           group: houston
+          name: houston - powerprofile_check
+          nodefilters:
+            filter: "tags: storage-server+check-powerprofile_check"
+            dispatch:
+              keepgoing: true
+              threadcount: 1
+
+      - jobref:
+          group: houston
           name: houston - server_needs_reboot
           nodefilters:
             filter: "tags: storage-server+check-server_needs_reboot"
