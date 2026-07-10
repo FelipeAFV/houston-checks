@@ -26,6 +26,9 @@ energy_perf_bias_value=$(cat "$energy_perf_bias_file")
 # Check if the file contains the expected value for the performance mode 
 if [[ "$energy_perf_bias_value" == "6" || "$energy_perf_bias_value" == "7" ]]; then
   printf "Intel server"
+  printf "Runing script on node: "
+  printf "@node.name@"
+  printf "Running on node: @node.name@"
   printf "energy_perf_bias=%s" "$energy_perf_bias_value"
   printf 'CHECK_RC=0\n'
   exit 0
