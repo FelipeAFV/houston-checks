@@ -9,6 +9,49 @@ from typing import Any
 from src.configs.config import Config
 from src.utils.util import log
 
+CHECK_JOB_OPTIONS = {
+    "powerprofile": [
+        {
+            "name": "expected_profile",
+            "description": "Expected power profile",
+            "required": True,
+            "default": "balanced",
+        }
+    ],
+
+    "ceph_osd_status": [
+        {
+            "name": "warn_percent",
+            "description": "Warning threshold",
+            "required": False,
+            "default": "80",
+        }
+    ],
+}
+
+def render_job_options(options):
+    """Render job options for a Rundeck job."""
+    if not options:
+        return ""
+    lines = ["options:"]
+    for opt in options:
+        lines.append(f"""
+- name: {opt['name']}
+  description: {opt['description']}
+  required: {str(opt['required']).lower()}
+  {f"defaultValue: {opt.get('default')}" if opt.get('default') else ''}
+""")
+    return "\n".join(lines)
+
+def render_job_exports(options):
+    """Render job exports for a Rundeck job"""
+    lines = []
+    for opt in options:
+        lines.append(f"""
+export {opt['name'].upper()}='@option.{opt['name']}@'
+""")
+    return "\n".join(lines) 
+
 
 @dataclass
 class JobGenDefaults:
@@ -112,6 +155,7 @@ def emit_per_check(
     job_dir = Path(cfg.scm_base_dir) / "rundeck/jobs/per-check"
     tpl_dir = Path(cfg.rundeck_scripts_dir) / "templates"
     out = job_dir / f"{check_id}.yaml"
+    options = CHECK_JOB_OPTIONS.get(check_id, [])
     tokens: dict[str, str] = {
         "CHECK_ID": check_id,
         "DISPLAY_NAME": display_name,
@@ -134,6 +178,8 @@ def emit_per_check(
         "OPENSTACK_ADMIN_RC": (
             str(catalog_spec.get("admin_rc_path") or "") if catalog_spec else ""
         ),
+        "JOB_OPTIONS": render_job_options(options),
+        "JOB_EXPORTS": render_job_exports(options),
     }
     tpl = tpl_dir / "per-check.yaml.tpl"
     if executor == "python":

@@ -55,3 +55,17 @@ switch_ssh:
   port: 22
   request_tty: true
   password_key_storage_path: keys/project/houston/switch/ocnos.password
+
+check_parameters:
+  check_name:
+    value: ""
+    description: Name of the check to run
+    required: true
+  check2:
+    value: ""
+    description: Type of the check to run (ping, http, https, tcp, udp, dns)
+    required: true
+  check3:
+    value: ""
+    description: Target of the check to run (IP or hostname)
+    required: true
