@@ -12,10 +12,16 @@ from src.utils.util import log
 CHECK_JOB_OPTIONS = {
     "powerprofile": [
         {
-            "name": "expected_profile",
-            "description": "Expected power profile",
+            "name": "expected_profile_lower_range",
+            "description": "Expected power profile lower range",
             "required": True,
-            "default": "balanced",
+            "default": "6",
+        },
+        {
+            "name": "expected_profile_upper_range",
+            "description": "Expected power profile upper range",
+            "required": True,
+            "default": "7",
         }
     ],
 
