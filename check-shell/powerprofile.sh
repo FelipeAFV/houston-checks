@@ -4,6 +4,9 @@
 # Description: /sys/devices/system/cpu/cpu0/power/energy_perf_bias has the correct range value for indicated performance mode.
 #
 
+EXPECTED_PROFILE_LOWER_RANGE="${EXPECTED_PROFILE_LOWER_RANGE:-6}"
+EXPECTED_PROFILE_UPPER_RANGE="${EXPECTED_PROFILE_UPPER_RANGE:-7}"
+
 vendor=$(awk -F': ' '/vendor_id/ {print $2; exit}' /proc/cpuinfo)
 
 # AMD does not implement energy_perf_bias.
@@ -24,7 +27,7 @@ fi
 
 energy_perf_bias_value=$(cat "$energy_perf_bias_file")
 # Check if the file contains the expected value for the performance mode 
-if [[ "$energy_perf_bias_value" == "6" || "$energy_perf_bias_value" == "7" ]]; then
+if [[ "$energy_perf_bias_value" -ge "$EXPECTED_PROFILE_LOWER_RANGE" && "$energy_perf_bias_value" -le "$EXPECTED_PROFILE_UPPER_RANGE" ]]; then
   printf "Intel server"
   printf "Runing script on node: "
   printf "@node.name@"
