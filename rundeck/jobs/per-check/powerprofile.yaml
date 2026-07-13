@@ -18,16 +18,16 @@
   timeout: 20m
   options:
 
-- name: expected_profile_lower_range
-  description: Expected power profile lower range
-  required: true
-  defaultValue: 6
+    - name: expected_profile_lower_range
+    description: Expected power profile lower range
+    required: true
+    defaultValue: 6
 
 
-- name: expected_profile_upper_range
-  description: Expected power profile upper range
-  required: true
-  defaultValue: 7
+    - name: expected_profile_upper_range
+    description: Expected power profile upper range
+    required: true
+    defaultValue: 7
 
   nodefilters:
     dispatch:
@@ -121,10 +121,10 @@
           export TARGET_USER='@node.target_user@'
           export TARGET_PORT='@node.target_port@'
           
-export EXPECTED_PROFILE_LOWER_RANGE='@option.expected_profile_lower_range@'
+         export EXPECTED_PROFILE_LOWER_RANGE='@option.expected_profile_lower_range@'
 
 
-export EXPECTED_PROFILE_UPPER_RANGE='@option.expected_profile_upper_range@'
+         export EXPECTED_PROFILE_UPPER_RANGE='@option.expected_profile_upper_range@'
 
           set +e
           if [[ -n "${TARGET_HOST}" ]]; then
