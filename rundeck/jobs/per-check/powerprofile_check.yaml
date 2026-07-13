@@ -23,7 +23,7 @@
       rankOrder: ascending
       successOnEmptyNodeFilter: false
       threadcount: '10'
-    filter: 'tags: check-powerprofile_check'
+    filter: 'tags: check-powerprofile'
   sequence:
     strategy: node-first
     keepgoing: false
