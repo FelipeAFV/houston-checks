@@ -16,6 +16,7 @@
     month: '*'
     year: '*'
   timeout: 20m
+  
   nodefilters:
     dispatch:
       excludePrecedence: true
@@ -107,6 +108,7 @@
           export TARGET_HOST='@node.target_host@'
           export TARGET_USER='@node.target_user@'
           export TARGET_PORT='@node.target_port@'
+          
           set +e
           if [[ -n "${TARGET_HOST}" ]]; then
             REMOTE="${TARGET_USER}@${TARGET_HOST}"

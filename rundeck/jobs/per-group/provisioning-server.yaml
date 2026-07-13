@@ -62,9 +62,9 @@
 
       - jobref:
           group: houston
-          name: houston - powerprofile_check
+          name: houston - powerprofile
           nodefilters:
-            filter: "tags: provisioning-server+check-powerprofile_check"
+            filter: "tags: provisioning-server+check-powerprofile"
             dispatch:
               keepgoing: true
               threadcount: 1
