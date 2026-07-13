@@ -25,6 +25,7 @@ if [[ ! -f "$energy_perf_bias_file" ]]; then
   exit 0
 fi
 
+
 energy_perf_bias_value=$(cat "$energy_perf_bias_file")
 # Check if the file contains the expected value for the performance mode 
 if [[ "$energy_perf_bias_value" -ge "$EXPECTED_PROFILE_LOWER_RANGE" && "$energy_perf_bias_value" -le "$EXPECTED_PROFILE_UPPER_RANGE" ]]; then
@@ -33,6 +34,7 @@ if [[ "$energy_perf_bias_value" -ge "$EXPECTED_PROFILE_LOWER_RANGE" && "$energy_
   printf "@node.name@"
   printf "Running on node: @node.name@"
   printf "energy_perf_bias=%s" "$energy_perf_bias_value"
+  printf "Expected range: %s-%s" "$EXPECTED_PROFILE_LOWER_RANGE" "$EXPECTED_PROFILE_UPPER_RANGE"
   printf 'CHECK_RC=0\n'
   exit 0
 fi
