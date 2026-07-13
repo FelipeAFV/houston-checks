@@ -42,10 +42,10 @@ def render_job_options(options):
     lines = ["options:"]
     for opt in options:
         lines.append(f"""
-- name: {opt['name']}
-  description: {opt['description']}
-  required: {str(opt['required']).lower()}
-  {f"defaultValue: {opt.get('default')}" if opt.get('default') else ''}
+    - name: {opt['name']}
+    description: {opt['description']}
+    required: {str(opt['required']).lower()}
+    {f"defaultValue: {opt.get('default')}" if opt.get('default') else ''}
 """)
     return "\n".join(lines)
 
@@ -54,7 +54,7 @@ def render_job_exports(options):
     lines = []
     for opt in options:
         lines.append(f"""
-export {opt['name'].upper()}='@option.{opt['name']}@'
+         export {opt['name'].upper()}='@option.{opt['name']}@'
 """)
     return "\n".join(lines) 
 
