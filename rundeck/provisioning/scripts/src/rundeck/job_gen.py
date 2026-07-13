@@ -5,9 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
-import yaml
 
-from rundeck.provisioning.scripts.src.inventory.check_options import JobOption
+from src.inventory.check_options import JobOption
 from src.configs.config import Config
 from src.utils.util import log
 
