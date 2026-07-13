@@ -27,6 +27,10 @@ checks:
     schedule: "15 6 * * *"
     groups: [provisioning-server, hybrid-provisioning-server, control-server, infra-server, tenant-server, storage-server]
 
+  - path: check-shell/powerprofile_check.sh
+    schedule: "30 6 * * *"
+    groups: [control-server, infra-server, tenant-server, storage-server, provisioning-server, hybrid-provisioning-server]
+
   - path: check-shell/server_needs_reboot.sh
     schedule: "30 6 * * *"
     groups: [control-server, infra-server, tenant-server, storage-server, provisioning-server, hybrid-provisioning-server]
