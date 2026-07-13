@@ -18,7 +18,7 @@
   timeout: 20m
   options:
 
-    - name: warn_percent
+  - name: warn_percent
     description: Warning threshold
     required: false
     defaultValue: 80
@@ -115,7 +115,7 @@
           export TARGET_USER='@node.target_user@'
           export TARGET_PORT='@node.target_port@'
           
-         export WARN_PERCENT='@option.warn_percent@'
+          export WARN_PERCENT='@option.warn_percent@'
 
           set +e
           if [[ -n "${TARGET_HOST}" ]]; then
