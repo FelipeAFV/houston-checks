@@ -1,0 +1,9 @@
+powerprofile:
+- name: expected_profile_lower_range
+  description: Expected power profile lower range
+  required: true
+  default: "6"
+- name: expected_profile_upper_range
+  description: Expected power profile upper range
+  required: true
+  default: "7"

@@ -186,6 +186,8 @@ def _finalize_paths(cfg: Config) -> None:
         return
     if not cfg.checks_path:
         cfg.checks_path = f"{scm}/{PROVISION_DIR}/checks.yaml"
+    if not cfg.checks_options_path:
+        cfg.checks_options_path = f"{scm}/{PROVISION_DIR}/checks_options.yaml"
     if not cfg.inventory_path:
         cfg.inventory_path = f"{scm}/{PROVISION_DIR}/inventory.yaml"
     if not cfg.rundeck_scripts_dir:

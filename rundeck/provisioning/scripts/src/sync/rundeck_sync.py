@@ -43,10 +43,12 @@ def _emit_per_check_jobs(ctx: ProvisionContext, jg: job_gen.JobGenDefaults) -> l
     cfg = ctx.cfg
     checks_meta = ctx.ensure_checks_meta()
     job_check_ids: list[str] = []
+        
     for check_id in ctx.checks.check_ids:
         if not check_id:
             continue
         job_check_ids.append(check_id)
+        options = ctx.checks_options.get(check_id)
         meta = checks_meta[check_id]
         name = meta.get("name") or f"houston - {check_id}"
         desc = (
@@ -62,6 +64,7 @@ def _emit_per_check_jobs(ctx: ProvisionContext, jg: job_gen.JobGenDefaults) -> l
                 cfg,
                 jg,
                 check_id,
+                options,
                 name,
                 desc,
                 executor,
