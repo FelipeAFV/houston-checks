@@ -221,6 +221,7 @@ class Config:
     scm_base_dir: str = ""
     rundeck_scripts_dir: str = ""
     checks_path: str = ""
+    checks_options_path: str = ""
     inventory_path: str = ""
     dry_run: bool = False
     scm_auto_push: bool = False
