@@ -12,6 +12,7 @@ vendor=$(awk -F': ' '/vendor_id/ {print $2; exit}' /proc/cpuinfo)
 
 # AMD does not implement energy_perf_bias.
 if [[ "$vendor" == "AuthenticAMD" ]]; then
+    printf "AMD server\n"
     manufacturer=$(sudo dmidecode -s system-manufacturer)
     if [[ "$manufacturer" == "Dell Inc." ]]; then
       if which racadm >/dev/null 2>&1; then
@@ -41,14 +42,16 @@ fi
 energy_perf_bias_file=/sys/devices/system/cpu/cpu0/power/energy_perf_bias
 
 if [[ ! -f "$energy_perf_bias_file" ]]; then
-  printf "Not AMD CPU but energy_perf_bias file not found.\n"
-  printf 'CHECK_RC=0\n'
-  exit 0
+  printf "Intel server but energy_perf_bias file not found.\n"
+  printf 'CHECK_RC=1\n'
+  exit 1
 fi
 
 
 energy_perf_bias_value=$(cat "$energy_perf_bias_file")
 # Check if the file contains the expected value for the performance mode 
+printf "Intel server\n"
+printf "energy_perf_bias=%s\n" "$energy_perf_bias_value"
 if [[ "$energy_perf_bias_value" -ge "$EXPECTED_INTEL_PROFILE_LOWER_RANGE" && "$energy_perf_bias_value" -le "$EXPECTED_INTEL_PROFILE_UPPER_RANGE" ]]; then
   printf "Intel server in optimized mode.\n"
   printf 'CHECK_RC=0\n'
