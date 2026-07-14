@@ -13,3 +13,6 @@ All noteworthy changes to the `collins` release should be documented in this fil
 - Feature(Checks): Adds `load_expected_values` function to load variables from `expected_values.txt` into the environment of the check script [PRHOUSTON-316].
 - Feature(Checks): Adds `send_commands_to_device` function for checks running from bastion [PRHOUSTON-316].
 - Chore(Provisioning): Updates provisioning files with latest changes [PRHOUSTON-321].
+- Feature(Checks): Adds check for ensuring power profile is in optimized mode [PRHOUSTON-31].
+- Feature(Provisioning): Adds support for parameterization of custom variables in checks scripts [PRHOUSTON-327].
+
