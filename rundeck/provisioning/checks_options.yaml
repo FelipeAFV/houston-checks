@@ -1,9 +1,13 @@
 powerprofile:
-- name: expected_profile_lower_range
-  description: Expected power profile lower range
+- name: expected_intel_profile_lower_range
+  description: Expected Intel power profile lower range
   required: true
   default: "6"
-- name: expected_profile_upper_range
-  description: Expected power profile upper range
+- name: expected_intel_profile_upper_range
+  description: Expected Intel power profile upper range
   required: true
   default: "7"
+- name: expected_amd_profile_regex
+  description: Expected AMD power profile regex
+  required: true
+  default: "^(PerfPerWattOptimized|PerfPerWattOptimizedDapc|PerfPerWattOptimizedOS)$"
