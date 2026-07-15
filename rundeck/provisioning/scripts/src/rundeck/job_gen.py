@@ -118,6 +118,7 @@ def render_job_exports(options):
     for opt in options:
         lines.append(f"""
           export {opt['name'].upper()}='@option.{opt['name']}@'
+          export NODE_{opt['name'].upper()}='@node.{opt['name']}@'
 """)
     return "\n".join(lines) 
 
