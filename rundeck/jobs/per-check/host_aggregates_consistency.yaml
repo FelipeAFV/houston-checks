@@ -1,40 +1,22 @@
 - defaultTab: nodes
-  description: '/sys/devices/system/cpu/cpu0/power/energy_perf_bias has the correct range value for indicated performance mode.'
+  description: 'Placement resource provider aggregates must match Nova aggregate UUIDs.'
   executionEnabled: true
   group: houston
   loglevel: INFO
-  name: houston - powerprofile
+  name: houston - host_aggregates_consistency
   nodeFilterEditable: false
   scheduleEnabled: true
   schedule:
     time:
-      hour: '6'
-      minute: '30'
+      hour: '*/6'
+      minute: '45'
       seconds: '0'
     weekday:
       day: '*'
     month: '*'
     year: '*'
   timeout: 20m
-  options:
-
-  - name: expected_intel_profile_lower_range
-    description: Expected Intel power profile lower range
-    required: true
-    defaultValue: 6
-
-
-  - name: expected_intel_profile_upper_range
-    description: Expected Intel power profile upper range
-    required: true
-    defaultValue: 7
-
-
-  - name: expected_amd_profile_regex
-    description: Expected AMD power profile regex
-    required: true
-    defaultValue: ^(PerfPerWattOptimized\|PerfPerWattOptimizedDapc\|PerfPerWattOptimizedOS)$
-
+  
   nodefilters:
     dispatch:
       excludePrecedence: true
@@ -42,7 +24,7 @@
       rankOrder: ascending
       successOnEmptyNodeFilter: false
       threadcount: '10'
-    filter: 'tags: check-powerprofile'
+    filter: 'tags: check-host_aggregates_consistency'
   sequence:
     strategy: node-first
     keepgoing: false
@@ -57,7 +39,7 @@
           type: localexec
           configuration:
             command: >
-              /home/rundeck/server/data/provision/rundeck/provisioning/scripts/curl-step.sh fail "${node.uptime_ping_powerprofile}"
+              /home/rundeck/server/data/provision/rundeck/provisioning/scripts/curl-step.sh fail "${node.uptime_ping_host_aggregates_consistency}"
       - nodeStep: true
         type: copyfile
         description: 'Copy run-check-step.sh to the node.'
@@ -71,7 +53,7 @@
           type: localexec
           configuration:
             command: >
-              /home/rundeck/server/data/provision/rundeck/provisioning/scripts/curl-step.sh fail "${node.uptime_ping_powerprofile}"
+              /home/rundeck/server/data/provision/rundeck/provisioning/scripts/curl-step.sh fail "${node.uptime_ping_host_aggregates_consistency}"
       - nodeStep: true
         type: copyfile
         description: 'Copy lib/check-capture.sh to the node.'
@@ -85,13 +67,13 @@
           type: localexec
           configuration:
             command: >
-              /home/rundeck/server/data/provision/rundeck/provisioning/scripts/curl-step.sh fail "${node.uptime_ping_powerprofile}"
+              /home/rundeck/server/data/provision/rundeck/provisioning/scripts/curl-step.sh fail "${node.uptime_ping_host_aggregates_consistency}"
       - nodeStep: true
         type: copyfile
-        description: 'Copy check-shell/powerprofile.sh to the node.'
+        description: 'Copy check-shell/host_aggregates_consistency.sh to the node.'
         configuration:
-          sourcePath: /home/rundeck/server/data/provision/check-shell/powerprofile.sh
-          destinationPath: '/var/tmp/rundeck/powerprofile.sh'
+          sourcePath: /home/rundeck/server/data/provision/check-shell/host_aggregates_consistency.sh
+          destinationPath: '/var/tmp/rundeck/host_aggregates_consistency.sh'
           recursive: 'false'
           echo: 'true'
         errorhandler:
@@ -99,7 +81,7 @@
           type: localexec
           configuration:
             command: >
-              /home/rundeck/server/data/provision/rundeck/provisioning/scripts/curl-step.sh fail "${node.uptime_ping_powerprofile}"
+              /home/rundeck/server/data/provision/rundeck/provisioning/scripts/curl-step.sh fail "${node.uptime_ping_host_aggregates_consistency}"
       - nodeStep: true
         type: copyfile
         description: 'Copy check-shell/lib/ contents into lib/ on the node (recursive copies folder contents, not the folder name).'
@@ -113,11 +95,11 @@
           type: localexec
           configuration:
             command: >
-              /home/rundeck/server/data/provision/rundeck/provisioning/scripts/curl-step.sh fail "${node.uptime_ping_powerprofile}"
+              /home/rundeck/server/data/provision/rundeck/provisioning/scripts/curl-step.sh fail "${node.uptime_ping_host_aggregates_consistency}"
       - script: |
           NODE_BASE='/var/tmp/rundeck'
           chmod +x "${NODE_BASE}/scripts/run-check-step.sh" 2>/dev/null || true
-          chmod +x "${NODE_BASE}/powerprofile.sh" 2>/dev/null || true
+          chmod +x "${NODE_BASE}/host_aggregates_consistency.sh" 2>/dev/null || true
           find "${NODE_BASE}/lib" -type f -name '*.sh' -exec chmod a+x {} + 2>/dev/null || true
           export NODE_NAME='@node.name@'
           export NODE_TAGS='@node.tags@'
@@ -127,17 +109,6 @@
           export TARGET_USER='@node.target_user@'
           export TARGET_PORT='@node.target_port@'
           
-          export EXPECTED_INTEL_PROFILE_LOWER_RANGE='@option.expected_intel_profile_lower_range@'
-          export NODE_EXPECTED_INTEL_PROFILE_LOWER_RANGE='@node.expected_intel_profile_lower_range@'
-
-
-          export EXPECTED_INTEL_PROFILE_UPPER_RANGE='@option.expected_intel_profile_upper_range@'
-          export NODE_EXPECTED_INTEL_PROFILE_UPPER_RANGE='@node.expected_intel_profile_upper_range@'
-
-
-          export EXPECTED_AMD_PROFILE_REGEX='@option.expected_amd_profile_regex@'
-          export NODE_EXPECTED_AMD_PROFILE_REGEX='@node.expected_amd_profile_regex@'
-
           set +e
           if [[ -n "${TARGET_HOST}" ]]; then
             REMOTE="${TARGET_USER}@${TARGET_HOST}"
@@ -148,18 +119,18 @@
             scp -P "${TARGET_PORT:-22}" -o BatchMode=yes -o StrictHostKeyChecking=accept-new -r \
               "${NODE_BASE}/scripts/lib" "${REMOTE}:${NODE_BASE}/scripts/"
             scp -P "${TARGET_PORT:-22}" -o BatchMode=yes -o StrictHostKeyChecking=accept-new \
-              "${NODE_BASE}/powerprofile.sh" "${REMOTE}:${NODE_BASE}/"
+              "${NODE_BASE}/host_aggregates_consistency.sh" "${REMOTE}:${NODE_BASE}/"
             scp -P "${TARGET_PORT:-22}" -o BatchMode=yes -o StrictHostKeyChecking=accept-new -r \
               "${NODE_BASE}/lib" "${REMOTE}:${NODE_BASE}/"
             ssh "${SSH_OPTS[@]}" "${REMOTE}" \
-              "chmod +x ${NODE_BASE}/scripts/run-check-step.sh ${NODE_BASE}/powerprofile.sh 2>/dev/null || true; \
+              "chmod +x ${NODE_BASE}/scripts/run-check-step.sh ${NODE_BASE}/host_aggregates_consistency.sh 2>/dev/null || true; \
                find ${NODE_BASE}/lib -type f -name '*.sh' -exec chmod a+x {} + 2>/dev/null || true; \
                export NODE_NAME='${NODE_NAME}'; export NODE_TAGS='${NODE_TAGS}'; export JOB_EXECID='${JOB_EXECID}'; \
                export OPENSTACK_ADMIN_RC='${OPENSTACK_ADMIN_RC}'; \
-               bash ${NODE_BASE}/scripts/run-check-step.sh shell powerprofile ${NODE_BASE}"
+               bash ${NODE_BASE}/scripts/run-check-step.sh shell host_aggregates_consistency ${NODE_BASE}"
             CHECK_RC=$?
           else
-            bash "${NODE_BASE}/scripts/run-check-step.sh" shell powerprofile "${NODE_BASE}"
+            bash "${NODE_BASE}/scripts/run-check-step.sh" shell host_aggregates_consistency "${NODE_BASE}"
             CHECK_RC=$?
           fi
           set -e
@@ -167,7 +138,7 @@
           printf 'RUNDECK:DATA:check_rc=%s\n' "${CHECK_RC}"
           exit 0
         scriptInterpreter: /bin/bash
-        description: 'Remote exec: run check-shell/powerprofile.sh on target (SSH hop via bastion when target_host is set). Always exits 0 so the curl step receives log-filter data.'
+        description: 'Remote exec: run check-shell/host_aggregates_consistency.sh on target (SSH hop via bastion when target_host is set). Always exits 0 so the curl step receives log-filter data.'
         plugins:
           LogFilter:
             - type: key-value-data
@@ -189,5 +160,5 @@
             /home/rundeck/server/data/provision/rundeck/provisioning/scripts/curl-step.sh from-data
             "${data.check_rc}"
             "${data.check_output_b64}"
-            "${node.uptime_ping_powerprofile}"
+            "${node.uptime_ping_host_aggregates_consistency}"
         description: 'Localexec on Rundeck: curl Uptime ping URL; exits with CHECK_RC so Rundeck marks fail when the check failed.'
