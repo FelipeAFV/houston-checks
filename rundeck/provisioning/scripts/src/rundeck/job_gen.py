@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from rundeck.provisioning.scripts.src.inventory.catalog import group_args
 from src.inventory.check_options import JobOption
 from src.configs.config import Config
 from src.utils.util import log
@@ -177,10 +178,18 @@ def emit_per_check(
 def _jobrefs_yaml(cfg: Any, group_tag: str, check_ids: list[str]) -> str:
     parts = []
     for check_id in check_ids:
+        args = group_args(cfg.checks_path, check_id, group_tag)
+        args_yaml = ""
+        if args:
+            args_str = " ".join(
+                f"-{key} {value}" for key, value in args.items()
+            )
+            args_yaml = f'\n          args: "{args_str}"'
+
         parts.append(
             f"""      - jobref:
           group: {cfg.rundeck_job_group}
-          name: houston - {check_id}
+          name: houston - {check_id}{args_yaml}
           nodefilters:
             filter: "tags: {group_tag}+check-{check_id}"
             dispatch:
