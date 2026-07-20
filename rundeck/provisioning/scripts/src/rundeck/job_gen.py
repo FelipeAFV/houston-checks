@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from rundeck.provisioning.scripts.src.inventory.catalog import group_args
+from src.inventory.catalog import group_args
 from src.inventory.check_options import JobOption
 from src.configs.config import Config
 from src.utils.util import log
