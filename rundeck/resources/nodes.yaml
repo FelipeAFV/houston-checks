@@ -30,7 +30,7 @@ tc-cobuit1-back001:
   hostname: TC-COBUIT1-BACK001
   osFamily: unix
   kind: server
-  tags: server,check-server_needs_reboot,check-ceph_health_status,check-ceph_balancer_status,check-grub_needs_reboot,check-powerprofile,check-ceph_health_checks,check-mdcheck_deadlock_fix,check-ceph_osd_status,check-ceph_pool_autoscale,check-mdcheck_presence,check-apt_unattended_upgrades_disabled,check-lscpu_vulnerabilities,check-ufw,storage-server
+  tags: server,check-apt_unattended_upgrades_disabled,check-ceph_health_status,check-ceph_balancer_status,check-ceph_osd_status,check-ceph_pool_autoscale,check-ceph_health_checks,check-lscpu_vulnerabilities,check-grub_needs_reboot,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,storage-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cobuit/prov.key
@@ -39,18 +39,18 @@ tc-cobuit1-back001:
   ssh-connection-timeout: 60000
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
-  uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/662c2075c5f666ea72d2b0ae98823bca
+  uptime_ping_apt_unattended_upgrades_disabled: http://10.100.20.73:3000/ping/93d2bf5adcf7ac2c277db31b9ba51db0
   uptime_ping_ceph_health_status: http://10.100.20.73:3000/ping/40b32120831aab2ff9898977ccc6b320
   uptime_ping_ceph_balancer_status: http://10.100.20.73:3000/ping/3e30aabc6ae6c42d57ef5e14bb16e582
-  uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/9e6ae28fef41a550e6e879e5489e5b22
-  uptime_ping_powerprofile: http://10.100.20.73:3000/ping/d5be573fc1454c3813a510371cc1606d
-  uptime_ping_ceph_health_checks: http://10.100.20.73:3000/ping/b2ffcb9127ca4e9397cc0ac624ec0456
-  uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/2a3ad1d680e6eff4465bab9918f666ec
   uptime_ping_ceph_osd_status: http://10.100.20.73:3000/ping/5be253dbf7d0d0a929362beeb49f3096
   uptime_ping_ceph_pool_autoscale: http://10.100.20.73:3000/ping/d54a2cfff9776de88ab39a0ca5c5d1e2
-  uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/49aecf8d0447268dcc9a33eebfd80468
-  uptime_ping_apt_unattended_upgrades_disabled: http://10.100.20.73:3000/ping/93d2bf5adcf7ac2c277db31b9ba51db0
+  uptime_ping_ceph_health_checks: http://10.100.20.73:3000/ping/b2ffcb9127ca4e9397cc0ac624ec0456
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/8ac00a552d83830ee10783917da0363a
+  uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/9e6ae28fef41a550e6e879e5489e5b22
+  uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/2a3ad1d680e6eff4465bab9918f666ec
+  uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/49aecf8d0447268dcc9a33eebfd80468
+  uptime_ping_powerprofile: http://10.100.20.73:3000/ping/d5be573fc1454c3813a510371cc1606d
+  uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/662c2075c5f666ea72d2b0ae98823bca
   uptime_ping_ufw: http://10.100.20.73:3000/ping/5c2c3b3f8c42d0bba169eda3a02b684c
 
 tc-cobuit1-back002:
@@ -167,7 +167,7 @@ tc-cobuit1-ctrl001:
   hostname: TC-COBUIT1-CTRL001
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,control-server
+  tags: server,check-kolla_configuration_files_format,check-grub_needs_reboot,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,control-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cobuit/prov.key
@@ -176,8 +176,8 @@ tc-cobuit1-ctrl001:
   ssh-connection-timeout: 60000
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
-  uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/e8035f69cf98c5a399c4ac68bbf2ac3b
   uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/79234e1d6f2b306580b8da3d69a58e0c
+  uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/e8035f69cf98c5a399c4ac68bbf2ac3b
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/e456b4fffa58a5f40ba1d6c2cb7e8138
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/5a0f7086a7123ab8469809b93000f087
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/97c69885c0f2ccc15adaf5b1009da0e8
@@ -312,7 +312,7 @@ tc-cobuit1-infr003:
   hostname: TC-COBUIT1-INFR003
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-powerprofile,check-mdcheck_presence,check-mdcheck_deadlock_fix,check-server_needs_reboot,check-ufw,infra-server
+  tags: server,check-mdcheck_deadlock_fix,check-kolla_configuration_files_format,check-powerprofile,check-grub_needs_reboot,check-lscpu_vulnerabilities,check-mdcheck_presence,check-server_needs_reboot,check-ufw,infra-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cobuit/prov.key
@@ -321,12 +321,12 @@ tc-cobuit1-infr003:
   ssh-connection-timeout: 60000
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
-  uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/6c9fd05f2e7bf9d6a1dae0f2ad1e656d
-  uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/5e6f06f84874b1a0d573663e3fe96514
-  uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/e4b7840c13e4b46832eeebd6623aa68b
-  uptime_ping_powerprofile: http://10.100.20.73:3000/ping/0a1fc0c555256ea259abdb1f14f49090
-  uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/b0623cb4ebdf98f95cf99f821f78bfbb
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/d4b3ecbedb1c3ffd9de0098da2677382
+  uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/5e6f06f84874b1a0d573663e3fe96514
+  uptime_ping_powerprofile: http://10.100.20.73:3000/ping/0a1fc0c555256ea259abdb1f14f49090
+  uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/6c9fd05f2e7bf9d6a1dae0f2ad1e656d
+  uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/e4b7840c13e4b46832eeebd6623aa68b
+  uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/b0623cb4ebdf98f95cf99f821f78bfbb
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/88268c561e1e2f0e571ec8882420124b
   uptime_ping_ufw: http://10.100.20.73:3000/ping/7e15835b2f7954f31c874f99f9dd46dd
 
@@ -1076,7 +1076,7 @@ tc-cobuit1-strg005:
   hostname: TC-COBUIT1-STRG005
   osFamily: unix
   kind: server
-  tags: server,check-apt_unattended_upgrades_disabled,check-grub_needs_reboot,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-ufw,check-server_needs_reboot,storage-server
+  tags: server,check-apt_unattended_upgrades_disabled,check-grub_needs_reboot,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,storage-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cobuit/prov.key
@@ -1091,15 +1091,15 @@ tc-cobuit1-strg005:
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/e8e8304da3b976f633ef191bcb9c66cf
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/f699309abbfe7bda09c692049b4a6250
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/0e559a08bb00283591247adf2ea27844
-  uptime_ping_ufw: http://10.100.20.73:3000/ping/041fd12a5b8a18763f8690ed4dbfc6ee
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/e47a0a0996b8a3553ac8ba3dc58eb753
+  uptime_ping_ufw: http://10.100.20.73:3000/ping/041fd12a5b8a18763f8690ed4dbfc6ee
 
 tc-cobuit1-strg006:
   nodename: tc-cobuit1-strg006
   hostname: TC-COBUIT1-STRG006
   osFamily: unix
   kind: server
-  tags: server,check-apt_unattended_upgrades_disabled,check-grub_needs_reboot,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,storage-server
+  tags: server,check-apt_unattended_upgrades_disabled,check-grub_needs_reboot,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-powerprofile,check-mdcheck_presence,check-server_needs_reboot,check-ufw,storage-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cobuit/prov.key
@@ -1112,8 +1112,8 @@ tc-cobuit1-strg006:
   uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/7e4cb5c15d034fbf3af7cb56a79d6f45
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/caf043632ad37191c9147f1117395034
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/eda0f8bbc81eb30ae0ac01844fc3fb9e
-  uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/216f466ea9ea99f21105a55fcb17a191
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/56936ca684615354a578d26dbf7d87ef
+  uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/216f466ea9ea99f21105a55fcb17a191
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/2e4ac395b735b175890ecfabdd910198
   uptime_ping_ufw: http://10.100.20.73:3000/ping/e262152e3e769eec9d7dd3a30ce565d3
 
@@ -1122,7 +1122,7 @@ tc-cobuit1-strg007:
   hostname: TC-COBUIT1-STRG007
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-apt_unattended_upgrades_disabled,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,storage-server
+  tags: server,check-apt_unattended_upgrades_disabled,check-grub_needs_reboot,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,storage-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cobuit/prov.key
@@ -1131,8 +1131,8 @@ tc-cobuit1-strg007:
   ssh-connection-timeout: 60000
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
-  uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/b0e40a42688f1bbd36c562e3ccc0fa61
   uptime_ping_apt_unattended_upgrades_disabled: http://10.100.20.73:3000/ping/b63692e1268a288e6ce802b36f422a22
+  uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/b0e40a42688f1bbd36c562e3ccc0fa61
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/345f259f489a6b8e81f966c025a89897
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/10e8312d6922a9e87f13288599bbdcf5
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/3bd22d6efe169b5e674b90f513dcbe1a
@@ -1283,7 +1283,7 @@ tc-cobuit1-tena002:
   hostname: TC-COBUIT1-TENA002
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-ufw,check-server_needs_reboot,tenant-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cobuit/prov.key
@@ -1298,8 +1298,8 @@ tc-cobuit1-tena002:
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/503b12dad98296e085ef89c625d92287
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/b53d87fb67f75f9fbd42a21641b54c81
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/e554e34430b18edbb5c3312fdec94878
-  uptime_ping_ufw: http://10.100.20.73:3000/ping/9f19efd6a746229b50ca6f4999f11b50
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/a15f43ec10dff42d8b47950afeaa59e2
+  uptime_ping_ufw: http://10.100.20.73:3000/ping/9f19efd6a746229b50ca6f4999f11b50
 
 tc-cobuit1-tena003:
   nodename: tc-cobuit1-tena003
@@ -1444,7 +1444,7 @@ tc-cobuit1-tena009:
   hostname: TC-COBUIT1-TENA009
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-powerprofile,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-server_needs_reboot,check-ufw,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cobuit/prov.key
@@ -1456,9 +1456,9 @@ tc-cobuit1-tena009:
   uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/84cebd1e8fb0c269687e8511342f68bb
   uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/3ebf99ac19b2b52780cb12a17eb4fd31
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/c9487ae148121058a7b429103d63bb3f
+  uptime_ping_powerprofile: http://10.100.20.73:3000/ping/780d17ebf6d34d1493b37a603531fbc5
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/1e7fc858dc249423c6603e3b6d2caf64
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/9f65cdbac1e8d2368ef73c954b3ac8ba
-  uptime_ping_powerprofile: http://10.100.20.73:3000/ping/780d17ebf6d34d1493b37a603531fbc5
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/2e068053328c645a4b5316703f641eb9
   uptime_ping_ufw: http://10.100.20.73:3000/ping/5e5f4a629c981088dc9d2e7bd18dedac
 
@@ -1467,7 +1467,7 @@ tc-cobuit1-tena010:
   hostname: TC-COBUIT1-TENA010
   osFamily: unix
   kind: server
-  tags: server,check-kolla_configuration_files_format,check-grub_needs_reboot,check-mdcheck_deadlock_fix,check-lscpu_vulnerabilities,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
+  tags: server,check-kolla_configuration_files_format,check-grub_needs_reboot,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-server_needs_reboot,check-ufw,check-powerprofile,check-mdcheck_presence,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cobuit/prov.key
@@ -1478,19 +1478,19 @@ tc-cobuit1-tena010:
   check_script_base: /var/tmp/rundeck
   uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/bcdccc9b172f7b1205e3fcedf9c5418d
   uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/522bc668a462640cf147d1a636aba961
-  uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/e55ef09e25d921ae3db63d1dd773b72e
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/bc873175770281eb35bd9f7aecb8641a
-  uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/eed2094ee4ad592955952f028b2f7d8a
-  uptime_ping_powerprofile: http://10.100.20.73:3000/ping/ffa8c7ee48663ef3e8fd05b0cb2d2e69
+  uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/e55ef09e25d921ae3db63d1dd773b72e
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/3d96fc1005734250a9f24ae4f02e338d
   uptime_ping_ufw: http://10.100.20.73:3000/ping/129b34310b2d6b93a9f43842243b4da3
+  uptime_ping_powerprofile: http://10.100.20.73:3000/ping/ffa8c7ee48663ef3e8fd05b0cb2d2e69
+  uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/eed2094ee4ad592955952f028b2f7d8a
 
 tc-cobuit1-tena011:
   nodename: tc-cobuit1-tena011
   hostname: TC-COBUIT1-TENA011
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
+  tags: server,check-grub_needs_reboot,check-lscpu_vulnerabilities,check-kolla_configuration_files_format,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cobuit/prov.key
@@ -1500,8 +1500,8 @@ tc-cobuit1-tena011:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/1fca3c5fbf3c2b042163d6de36b6ecb4
-  uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/c7a306e31cc554a284931a10dfdf3192
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/823e2af5137b2e4e5f054b5233b6e6c8
+  uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/c7a306e31cc554a284931a10dfdf3192
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/3a71886afcf40cbe2f9fffceb8a50c2a
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/1f78c23df88d1bbc1bbcf8aca7afb5b2
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/98fb04ccec8bcb47ce7515e96f90d09f
@@ -1720,7 +1720,7 @@ tc-cobuit1-tena021:
   hostname: TC-COBUIT1-TENA021
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-lscpu_vulnerabilities,check-kolla_configuration_files_format,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cobuit/prov.key
@@ -1730,8 +1730,8 @@ tc-cobuit1-tena021:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/afb4977f4dd64cc9cd36052b4a4e5412
-  uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/6e14bb9b5aaad8e4a713ab0b4e8ac593
   uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/9009e9c947e29ec8486172561ae7fa15
+  uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/6e14bb9b5aaad8e4a713ab0b4e8ac593
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/72f85749e900c3e3cf188a41a6a8e936
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/ca642069b4adb9739e888d95eb3e680c
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/c321d420d132a7c3faac81b5b58ad820
@@ -2387,7 +2387,7 @@ tc-cobuit1-tena050:
   hostname: TC-COBUIT1-TENA050
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-ufw,check-server_needs_reboot,tenant-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cobuit/prov.key
@@ -2402,8 +2402,8 @@ tc-cobuit1-tena050:
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/154a266bbd6949344081bb7fc9fe307e
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/0009be748bb64cdaeaf9a3eaca353a27
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/4bcf796d6071c7b10c09d1434b53edf1
-  uptime_ping_ufw: http://10.100.20.73:3000/ping/1db0d95594462cc4457ade6778692ca7
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/91bb7fad2dc8aa7751366d667d1d1215
+  uptime_ping_ufw: http://10.100.20.73:3000/ping/1db0d95594462cc4457ade6778692ca7
 
 tc-cobuit1-tena051:
   nodename: tc-cobuit1-tena051
@@ -2709,7 +2709,7 @@ tc-cobuit1-tena064:
   hostname: TC-COBUIT1-TENA064
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-server_needs_reboot,check-mdcheck_presence,check-powerprofile,check-ufw,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cobuit/prov.key
@@ -2722,9 +2722,9 @@ tc-cobuit1-tena064:
   uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/b3d03976e5a6ab55e1434352d1b2e123
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/932444d1212d7af41ad46c9b2e7bd18b
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/6615cda3ac4a405f7a96ae7a8e0be78a
+  uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/072e870600e55e3d7b5c4f76ca039283
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/2b0dba8883b46c6d82d075bbecc56934
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/1314070e143a7ecafce5c65b35646073
-  uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/072e870600e55e3d7b5c4f76ca039283
   uptime_ping_ufw: http://10.100.20.73:3000/ping/6a678cfbbd27def4aa32f24732a66f33
 
 tc-cobuit1-tena065:
@@ -2755,7 +2755,7 @@ tc-cobuit1-tena066:
   hostname: TC-COBUIT1-TENA066
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-mdcheck_deadlock_fix,check-lscpu_vulnerabilities,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cobuit/prov.key
@@ -2766,8 +2766,8 @@ tc-cobuit1-tena066:
   check_script_base: /var/tmp/rundeck
   uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/bfc4bb0d6448615a5d68dc07e7f72b20
   uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/c73ee00c29242640acca06a9623a1e74
-  uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/b2bfac0315575e4b3484e9abda4434fe
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/ff8a384a89ea61aa960c76c54cb594c1
+  uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/b2bfac0315575e4b3484e9abda4434fe
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/249e5c22241462c62f7c583749281f20
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/5c8fcdbb2a73feffa4788ae7f2fb152f
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/30e5c65e319c65f9aec50c63fe6199a5
@@ -2893,7 +2893,7 @@ tc-cobuit1-tena072:
   hostname: TC-COBUIT1-TENA072
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-powerprofile,check-mdcheck_presence,check-server_needs_reboot,check-ufw,tenant-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cobuit/prov.key
@@ -2906,8 +2906,8 @@ tc-cobuit1-tena072:
   uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/a1fe33c27fbc452aba09eeca60aa1948
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/8db815b8d258a18f788a8a69de41d08b
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/0c4a207f16399cdbc558edf76c4da2e5
-  uptime_ping_powerprofile: http://10.100.20.73:3000/ping/94c25496e1ec6782eb407a099bae0267
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/86e3da523924e5051299d512afc3ada8
+  uptime_ping_powerprofile: http://10.100.20.73:3000/ping/94c25496e1ec6782eb407a099bae0267
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/daffd4dad4f63168b898c232c7cc5a00
   uptime_ping_ufw: http://10.100.20.73:3000/ping/0fe538203c0f88ec1b398be0f8b48dce
 
@@ -3215,7 +3215,7 @@ tc-cobuit1-tena086:
   hostname: TC-COBUIT1-TENA086
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-server_needs_reboot,check-powerprofile,check-ufw,tenant-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cobuit/prov.key
@@ -3229,8 +3229,8 @@ tc-cobuit1-tena086:
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/1544c875bc31c1c9c394691cf3c167bf
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/7b445b294353adf05ab9bf48eba359f2
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/7fe4c86279cf4177f886ab0faccb77ff
-  uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/843a03825ccc30bfd4316e8970c52f1b
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/f4aca7cb14bb4af63cef035e2d55cd4b
+  uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/843a03825ccc30bfd4316e8970c52f1b
   uptime_ping_ufw: http://10.100.20.73:3000/ping/26648b4534ab4ef8294cc89e453826fe
 
 tc-cobuit1-tena087:
@@ -3353,7 +3353,7 @@ tc-cobuit1-tena092:
   hostname: TC-COBUIT1-TENA092
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_presence,check-mdcheck_deadlock_fix,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cobuit/prov.key
@@ -3365,8 +3365,8 @@ tc-cobuit1-tena092:
   uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/65f53b76dad38d2dddefc541eaef817e
   uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/1afef6e6fb9734314575e3d8be65dfbd
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/a95f3ed9c99b5ae6714ab583356a4ab5
-  uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/8c7bb7ddad95ee0dda00fa2dcd86f22e
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/8026deb4becb76ce49884097ff4c7c81
+  uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/8c7bb7ddad95ee0dda00fa2dcd86f22e
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/a94269f6b457d89eb73d295633db9fa7
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/c9cb86d9156d7cd7b528c53717a43a70
   uptime_ping_ufw: http://10.100.20.73:3000/ping/86400a08bdbe56fc6390db93c8302b14
@@ -3491,7 +3491,7 @@ tc-cobuit1-tena098:
   hostname: TC-COBUIT1-TENA098
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-ufw,check-server_needs_reboot,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cobuit/prov.key
@@ -3506,15 +3506,15 @@ tc-cobuit1-tena098:
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/0663a7bd9ec34f5110f63e2dbd6a9c57
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/5053fe4f5762b875faa2df55960987c9
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/9ffb8071e10d9a0dc06dbf601f5f04e7
-  uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/74fec5f9cb980f499a67dba36c39c231
   uptime_ping_ufw: http://10.100.20.73:3000/ping/6e7bc23694a2125cb6dc9105dd641248
+  uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/74fec5f9cb980f499a67dba36c39c231
 
 tc-cobuit1-tena099:
   nodename: tc-cobuit1-tena099
   hostname: TC-COBUIT1-TENA099
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
+  tags: server,check-kolla_configuration_files_format,check-mdcheck_presence,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-grub_needs_reboot,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cobuit/prov.key
@@ -3523,11 +3523,11 @@ tc-cobuit1-tena099:
   ssh-connection-timeout: 60000
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
-  uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/2bc18cb5d0db21cf4b69f30c35192b15
   uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/ddc6afabbe8a129c261176a0b04f9b90
+  uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/0c906d3bf23a7512c658c60e26c3923e
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/4beb0b7f2daffe691b31aa8a1c4541d3
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/02f783a37296bebb2d4bfd5a6dc6fc27
-  uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/0c906d3bf23a7512c658c60e26c3923e
+  uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/2bc18cb5d0db21cf4b69f30c35192b15
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/e699cb3b007fbe5fff186b4cb5e4faf2
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/8731b0d0c41c6fd19f091c65471fdd8d
   uptime_ping_ufw: http://10.100.20.73:3000/ping/9c09085c60b6041f1ab071b9dc6e80ef
@@ -3675,7 +3675,7 @@ tc-cobuit1-tena106:
   hostname: TC-COBUIT1-TENA106
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-mdcheck_deadlock_fix,check-lscpu_vulnerabilities,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cobuit/prov.key
@@ -3686,8 +3686,8 @@ tc-cobuit1-tena106:
   check_script_base: /var/tmp/rundeck
   uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/72f1fcc835ec9e37a4af53fb28f2a03d
   uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/52433de33f66595c6948c5e74bd2564c
-  uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/6e3a0642baef6c49830d2503130ed63d
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/3c9052a365c0e0c33469a0ccdbde4dc2
+  uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/6e3a0642baef6c49830d2503130ed63d
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/2f4a7d606ef4b7a0e37bb09f6b5fe846
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/8a75fdfac7cd52b2a1fd2fb9d6c611c2
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/e0d310b152e528887f05c27bc4b9ac4a
@@ -3945,7 +3945,7 @@ tc-cotobe1-ctrl001:
   hostname: TC-COTOBE1-CTRL001
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_presence,check-powerprofile,check-mdcheck_deadlock_fix,check-server_needs_reboot,check-ufw,control-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,control-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cotobe/prov.key
@@ -3957,9 +3957,9 @@ tc-cotobe1-ctrl001:
   uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/4ff8bccb0bbbe3262017d925d1ce6bb2
   uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/8118fe2c8953f01835a29b4de71f3e2e
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/73583dbf1ca62372e9004dd1a3107ef2
+  uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/ac95d5d158c5d7067ddbf36165b7009e
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/497cd4f1a7adbfb9c54378960714cf7e
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/daeb97c913e476bc41ec05e60e4157f2
-  uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/ac95d5d158c5d7067ddbf36165b7009e
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/d660b265436699c52fcb3791bb867ed9
   uptime_ping_ufw: http://10.100.20.73:3000/ping/f213eead2775e15b62390e64b6e85342
 
@@ -3968,7 +3968,7 @@ tc-cotobe1-ctrl002:
   hostname: TC-COTOBE1-CTRL002
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,control-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-ufw,check-server_needs_reboot,control-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cotobe/prov.key
@@ -3983,15 +3983,15 @@ tc-cotobe1-ctrl002:
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/82dd39b8d57a37f485e5f99805f931d8
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/364e2ca74de51b550de87d5e806bee84
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/31e25288be7f0334b6e5c1e6a8ce5e73
-  uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/e7b0c326fcc3767e625775cc9d9ee484
   uptime_ping_ufw: http://10.100.20.73:3000/ping/d9ebb929bac504947de8b0319d77b6b9
+  uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/e7b0c326fcc3767e625775cc9d9ee484
 
 tc-cotobe1-ctrl003:
   nodename: tc-cotobe1-ctrl003
   hostname: TC-COTOBE1-CTRL003
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,control-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-powerprofile,check-mdcheck_presence,check-mdcheck_deadlock_fix,check-server_needs_reboot,check-ufw,control-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cotobe/prov.key
@@ -4003,9 +4003,9 @@ tc-cotobe1-ctrl003:
   uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/a50b91e45bfbdce4abd9067ca57f128c
   uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/eff990c26efde407f12b549487e0abe6
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/fa8f061dc7d80d87df3ee23c63be8c75
-  uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/13cd917a196dac5caf8e4e9011e451c5
-  uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/f4a62fca2e30397c33cd3763a13d65af
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/be5bca7fe62f1da16365d4a974cc3388
+  uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/f4a62fca2e30397c33cd3763a13d65af
+  uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/13cd917a196dac5caf8e4e9011e451c5
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/002f45f30e3aedc90210f85234cf3bf1
   uptime_ping_ufw: http://10.100.20.73:3000/ping/a22a2e43ec9afb6c790b4a018895bc79
 
@@ -4635,7 +4635,7 @@ tc-cotobe1-prov001:
   hostname: TC-COTOBE1-PROV001
   osFamily: unix
   kind: server
-  tags: server,check-apt_unattended_upgrades_disabled,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,provisioning-server
+  tags: server,check-apt_unattended_upgrades_disabled,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-server_needs_reboot,check-powerprofile,check-ufw,provisioning-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cotobe/prov.key
@@ -4648,8 +4648,8 @@ tc-cotobe1-prov001:
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/8e701f155c2bf2115367da8d2c1b76c8
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/913146b8a2ce99ca5b71e89fb090c1d3
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/9d17ceb6ab5fac3325ff2b878ccbdaa6
-  uptime_ping_powerprofile: http://10.100.20.73:3000/ping/1404ecbd569b7f476ae979b4123f53d7
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/d90e46d4c8bca01758ece1eac553d5ad
+  uptime_ping_powerprofile: http://10.100.20.73:3000/ping/1404ecbd569b7f476ae979b4123f53d7
   uptime_ping_ufw: http://10.100.20.73:3000/ping/a4de7dd45576608630b6fb2b54fe9692
 
 tc-cotobe1-slba001:
@@ -4759,7 +4759,7 @@ tc-cotobe1-strg001:
   hostname: TC-COTOBE1-STRG001
   osFamily: unix
   kind: server
-  tags: server,check-apt_unattended_upgrades_disabled,check-grub_needs_reboot,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-ufw,check-server_needs_reboot,storage-server
+  tags: server,check-apt_unattended_upgrades_disabled,check-lscpu_vulnerabilities,check-grub_needs_reboot,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,storage-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cotobe/prov.key
@@ -4769,20 +4769,20 @@ tc-cotobe1-strg001:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   uptime_ping_apt_unattended_upgrades_disabled: http://10.100.20.73:3000/ping/6f5239c22ac8095d4cbdec3e35a87d91
-  uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/7877c83ecc446fc91941ae73082736d0
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/71405037de2fdf8af5e567c8b99c53ba
+  uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/7877c83ecc446fc91941ae73082736d0
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/b4a969bd9b39ab8836c6e43e47fbfdff
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/b86fc66f4359c26a3039fb46f8d656d8
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/b20fda7432e39e8b611dbfd2377e3df6
-  uptime_ping_ufw: http://10.100.20.73:3000/ping/f1a186c2a55b2821662f51eb7fb713a4
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/e64a0485dc6dd1374338866e2ee67d52
+  uptime_ping_ufw: http://10.100.20.73:3000/ping/f1a186c2a55b2821662f51eb7fb713a4
 
 tc-cotobe1-strg002:
   nodename: tc-cotobe1-strg002
   hostname: TC-COTOBE1-STRG002
   osFamily: unix
   kind: server
-  tags: server,check-apt_unattended_upgrades_disabled,check-grub_needs_reboot,check-lscpu_vulnerabilities,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-mdcheck_deadlock_fix,check-ufw,storage-server
+  tags: server,check-apt_unattended_upgrades_disabled,check-grub_needs_reboot,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,storage-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cotobe/prov.key
@@ -4794,10 +4794,10 @@ tc-cotobe1-strg002:
   uptime_ping_apt_unattended_upgrades_disabled: http://10.100.20.73:3000/ping/0caddd959048c82533b9b4ae9ffd5d10
   uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/b5bc706d3d790850810da2f2b42dc905
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/0effae54e841ff8ba24c74d528d74590
+  uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/24f96a347757f3d8ed0d30c70c3d844c
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/346bc777753a80f8a6a971e85f68f593
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/c95d775bd7a77d7646f8723da7020eb8
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/a2a93083ca3bf05513ff2dded032ccc0
-  uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/24f96a347757f3d8ed0d30c70c3d844c
   uptime_ping_ufw: http://10.100.20.73:3000/ping/f8492dc7d58b9e3cce02fd0ce6f339c9
 
 tc-cotobe1-strg003:
@@ -4874,7 +4874,7 @@ tc-cotobe1-strg006:
   hostname: TC-COTOBE1-STRG006
   osFamily: unix
   kind: server
-  tags: server,check-apt_unattended_upgrades_disabled,check-grub_needs_reboot,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,storage-server
+  tags: server,check-apt_unattended_upgrades_disabled,check-grub_needs_reboot,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-ufw,check-server_needs_reboot,storage-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cotobe/prov.key
@@ -4889,8 +4889,8 @@ tc-cotobe1-strg006:
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/788e2abea86499d7804bff57d3774308
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/3ce2c0055187a4a94978cd370a5abed4
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/a09447e977bef81346952389fdeaf8e2
-  uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/1afc5776ae6f4f5bcad08764cecc34be
   uptime_ping_ufw: http://10.100.20.73:3000/ping/68d72fd3b8f5c9822680f4653cc0b49f
+  uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/1afc5776ae6f4f5bcad08764cecc34be
 
 tc-cotobe1-strg007:
   nodename: tc-cotobe1-strg007
@@ -4966,7 +4966,7 @@ tc-cotobe1-strg010:
   hostname: TC-COTOBE1-STRG010
   osFamily: unix
   kind: server
-  tags: server,check-apt_unattended_upgrades_disabled,check-grub_needs_reboot,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,storage-server
+  tags: server,check-apt_unattended_upgrades_disabled,check-grub_needs_reboot,check-mdcheck_deadlock_fix,check-lscpu_vulnerabilities,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,storage-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cotobe/prov.key
@@ -4977,8 +4977,8 @@ tc-cotobe1-strg010:
   check_script_base: /var/tmp/rundeck
   uptime_ping_apt_unattended_upgrades_disabled: http://10.100.20.73:3000/ping/4512f1491c611891d8cf5a83d240b730
   uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/4a91556cb30591fd2b4e347e284705fc
-  uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/3fef20e4bb5e6f9b8cf6cc7d61003565
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/5cb827aef04a59d8574ca3cef1db7525
+  uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/3fef20e4bb5e6f9b8cf6cc7d61003565
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/df020e3f77b300c2736f13e8ac7d47dc
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/2a5fb738002fcdcefbfad1c6b32665c9
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/e336b7a177201d66f0ba68fe7f503d29
@@ -5840,7 +5840,7 @@ tc-cotobe1-tena036:
   hostname: TC-COTOBE1-TENA036
   osFamily: unix
   kind: server
-  tags: server,check-kolla_configuration_files_format,check-grub_needs_reboot,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cotobe/prov.key
@@ -5849,8 +5849,8 @@ tc-cotobe1-tena036:
   ssh-connection-timeout: 60000
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
-  uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/e565bfacd692db261c3be525248c163c
   uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/d731669d6a461a37582a60818a23f2d2
+  uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/e565bfacd692db261c3be525248c163c
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/3fafcfd97b9779f3682f66d6d119908a
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/b379a0edd1327e9bb9fd71955e2fb52b
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/6fe15053e4efdeb440dee25e9cd57bf8
@@ -5932,7 +5932,7 @@ tc-cotobe1-tena040:
   hostname: TC-COTOBE1-TENA040
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-lscpu_vulnerabilities,check-kolla_configuration_files_format,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cotobe/prov.key
@@ -5942,8 +5942,8 @@ tc-cotobe1-tena040:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/62601d75dad84fe4c3b1f06097911a59
-  uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/d1a064c216d4876a7483d9f6bf8d965a
   uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/d43f5f61ffc00f584bb5dd55f0b48557
+  uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/d1a064c216d4876a7483d9f6bf8d965a
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/8f50d36752c2e40fee1ac8fa2eb2947f
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/fa4d5a96979f9e04a0251ee5d689310c
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/ef77a00b4d7728019470012ec628979d
@@ -6162,7 +6162,7 @@ tc-cotobe1-tena050:
   hostname: TC-COTOBE1-TENA050
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-server_needs_reboot,check-ufw,check-powerprofile,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cotobe/prov.key
@@ -6176,9 +6176,9 @@ tc-cotobe1-tena050:
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/63a64bbcaf73896309aff424da4a93d3
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/67714309da5e8b8e4ab1de7e32d899c9
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/e26a3024d02f163f328b6519f84d45b6
-  uptime_ping_powerprofile: http://10.100.20.73:3000/ping/dfcb43fd202973ee83e3cc656b49d07d
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/fecdfecc83b33f586af8fa99e8148390
   uptime_ping_ufw: http://10.100.20.73:3000/ping/ee5a78b548581c16028c07839ad26939
+  uptime_ping_powerprofile: http://10.100.20.73:3000/ping/dfcb43fd202973ee83e3cc656b49d07d
 
 tc-cotobe1-tena051:
   nodename: tc-cotobe1-tena051
@@ -6323,7 +6323,7 @@ tc-cotobe1-tena057:
   hostname: TC-COTOBE1-TENA057
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-ufw,check-server_needs_reboot,tenant-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cotobe/prov.key
@@ -6338,15 +6338,15 @@ tc-cotobe1-tena057:
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/fbf0bd537d2f547d0e4dc84b9aecb9af
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/b5e1ed8262ec7391f2993c643ff024f4
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/bc1d51aa9377521a46b39aae83974497
-  uptime_ping_ufw: http://10.100.20.73:3000/ping/5530ff8b6d4fe765d6a0cfb52a555946
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/4c5dfb93a94dca0b8e1b105d62145cc6
+  uptime_ping_ufw: http://10.100.20.73:3000/ping/5530ff8b6d4fe765d6a0cfb52a555946
 
 tc-cotobe1-tena058:
   nodename: tc-cotobe1-tena058
   hostname: TC-COTOBE1-TENA058
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-mdcheck_deadlock_fix,check-lscpu_vulnerabilities,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cotobe/prov.key
@@ -6357,8 +6357,8 @@ tc-cotobe1-tena058:
   check_script_base: /var/tmp/rundeck
   uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/b035126856cd7e0975de50b4fcd0c864
   uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/4e0634043c7ab9a422afe3cd735017db
-  uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/09c7f5911e9de4f72f96f76bf3ede844
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/4e191b02a42e33a9560815ee73cceb4c
+  uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/09c7f5911e9de4f72f96f76bf3ede844
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/dcb684be0de901f94b2968d0c5bd4e86
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/227378b66c33403d141d6f48ac16fc34
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/85c9c9f62a256dadd9ca1dbfaf1ee4e4
@@ -6415,7 +6415,7 @@ tc-cotobe1-tena061:
   hostname: TC-COTOBE1-TENA061
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-kolla_configuration_files_format,check-ufw,tenant-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cotobe/prov.key
@@ -6425,12 +6425,12 @@ tc-cotobe1-tena061:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/5dfd71a1eaeb6269ecf99506ebc48482
+  uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/548d6842aa4a9259c94d2604e6c7d351
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/940333033d5534af9210bfb6f82d714c
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/88f1870a22697c4ffe798baa6507dab8
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/048f32f4c63dc7a09f19232430d56f91
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/99e3a3eb00c13053e1881e8858fe5052
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/209986ca850b18873ddae53e6b8cdbbe
-  uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/548d6842aa4a9259c94d2604e6c7d351
   uptime_ping_ufw: http://10.100.20.73:3000/ping/861d395e56ffa242a31ac52ccbabd0d8
 
 tc-cotobe1-tena062:
@@ -6461,7 +6461,7 @@ tc-cotobe1-tena063:
   hostname: TC-COTOBE1-TENA063
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-lscpu_vulnerabilities,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cotobe/prov.key
@@ -6472,9 +6472,9 @@ tc-cotobe1-tena063:
   check_script_base: /var/tmp/rundeck
   uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/7e8cdcc35a7a7d9c3b5827b483943ce5
   uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/0b473e3e3f96359c49865994f74e51a7
+  uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/8399a9b765e6e9024b641ead75224d0b
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/b8b0ebb5c8d8194f205a1eaac74e7588
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/4b5698da51a500fe0ee8aadeadd4c758
-  uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/8399a9b765e6e9024b641ead75224d0b
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/dfe96efcc72760b16391ce79063b78a2
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/3a8e29d0b2fa12487a7caf5ae8e10b11
   uptime_ping_ufw: http://10.100.20.73:3000/ping/2021a81d23e97bb4417d094119fc9fd5
@@ -6553,7 +6553,7 @@ tc-cotobe1-tena067:
   hostname: TC-COTOBE1-TENA067
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-powerprofile,check-mdcheck_presence,check-server_needs_reboot,check-ufw,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cotobe/prov.key
@@ -6566,8 +6566,8 @@ tc-cotobe1-tena067:
   uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/996deaf3c26d35a3752066815f04a5db
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/e70cd099ce99111e4a2c25556eb3e2b3
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/78566340fac44b631ee289e14bf44512
-  uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/e6cb4398e357c7e1bde8ddb40c8c76a2
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/42b04ff26d9a24bdb0adbef2bc872100
+  uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/e6cb4398e357c7e1bde8ddb40c8c76a2
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/acce4e984ab649e644b51e528592377d
   uptime_ping_ufw: http://10.100.20.73:3000/ping/aa59dbf3dcd2aac38db0f27e6ba4708f
 
@@ -6990,7 +6990,7 @@ tc-cotobe1-tena086:
   hostname: TC-COTOBE1-TENA086
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-lscpu_vulnerabilities,check-kolla_configuration_files_format,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_deadlock_fix,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cotobe/prov.key
@@ -7000,8 +7000,8 @@ tc-cotobe1-tena086:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/09050856a2d50f49fe7b3270ac53f3c2
-  uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/6dbddde8d5e817d7afdfa79788d9e180
   uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/3b61ee960bc126733dc8bd18b84b4c63
+  uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/6dbddde8d5e817d7afdfa79788d9e180
   uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/a2ed148b00dc10da58eeec73da88a187
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/78cbd0f64952230526b216f393301a4d
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/62808f3ca5d472603319c90871ba05c6
@@ -7059,7 +7059,7 @@ tc-cotobe1-tena089:
   hostname: TC-COTOBE1-TENA089
   osFamily: unix
   kind: server
-  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-mdcheck_deadlock_fix,check-lscpu_vulnerabilities,check-mdcheck_presence,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
+  tags: server,check-grub_needs_reboot,check-kolla_configuration_files_format,check-lscpu_vulnerabilities,check-mdcheck_presence,check-mdcheck_deadlock_fix,check-powerprofile,check-server_needs_reboot,check-ufw,tenant-server
   username: whitestack
   ssh-authentication: privateKey
   ssh-key-storage-path: keys/project/houston/cotobe/prov.key
@@ -7070,9 +7070,9 @@ tc-cotobe1-tena089:
   check_script_base: /var/tmp/rundeck
   uptime_ping_grub_needs_reboot: http://10.100.20.73:3000/ping/48cfd02cff67d61f01f4edacd195f478
   uptime_ping_kolla_configuration_files_format: http://10.100.20.73:3000/ping/fdf6a06ff7a1b02310d34d28b272b00e
-  uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/f407bea6dc8e3860b60660f4c975c2ad
   uptime_ping_lscpu_vulnerabilities: http://10.100.20.73:3000/ping/ab436e148f02a6423128a3cf444bcf6e
   uptime_ping_mdcheck_presence: http://10.100.20.73:3000/ping/7b18b8ec76cd449d8cef489ea119e2df
+  uptime_ping_mdcheck_deadlock_fix: http://10.100.20.73:3000/ping/f407bea6dc8e3860b60660f4c975c2ad
   uptime_ping_powerprofile: http://10.100.20.73:3000/ping/5d8c5043956d89efab9e9eefb3eb331c
   uptime_ping_server_needs_reboot: http://10.100.20.73:3000/ping/a0198663a2ff37edcd49a9cb5e8c30bc
   uptime_ping_ufw: http://10.100.20.73:3000/ping/c043e56018b8f1ed60d37cfeb14a397c
