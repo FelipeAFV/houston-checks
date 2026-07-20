@@ -1,6 +1,8 @@
 tc-cobuit1-ctrl001:
   nodename: tc-cobuit1-ctrl001
   hostname: 10.71.7.12
+  expected_intel_profile_lower_range: 4
+  expected_intel_profile_upper_range: 10
 tc-cobuit1-ctrl002:
   nodename: tc-cobuit1-ctrl002
   hostname: 10.71.7.13

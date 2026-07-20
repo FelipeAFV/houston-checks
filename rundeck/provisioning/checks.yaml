@@ -64,30 +64,12 @@ checks:
       required: true
       default: "^(PerfPerWattOptimized|PerfPerWattOptimizedDapc|PerfPerWattOptimizedOS)$"
     groups:
-      control-server:
-        args:
-          expected_intel_profile_lower_range: 1
-          expected_intel_profile_upper_range: 9
-      infra-server:
-        args:
-          expected_intel_profile_lower_range: 6
-          expected_intel_profile_upper_range: 7
-      tenant-server:
-        args:
-          expected_intel_profile_lower_range: 6
-          expected_intel_profile_upper_range: 7
-      storage-server:
-        args:
-          expected_intel_profile_lower_range: 6
-          expected_intel_profile_upper_range: 7
-      provisioning-server:
-        args:
-          expected_intel_profile_lower_range: 6
-          expected_intel_profile_upper_range: 7
-      hybrid-provisioning-server:
-        args:
-          expected_intel_profile_lower_range: 6
-          expected_intel_profile_upper_range: 7
+      control-server: {}
+      infra-server: {}
+      tenant-server: {}
+      storage-server: {}
+      provisioning-server: {}
+      hybrid-provisioning-server: {}
 
   - path: check-shell/server_needs_reboot.sh
     schedule: "30 6 * * *"
