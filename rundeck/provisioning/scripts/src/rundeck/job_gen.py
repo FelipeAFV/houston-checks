@@ -97,28 +97,28 @@ def render_template(tpl_path: Path, out_path: Path, tokens: dict[str, str]) -> N
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(text, encoding="utf-8")
 
-def render_job_options(options):
+def render_job_options(options: list[JobOption]) -> str:
     """Render job options for a Rundeck job."""
     if not options:
         return ""
     lines = ["options:"]
     for opt in options:
         lines.append(f"""
-  - name: {opt['name']}
-    description: {opt['description']}
-    required: {str(opt['required']).lower()}
-    {f"defaultValue: {opt.get('default')}" if opt.get('default') else ''}
+  - name: {opt.name}
+    description: {opt.description}
+    required: {str(opt.required).lower()}
+    {f"defaultValue: {opt.default}" if opt.default else ''}
 """)
     return "\n".join(lines)
 
 
-def render_job_exports(options):
+def render_job_exports(options: list[JobOption]) -> str:
     """Render job exports for a Rundeck job"""
     lines = []
     for opt in options:
         lines.append(f"""
-          export {opt['name'].upper()}='@option.{opt['name']}@'
-          export NODE_{opt['name'].upper()}='@node.{opt['name']}@'
+          export {opt.name.upper()}='@option.{opt.name}@'
+          export NODE_{opt.name.upper()}='@node.{opt.name}@'
 """)
     return "\n".join(lines) 
 
