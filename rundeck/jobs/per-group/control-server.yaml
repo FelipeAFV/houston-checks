@@ -63,7 +63,6 @@
       - jobref:
           group: houston
           name: houston - powerprofile
-          args: "-expected_intel_profile_lower_range 1 -expected_intel_profile_upper_range 9"
           nodefilters:
             filter: "tags: control-server+check-powerprofile"
             dispatch:

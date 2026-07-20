@@ -108,7 +108,6 @@
       - jobref:
           group: houston
           name: houston - powerprofile
-          args: "-expected_intel_profile_lower_range 6 -expected_intel_profile_upper_range 7"
           nodefilters:
             filter: "tags: storage-server+check-powerprofile"
             dispatch:
