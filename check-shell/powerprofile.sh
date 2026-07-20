@@ -52,6 +52,7 @@ energy_perf_bias_value=$(cat "$energy_perf_bias_file")
 # Check if the file contains the expected value for the performance mode 
 printf "Intel server\n"
 printf "energy_perf_bias=%s\n" "$energy_perf_bias_value"
+printf "expected range: %s-%s\n" "$EXPECTED_INTEL_PROFILE_LOWER_RANGE" "$EXPECTED_INTEL_PROFILE_UPPER_RANGE"
 if [[ "$energy_perf_bias_value" -ge "$EXPECTED_INTEL_PROFILE_LOWER_RANGE" && "$energy_perf_bias_value" -le "$EXPECTED_INTEL_PROFILE_UPPER_RANGE" ]]; then
   printf "Intel server in optimized mode.\n"
   printf 'CHECK_RC=0\n'
