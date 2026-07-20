@@ -12,6 +12,13 @@ from src.utils.util import load_yaml_file
 
 _CATALOG_INSTANCES: dict[str, ChecksCatalog] = {}
 
+@dataclass
+class JobOption:
+    name: str
+    description: str = ""
+    required: bool = False
+    default: str = ""
+
 
 @dataclass
 class ChecksCatalog:
@@ -107,9 +114,9 @@ class ChecksCatalog:
         group = groups.get(group_id, {})
         return dict(group.get("args", {}))
 
-    def options_by_id(self, check_id: str) -> dict[str, Any]:
+    def options_by_id(self, check_id: str) -> list[JobOption]:
         spec = self.by_id.get(check_id, {})
-        return dict(spec.get("options", []))
+        return [JobOption(**opt) for opt in spec.get("options", [])]
 
 
 def validate_catalog_path(spec: dict[str, Any]) -> str:
