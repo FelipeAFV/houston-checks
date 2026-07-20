@@ -8,7 +8,6 @@ from typing import Any
 from src.check_registry import build_check_registry
 from src.configs.config import Config
 from src.inventory.catalog import ChecksCatalog
-from src.inventory.check_options import ChecksOptions
 from src.inventory.membership import HostIndexes
 from src.utils.util import load_yaml_file
 
@@ -19,7 +18,6 @@ class ProvisionContext:
 
     cfg: Config
     checks: ChecksCatalog
-    checks_options: ChecksOptions
     static_inv: dict[str, Any]
     static_indexes: HostIndexes
     effective_inv: dict[str, Any] | None = None
@@ -31,11 +29,9 @@ class ProvisionContext:
         data = load_yaml_file(cfg.inventory_path)
         static_inv = data if isinstance(data, dict) else {}
         checks = ChecksCatalog.load(cfg.checks_path)
-        checks_options = ChecksOptions.load(cfg.checks_options_path)
         return cls(
             cfg=cfg,
             checks=checks,
-            checks_options=checks_options,
             static_inv=static_inv,
             static_indexes=HostIndexes.build(static_inv),
         )

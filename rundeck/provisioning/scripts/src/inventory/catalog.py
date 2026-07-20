@@ -107,6 +107,10 @@ class ChecksCatalog:
         group = groups.get(group_id, {})
         return dict(group.get("args", {}))
 
+    def options_by_id(self, check_id: str) -> dict[str, Any]:
+        spec = self.by_id.get(check_id, {})
+        return dict(spec.get("options", []))
+
 
 def validate_catalog_path(spec: dict[str, Any]) -> str:
     """Return the normalised repo-relative script path for a catalog entry."""
@@ -142,4 +146,7 @@ def group_check_ids(checks_path: str, group_id: str) -> list[str]:
 
 def group_args(checks_path: str, check_id: str, group_id: str) -> dict[str, Any]:
     return ChecksCatalog.load(checks_path).group_args(check_id, group_id)
+
+def options_by_id(checks_path: str, check_id: str) -> dict[str, Any]:
+    return ChecksCatalog.load(checks_path).options_by_id(check_id)
 
