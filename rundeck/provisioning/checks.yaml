@@ -96,7 +96,7 @@ checks:
       provisioning-server: {}
       hybrid-provisioning-server: {}
     one_host: true
-    admin_rc_path:
+    admin_rc_path: #update with the path to the admin-openrc.sh file
 
   - path: check-shell/vrouter_port_bindings.sh
     schedule: "30 */6 * * *"
@@ -112,7 +112,7 @@ checks:
       provisioning-server: {}
       hybrid-provisioning-server: {}
     one_host: true
-    admin_rc_path:
+    admin_rc_path: #update with the path to the admin-openrc.sh file
 
   - path: check-shell/ceph_balancer_status.sh
     schedule: "0 */6 * * *"
