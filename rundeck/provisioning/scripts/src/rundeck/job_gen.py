@@ -118,10 +118,11 @@ def render_job_exports(options: list[JobOption]) -> str:
     for opt in options:
         lines.append(f"""
           export {opt.name.upper()}='@option.{opt.name}@'
-          [[ -n "@node.{opt.name}@" ]] && export {opt.name.upper()}='@node.{opt.name}@'
+          if [[ -n "@node.{opt.name}@" ]]; then
+            export {opt.name.upper()}='@node.{opt.name}@'
+          fi
 """)
     return "\n".join(lines)
-
 
 def emit_per_check(
     cfg: Any,
