@@ -127,6 +127,8 @@
           export TARGET_USER='@node.target_user@'
           export TARGET_PORT='@node.target_port@'
           
+          echo "Lower range: @node.expected_intel_profile_lower_range@"
+          echo "Upper range: @node.expected_intel_profile_upper_range@"
           export EXPECTED_INTEL_PROFILE_LOWER_RANGE='@option.expected_intel_profile_lower_range@'
           if [[ -n "@node.expected_intel_profile_lower_range@" ]]; then
             export EXPECTED_INTEL_PROFILE_LOWER_RANGE='@node.expected_intel_profile_lower_range@'
