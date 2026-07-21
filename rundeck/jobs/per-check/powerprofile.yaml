@@ -128,15 +128,21 @@
           export TARGET_PORT='@node.target_port@'
           
           export EXPECTED_INTEL_PROFILE_LOWER_RANGE='@option.expected_intel_profile_lower_range@'
-          [[ -n "@node.expected_intel_profile_lower_range@" ]] \&\& export EXPECTED_INTEL_PROFILE_LOWER_RANGE='@node.expected_intel_profile_lower_range@'
+          if [[ -n "@node.expected_intel_profile_lower_range@" ]]; then
+            export EXPECTED_INTEL_PROFILE_LOWER_RANGE='@node.expected_intel_profile_lower_range@'
+          fi
 
 
           export EXPECTED_INTEL_PROFILE_UPPER_RANGE='@option.expected_intel_profile_upper_range@'
-          [[ -n "@node.expected_intel_profile_upper_range@" ]] \&\& export EXPECTED_INTEL_PROFILE_UPPER_RANGE='@node.expected_intel_profile_upper_range@'
+          if [[ -n "@node.expected_intel_profile_upper_range@" ]]; then
+            export EXPECTED_INTEL_PROFILE_UPPER_RANGE='@node.expected_intel_profile_upper_range@'
+          fi
 
 
           export EXPECTED_AMD_PROFILE_REGEX='@option.expected_amd_profile_regex@'
-          [[ -n "@node.expected_amd_profile_regex@" ]] \&\& export EXPECTED_AMD_PROFILE_REGEX='@node.expected_amd_profile_regex@'
+          if [[ -n "@node.expected_amd_profile_regex@" ]]; then
+            export EXPECTED_AMD_PROFILE_REGEX='@node.expected_amd_profile_regex@'
+          fi
 
           set +e
           if [[ -n "${TARGET_HOST}" ]]; then
