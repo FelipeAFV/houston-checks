@@ -6,9 +6,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from src.inventory.catalog import JobOption, group_args
 from src.configs.config import Config
 from src.utils.util import log
-
 
 @dataclass
 class JobGenDefaults:
@@ -97,11 +97,38 @@ def render_template(tpl_path: Path, out_path: Path, tokens: dict[str, str]) -> N
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(text, encoding="utf-8")
 
+def render_job_options(options: list[JobOption]) -> str:
+    """Render job options for a Rundeck job."""
+    if not options:
+        return ""
+    lines = ["options:"]
+    for opt in options:
+        lines.append(f"""
+  - name: {opt.name}
+    description: {opt.description}
+    required: {str(opt.required).lower()}
+    {f"defaultValue: {opt.default}" if opt.default else ''}
+""")
+    return "\n".join(lines)
+
+
+def render_job_exports(options: list[JobOption]) -> str:
+    """Render job exports for a Rundeck job"""
+    lines = []
+    for opt in options:
+        lines.append(f"""
+          export {opt.name.upper()}='@option.{opt.name}@'
+          if [[ -n "@node.{opt.name}@" ]]; then
+            export {opt.name.upper()}='@node.{opt.name}@'
+          fi
+""")
+    return "\n".join(lines)
 
 def emit_per_check(
     cfg: Any,
     jg: JobGenDefaults,
     check_id: str,
+    check_options: list[JobOption],
     display_name: str,
     description: str,
     executor: str,
@@ -134,6 +161,8 @@ def emit_per_check(
         "OPENSTACK_ADMIN_RC": (
             str(catalog_spec.get("admin_rc_path") or "") if catalog_spec else ""
         ),
+        "JOB_OPTIONS": render_job_options(check_options),
+        "JOB_EXPORTS": render_job_exports(check_options),
     }
     tpl = tpl_dir / "per-check.yaml.tpl"
     if executor == "python":
@@ -149,10 +178,18 @@ def emit_per_check(
 def _jobrefs_yaml(cfg: Any, group_tag: str, check_ids: list[str]) -> str:
     parts = []
     for check_id in check_ids:
+        args = group_args(cfg.checks_path, check_id, group_tag)
+        args_yaml = ""
+        if args:
+            args_str = " ".join(
+                f"-{key} {value}" for key, value in args.items()
+            )
+            args_yaml = f'\n          args: "{args_str}"'
+
         parts.append(
             f"""      - jobref:
           group: {cfg.rundeck_job_group}
-          name: houston - {check_id}
+          name: houston - {check_id}{args_yaml}
           nodefilters:
             filter: "tags: {group_tag}+check-{check_id}"
             dispatch:

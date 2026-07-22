@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import shutil
 import tempfile
+import traceback
 
 from src.api import netbox_api
 from src.configs.config import Config
@@ -68,6 +69,8 @@ def main() -> None:
     try:
         run(cfg)
     except SystemExit:
+        traceback.print_exc()
         raise
     except Exception as exc:
+        traceback.print_exc()
         fatal(str(exc))

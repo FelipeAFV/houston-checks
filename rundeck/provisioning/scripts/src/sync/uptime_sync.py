@@ -349,7 +349,8 @@ def sync_uptime(
         )
 
         if not cfg.is_dry_run():
-            client.prune_orphans(expected_slugs, session=preload_session)
+            with http_client.http_session(insecure=insecure) as session:
+                client.prune_orphans(expected_slugs, session=session)
 
     if hosts.netbox_enabled(effective_inv):
         nb_hosts = hosts.netbox_role_host_ids(effective_inv)

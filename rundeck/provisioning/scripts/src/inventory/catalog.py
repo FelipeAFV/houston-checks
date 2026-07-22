@@ -12,6 +12,13 @@ from src.utils.util import load_yaml_file
 
 _CATALOG_INSTANCES: dict[str, ChecksCatalog] = {}
 
+@dataclass
+class JobOption:
+    name: str
+    description: str = ""
+    required: bool = False
+    default: str = ""
+
 
 @dataclass
 class ChecksCatalog:
@@ -21,6 +28,7 @@ class ChecksCatalog:
     by_id: dict[str, dict[str, Any]] = field(default_factory=dict)
     check_ids: list[str] = field(default_factory=list)
     ids_by_group: dict[str, list[str]] = field(default_factory=dict)
+    args_by_group: dict[str, dict[str, Any]] = field(default_factory=dict)
 
     @classmethod
     def load(cls, checks_path: str) -> ChecksCatalog:
@@ -44,8 +52,9 @@ class ChecksCatalog:
                 spec["path"] = rel
                 spec["script_stem"] = script_stem
                 by_id[check_id] = spec
-                for group_id in spec.get("groups") or []:
+                for group_id, group_spec in spec.get("groups").items() or []:
                     ids_by_group.setdefault(str(group_id), set()).add(check_id)
+
             _CATALOG_INSTANCES[key] = cls(
                 checks_path=checks_path,
                 by_id=by_id,
@@ -98,6 +107,16 @@ class ChecksCatalog:
                     )
                     missing = True
         return not missing
+    
+    def group_args(self, check_id: str, group_id: str) -> dict[str, Any]:
+        spec = self.by_id.get(check_id, {})
+        groups = spec.get("groups", {})
+        group = groups.get(group_id, {})
+        return dict(group.get("args", {}))
+
+    def options_by_id(self, check_id: str) -> list[JobOption]:
+        spec = self.by_id.get(check_id, {})
+        return [JobOption(**opt) for opt in spec.get("options", [])]
 
 
 def validate_catalog_path(spec: dict[str, Any]) -> str:
@@ -131,3 +150,10 @@ def validate_check_groups(checks_path: str, inv_children: dict[str, Any]) -> boo
 
 def group_check_ids(checks_path: str, group_id: str) -> list[str]:
     return ChecksCatalog.load(checks_path).group_check_ids(group_id)
+
+def group_args(checks_path: str, check_id: str, group_id: str) -> dict[str, Any]:
+    return ChecksCatalog.load(checks_path).group_args(check_id, group_id)
+
+def options_by_id(checks_path: str, check_id: str) -> dict[str, Any]:
+    return ChecksCatalog.load(checks_path).options_by_id(check_id)
+

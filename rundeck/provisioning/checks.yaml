@@ -12,88 +12,168 @@
 checks:
   - path: check-shell/apt_unattended_upgrades_disabled.sh
     schedule: "30 11 * * *"
-    groups: [storage-server, provisioning-server, hybrid-provisioning-server]
+    groups:
+      storage-server: {}
+      provisioning-server: {}
+      hybrid-provisioning-server: {}
 
   - path: check-shell/ufw.sh
     schedule: "*/15 * * * *"
     grace: 900
-    groups: [provisioning-server, hybrid-provisioning-server, control-server, infra-server, tenant-server, storage-server]
+    groups:
+      provisioning-server: {}
+      hybrid-provisioning-server: {}
+      control-server: {}
+      infra-server: {}
+      tenant-server: {}
+      storage-server: {}
 
   - path: check-shell/mdcheck_presence.sh
     schedule: "0 6 * * *"
-    groups: [provisioning-server, hybrid-provisioning-server, control-server, infra-server, tenant-server, storage-server]
+    groups:
+      provisioning-server: {}
+      hybrid-provisioning-server: {}
+      control-server: {}
+      infra-server: {}
+      tenant-server: {}
+      storage-server: {}
 
   - path: check-shell/mdcheck_deadlock_fix.sh
     schedule: "15 6 * * *"
-    groups: [provisioning-server, hybrid-provisioning-server, control-server, infra-server, tenant-server, storage-server]
+    groups:
+      provisioning-server: {}
+      hybrid-provisioning-server: {}
+      control-server: {}
+      infra-server: {}
+      tenant-server: {}
+      storage-server: {}
+
+  - path: check-shell/powerprofile.sh
+    schedule: "30 6 * * *"
+    options:
+    - name: expected_intel_profile_lower_range
+      description: Expected Intel power profile lower range
+      required: true
+      default: "6"
+    - name: expected_intel_profile_upper_range
+      description: Expected Intel power profile upper range
+      required: true
+      default: "7"
+    - name: expected_amd_profile_regex
+      description: Expected AMD power profile regex
+      required: true
+      default: "^(PerfPerWattOptimized|PerfPerWattOptimizedDapc|PerfPerWattOptimizedOS)$"
+    groups:
+      control-server: {}
+      infra-server: {}
+      tenant-server: {}
+      storage-server: {}
+      provisioning-server: {}
+      hybrid-provisioning-server: {}
 
   - path: check-shell/server_needs_reboot.sh
     schedule: "30 6 * * *"
-    groups: [control-server, infra-server, tenant-server, storage-server, provisioning-server, hybrid-provisioning-server]
+    groups:
+      control-server: {}
+      infra-server: {}
+      tenant-server: {}
+      storage-server: {}
+      provisioning-server: {}
+      hybrid-provisioning-server: {}
 
   - path: check-shell/grub_needs_reboot.sh
     schedule: "45 6 * * *"
-    groups: [control-server, infra-server, tenant-server, storage-server, hybrid-provisioning-server]
+    groups:
+      control-server: {}
+      infra-server: {}
+      tenant-server: {}
+      storage-server: {}
+      hybrid-provisioning-server: {}
 
   - path: check-shell/vrouter_ha_active_agent.sh
     schedule: "15 */6 * * *"
-    groups: [provisioning-server, hybrid-provisioning-server]
+    groups:
+      provisioning-server: {}
+      hybrid-provisioning-server: {}
     one_host: true
     admin_rc_path: #update with the path to the admin-openrc.sh file
 
   - path: check-shell/vrouter_port_bindings.sh
     schedule: "30 */6 * * *"
-    groups: [provisioning-server, hybrid-provisioning-server]
+    groups:
+      provisioning-server: {}
+      hybrid-provisioning-server: {}
     one_host: true
-    admin_rc_path: #update with the path to the admin-openrc.sh file
+    admin_rc_path:
 
   - path: check-shell/host_aggregates_consistency.sh
     schedule: "45 */6 * * *"
-    groups: [provisioning-server, hybrid-provisioning-server]
+    groups:
+      provisioning-server: {}
+      hybrid-provisioning-server: {}
     one_host: true
     admin_rc_path: #update with the path to the admin-openrc.sh file
 
   - path: check-shell/ceph_balancer_status.sh
     schedule: "0 */6 * * *"
-    groups: [storage-server]
+    groups:
+      storage-server: {}
     one_host: true
 
   - path: check-shell/ceph_pool_autoscale.sh
     schedule: "10 */6 * * *"
-    groups: [storage-server]
+    groups:
+      storage-server: {}
     one_host: true
 
   - path: check-shell/ceph_health_status.sh
     schedule: "20 */6 * * *"
-    groups: [storage-server]
+    groups:
+      storage-server: {}
     one_host: true
 
   - path: check-shell/ceph_health_checks.sh
     schedule: "30 */6 * * *"
-    groups: [storage-server]
+    groups:
+      storage-server: {}
     one_host: true
 
   - path: check-shell/ceph_osd_status.sh
     schedule: "40 */6 * * *"
-    groups: [storage-server]
+    groups:
+      storage-server: {}
     one_host: true
 
   - path: check-shell/ocnos_vp_lag.sh
     schedule: "40 */6 * * *"
-    groups: [border-leaf-switch, server-leaf-switch]
+    groups:
+      border-leaf-switch: {}
+      server-leaf-switch: {}
 
   - path: check-shell/ocnos_vxlan_mac.sh
     schedule: "40 */6 * * *"
-    groups: [border-leaf-switch, server-leaf-switch]
+    groups:
+      border-leaf-switch: {}
+      server-leaf-switch: {}
 
   - path: check-python/lscpu_vulnerabilities.py
     schedule: "0 7 * * *"
-    groups: [provisioning-server, hybrid-provisioning-server, control-server, tenant-server, infra-server, storage-server]
+    groups:
+      provisioning-server: {}
+      hybrid-provisioning-server: {}
+      control-server: {}
+      tenant-server: {}
+      infra-server: {}
+      storage-server: {}
 
   - path: check-python/kolla_configuration_files_format.py
     schedule: "30 7 * * *"
-    groups: [tenant-server, control-server, infra-server]
+    groups:
+      tenant-server: {}
+      control-server: {}
+      infra-server: {}
 
   - path: check-python/nodes_statuses.py
     schedule: "*/15 * * * *"
-    groups: [kubernetes-cluster]
+    groups:
+      kubernetes-cluster: {}
