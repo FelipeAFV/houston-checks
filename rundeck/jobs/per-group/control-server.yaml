@@ -71,6 +71,15 @@
 
       - jobref:
           group: houston
+          name: houston - prometheus_exporters_scrapped
+          nodefilters:
+            filter: "tags: control-server+check-prometheus_exporters_scrapped"
+            dispatch:
+              keepgoing: true
+              threadcount: 1
+
+      - jobref:
+          group: houston
           name: houston - server_needs_reboot
           nodefilters:
             filter: "tags: control-server+check-server_needs_reboot"
