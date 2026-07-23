@@ -28,27 +28,27 @@ for exporter in $exporters_names; do
     exporter_port=$(printf "$listen_address" | awk -F: '{print $NF}')
 
   fi
-  printf "Checking if $exporter is being scrapped on port $exporter_port"
+  printf "Checking if $exporter is being scrapped on port $exporter_port .\n"
   if [[ -z "$exporter_port" ]]; then
-    printf "Could not determine listening port for $exporter"
+    printf "Could not determine listening port for $exporter .\n"
     exporters_no_scraped="$exporters_no_scraped $exporter"
     continue
   fi
   if sudo timeout 60 tcpdump -nn -c 1 -i any "tcp dst port $exporter_port" >/dev/null 2>&1; then
-    printf "Exporter $exporter is being scrapped"
+    printf "Exporter $exporter is being scrapped.\n"
   else
-    printf "Exporter $exporter is not being scrapped"
+    printf "Exporter $exporter is not being scrapped.\n"
     exporters_no_scraped="$exporters_no_scraped $exporter"
   fi
 done
 
 if [[ -n "$exporters_no_scraped" ]]; then
-  printf "Prometheus exporters are not being scrapped"
+  printf "Prometheus exporters are not being scrapped.\n"
   printf "Not scrapped exporters: %s\n" "$exporters_no_scraped"
   printf 'CHECK_RC=1\n'
   exit 1
 else
-  printf "Prometheus exporters are being scrapped"
+  printf "Prometheus exporters are being scrapped.\n"
   printf 'CHECK_RC=0\n'
   exit 0
 fi
