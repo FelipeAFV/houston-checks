@@ -1,0 +1,148 @@
+- defaultTab: nodes
+  description: 'Check for duplicated (conflict) MAC entries in the VXLAN MAC table.'
+  executionEnabled: true
+  group: houston
+  loglevel: INFO
+  name: houston - ocnos_vxlan_mac
+  nodeFilterEditable: false
+  scheduleEnabled: true
+  schedule:
+    time:
+      hour: '*/6'
+      minute: '40'
+      seconds: '0'
+    weekday:
+      day: '*'
+    month: '*'
+    year: '*'
+  timeout: 20m
+  options:
+    - name: SWITCH_PASSWORD
+      description: Switch SSH password (Key Storage). Used for shell_bastion switch checks via TARGET_PASSWORD.
+      storagePath: keys/project/houston/switch/ocnos.password
+      secure: true
+      valueExposed: true
+      required: false
+  nodefilters:
+    dispatch:
+      excludePrecedence: true
+      keepgoing: true
+      rankOrder: ascending
+      successOnEmptyNodeFilter: false
+      threadcount: '10'
+    filter: 'tags: check-ocnos_vxlan_mac'
+  sequence:
+    strategy: node-first
+    keepgoing: false
+    commands:
+      - script: |
+          NODE_BASE='/var/tmp/rundeck'
+          mkdir -p "${NODE_BASE}/scripts/lib" "${NODE_BASE}/lib"
+        scriptInterpreter: /bin/bash
+        description: 'Create check paths on python bastion (Copy File does not mkdir -p).'
+        errorhandler:
+          nodeStep: true
+          type: localexec
+          configuration:
+            command: >
+              /home/rundeck/server/data/provision/rundeck/provisioning/scripts/curl-step.sh fail "${node.uptime_ping_ocnos_vxlan_mac}"
+      - nodeStep: true
+        type: copyfile
+        description: 'Copy run-check-step.sh to python bastion.'
+        configuration:
+          sourcePath: /home/rundeck/server/data/provision/rundeck/provisioning/scripts/run-check-step.sh
+          destinationPath: '/var/tmp/rundeck/scripts/'
+          recursive: 'false'
+          echo: 'true'
+        errorhandler:
+          nodeStep: true
+          type: localexec
+          configuration:
+            command: >
+              /home/rundeck/server/data/provision/rundeck/provisioning/scripts/curl-step.sh fail "${node.uptime_ping_ocnos_vxlan_mac}"
+      - nodeStep: true
+        type: copyfile
+        description: 'Copy lib/check-capture.sh to python bastion.'
+        configuration:
+          sourcePath: /home/rundeck/server/data/provision/rundeck/provisioning/scripts/lib/check-capture.sh
+          destinationPath: '/var/tmp/rundeck/scripts/lib/'
+          recursive: 'false'
+          echo: 'true'
+        errorhandler:
+          nodeStep: true
+          type: localexec
+          configuration:
+            command: >
+              /home/rundeck/server/data/provision/rundeck/provisioning/scripts/curl-step.sh fail "${node.uptime_ping_ocnos_vxlan_mac}"
+      - nodeStep: true
+        type: copyfile
+        description: 'Copy check-shell/ocnos_vxlan_mac.sh to python bastion.'
+        configuration:
+          sourcePath: /home/rundeck/server/data/provision/check-shell/ocnos_vxlan_mac.sh
+          destinationPath: '/var/tmp/rundeck/'
+          recursive: 'false'
+          echo: 'true'
+        errorhandler:
+          nodeStep: true
+          type: localexec
+          configuration:
+            command: >
+              /home/rundeck/server/data/provision/rundeck/provisioning/scripts/curl-step.sh fail "${node.uptime_ping_ocnos_vxlan_mac}"
+      - nodeStep: true
+        type: copyfile
+        description: 'Copy check-shell/lib/ contents into lib/ on the bastion (recursive copies folder contents, not the folder name).'
+        configuration:
+          sourcePath: /home/rundeck/server/data/provision/check-shell/lib/
+          destinationPath: '/var/tmp/rundeck/lib/'
+          recursive: 'true'
+          echo: 'true'
+        errorhandler:
+          nodeStep: true
+          type: localexec
+          configuration:
+            command: >
+              /home/rundeck/server/data/provision/rundeck/provisioning/scripts/curl-step.sh fail "${node.uptime_ping_ocnos_vxlan_mac}"
+      - script: |
+          NODE_BASE='/var/tmp/rundeck'
+          chmod +x "${NODE_BASE}/scripts/run-check-step.sh" 2>/dev/null || true
+          chmod +x "${NODE_BASE}/ocnos_vxlan_mac.sh" 2>/dev/null || true
+          find "${NODE_BASE}/lib" -type f -name '*.sh' -exec chmod a+x {} + 2>/dev/null || true
+          export NODE_NAME='@node.name@'
+          export NODE_TAGS='@node.tags@'
+          export JOB_EXECID='@job.execid@'
+          export TARGET_HOST='@node.target_host@'
+          export TARGET_USER='@node.target_user@'
+          export TARGET_PORT='@node.target_port@'
+          export TARGET_PASSWORD='@option.SWITCH_PASSWORD@'
+          set +e
+          bash "${NODE_BASE}/scripts/run-check-step.sh" shell ocnos_vxlan_mac "${NODE_BASE}"
+          CHECK_RC=$?
+          set -e
+          printf 'CHECK_RC=%s\n' "${CHECK_RC}"
+          printf 'RUNDECK:DATA:check_rc=%s\n' "${CHECK_RC}"
+          exit 0
+        scriptInterpreter: /bin/bash
+        description: 'Remote exec on python bastion: run check-shell/ocnos_vxlan_mac.sh (TARGET_* for switch). Always exits 0 so the curl step receives log-filter data.'
+        plugins:
+          LogFilter:
+            - type: key-value-data
+              config:
+                regex: ^RUNDECK:DATA:(.+?)\s*=\s*(.+)$
+                logData: 'false'
+            - type: key-value-data
+              config:
+                name: check_output_b64
+                regex: ^CHECK_BODY_B64=(.+)$
+            - type: key-value-data
+              config:
+                name: check_rc
+                regex: ^CHECK_RC=(.+)$
+      - nodeStep: true
+        type: localexec
+        configuration:
+          command: >
+            /home/rundeck/server/data/provision/rundeck/provisioning/scripts/curl-step.sh from-data
+            "${data.check_rc}"
+            "${data.check_output_b64}"
+            "${node.uptime_ping_ocnos_vxlan_mac}"
+        description: 'Localexec on Rundeck: curl Uptime ping URL; exits with CHECK_RC so Rundeck marks fail when the check failed.'
