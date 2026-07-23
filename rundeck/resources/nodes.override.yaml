@@ -1,0 +1,12 @@
+tc-cobuit1-strg001:
+  nodename: tc-cobuit1-strg001
+  hostname: 10.71.7.18
+tc-cobuit1-ctrl001:
+  nodename: tc-cobuit1-ctrl001
+  hostname: 10.71.7.12
+tc-cobuit1-tena001:
+  nodename: tc-cobuit1-tena001
+  hostname: 10.71.7.22
+tc-cobuit1-infr001:
+  nodename: tc-cobuit1-infr001
+  hostname: 10.71.7.15
