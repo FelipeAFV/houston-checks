@@ -15,9 +15,9 @@ provision:
 uptime:
   grace: 3600
   tz: UTC
-  api_base_url: http://10.100.20.73:3000
-  ui_public_root: http://10.100.20.73:3000
-  ping_base_url: http://10.100.20.73:3000
+  api_base_url: http://127.0.0.1:3000
+  ui_public_root: http://127.0.0.1:3000
+  ping_base_url: http://127.0.0.1:3000
   upsert_workers: 4
 
 rundeck:
