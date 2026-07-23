@@ -34,7 +34,7 @@ for exporter in $exporters_names; do
     exporters_no_scraped="$exporters_no_scraped $exporter"
     continue
   fi
-  if sudo timeout 30 tcpdump -nn -c 1 -i any "tcp dst port $exporter_port" >/dev/null 2>&1; then
+  if sudo timeout 60 tcpdump -nn -c 1 -i any "tcp dst port $exporter_port" >/dev/null 2>&1; then
     printf "Exporter $exporter is being scrapped"
   else
     printf "Exporter $exporter is not being scrapped"
