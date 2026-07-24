@@ -4,6 +4,8 @@
 # Description: Check if Prometheus exporters are being scrapped by the Prometheus server.
 #
 
+SCRAPE_TIMEOUT="${SCRAPE_TIMEOUT:-60}"
+
 exporters_names=$(docker ps --format '{{.Names}}' | grep -E '(^prometheus_|.*exporter$|cadvisor$)')
 
 exporters_no_scraped=""
@@ -34,7 +36,7 @@ for exporter in $exporters_names; do
     exporters_no_scraped="$exporters_no_scraped $exporter"
     continue
   fi
-  if sudo timeout 60 tcpdump -nn -c 1 -i any "tcp dst port $exporter_port" >/dev/null 2>&1; then
+  if sudo timeout "$SCRAPE_TIMEOUT" tcpdump -nn -c 1 -i any "tcp dst port $exporter_port" >/dev/null 2>&1; then
     printf "Exporter $exporter is being scrapped.\n"
   else
     printf "Exporter $exporter is not being scrapped.\n"
