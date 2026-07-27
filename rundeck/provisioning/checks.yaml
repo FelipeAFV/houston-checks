@@ -71,6 +71,19 @@ checks:
       provisioning-server: {}
       hybrid-provisioning-server: {}
 
+  - path: check-shell/prometheus_exporters_scrapped.sh
+    schedule: "30 6 * * *"
+    options:
+    - name: scrape_timeout
+      description: Expected timeout for checking exporter scrapping
+      required: true
+      default: "60"
+    groups:
+      control-server: {}
+      infra-server: {}
+      tenant-server: {}
+      storage-server: {}
+
   - path: check-shell/server_needs_reboot.sh
     schedule: "30 6 * * *"
     groups:
