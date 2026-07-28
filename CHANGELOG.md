@@ -15,4 +15,5 @@ All noteworthy changes to the `collins` release should be documented in this fil
 - Chore(Provisioning): Updates provisioning files with latest changes [PRHOUSTON-321].
 - Feature(Checks): Adds check for ensuring power profile is in optimized mode [PRHOUSTON-31].
 - Feature(Provisioning): Adds support for parameterization of custom variables in checks scripts [PRHOUSTON-327].
+- Feature(Checks): Adds check for active alerts in Whitemon [PRHOUSTON-72].
 

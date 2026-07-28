@@ -84,6 +84,16 @@ checks:
       tenant-server: {}
       storage-server: {}
 
+  - path: check-shell/active_alerts.sh
+    schedule: "30 6 * * *"
+    options:
+    - name: whitemon_namespace
+      description: Namespace to check for active alerts in Whitemon
+      required: true
+      default: "whitenms"
+    groups:
+      kubernetes-cluster: {}
+
   - path: check-shell/server_needs_reboot.sh
     schedule: "30 6 * * *"
     groups:
