@@ -17,6 +17,15 @@
     commands:
       - jobref:
           group: houston
+          name: houston - active_alerts
+          nodefilters:
+            filter: "tags: kubernetes-cluster+check-active_alerts"
+            dispatch:
+              keepgoing: true
+              threadcount: 1
+
+      - jobref:
+          group: houston
           name: houston - nodes_statuses
           nodefilters:
             filter: "tags: kubernetes-cluster+check-nodes_statuses"
