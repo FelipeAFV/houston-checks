@@ -62,15 +62,6 @@
 
       - jobref:
           group: houston
-          name: houston - powerprofile
-          nodefilters:
-            filter: "tags: tenant-server+check-powerprofile"
-            dispatch:
-              keepgoing: true
-              threadcount: 1
-
-      - jobref:
-          group: houston
           name: houston - prometheus_exporters_scrapped
           nodefilters:
             filter: "tags: tenant-server+check-prometheus_exporters_scrapped"

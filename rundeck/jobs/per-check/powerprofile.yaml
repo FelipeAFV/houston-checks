@@ -8,8 +8,8 @@
   scheduleEnabled: true
   schedule:
     time:
-      hour: '6'
-      minute: '30'
+      hour: '*'
+      minute: '*/15'
       seconds: '0'
     weekday:
       day: '*'

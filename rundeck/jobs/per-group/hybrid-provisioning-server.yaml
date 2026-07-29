@@ -71,15 +71,6 @@
 
       - jobref:
           group: houston
-          name: houston - powerprofile
-          nodefilters:
-            filter: "tags: hybrid-provisioning-server+check-powerprofile"
-            dispatch:
-              keepgoing: true
-              threadcount: 1
-
-      - jobref:
-          group: houston
           name: houston - server_needs_reboot
           nodefilters:
             filter: "tags: hybrid-provisioning-server+check-server_needs_reboot"
