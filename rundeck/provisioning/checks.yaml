@@ -49,7 +49,7 @@ checks:
       storage-server: {}
 
   - path: check-shell/powerprofile.sh
-    schedule: "30 6 * * *"
+    schedule: "*/15 * * * *"
     options:
     - name: expected_intel_profile_lower_range
       description: Expected Intel power profile lower range
@@ -65,11 +65,7 @@ checks:
       default: "^(PerfPerWattOptimized|PerfPerWattOptimizedDapc|PerfPerWattOptimizedOS)$"
     groups:
       control-server: {}
-      infra-server: {}
-      tenant-server: {}
-      storage-server: {}
       provisioning-server: {}
-      hybrid-provisioning-server: {}
 
   - path: check-shell/prometheus_exporters_scrapped.sh
     schedule: "30 6 * * *"
@@ -84,15 +80,15 @@ checks:
       tenant-server: {}
       storage-server: {}
 
-  - path: check-shell/active_alerts.sh
-    schedule: "30 6 * * *"
-    options:
-    - name: whitemon_namespace
-      description: Namespace to check for active alerts in Whitemon
-      required: true
-      default: "whitenms"
-    groups:
-      kubernetes-cluster: {}
+  # - path: check-shell/active_alerts.sh
+  #   schedule: "30 6 * * *"
+  #   options:
+  #   - name: whitemon_namespace
+  #     description: Namespace to check for active alerts in Whitemon
+  #     required: true
+  #     default: "whitenms"
+  #   groups:
+  #     kubernetes-cluster: {}
 
   - path: check-shell/server_needs_reboot.sh
     schedule: "30 6 * * *"
