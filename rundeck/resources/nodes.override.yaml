@@ -34,3 +34,5 @@ tc-cotobe1-prov001:
 deployer:
   nodename: deployer
   hostname: 10.71.7.80
+  username: ubuntu
+  
