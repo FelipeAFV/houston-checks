@@ -10,12 +10,27 @@ tc-cobuit1-ctrl002:
 tc-cobuit1-ctrl003:
   nodename: tc-cobuit1-ctrl003
   hostname: 10.71.7.14
+tc-cotobe1-ctrl001:
+  nodename: tc-cotobe1-ctrl001
+  hostname: 10.89.81.11
+tc-cotobe1-ctrl002:
+  nodename: tc-cotobe1-ctrl002
+  hostname: 10.89.81.12
+tc-cotobe1-ctrl003:
+  nodename: tc-cotobe1-ctrl003
+  hostname: 10.89.81.12
 tc-cobuit1-tena001:
   nodename: tc-cobuit1-tena001
   hostname: 10.71.7.22
 tc-cobuit1-infr001:
   nodename: tc-cobuit1-infr001
   hostname: 10.71.7.15
+tc-cobuit1-prov001:
+  nodename: tc-cobuit1-prov001
+  hostname: 10.71.6.9
+tc-cotobe1-prov001:
+  nodename: tc-cotobe1-prov001
+  hostname: 10.89.80.9
 deployer:
   nodename: deployer
   hostname: 10.71.7.80
