@@ -16,4 +16,4 @@ All noteworthy changes to the `collins` release should be documented in this fil
 - Feature(Checks): Adds check for ensuring power profile is in optimized mode [PRHOUSTON-31].
 - Feature(Provisioning): Adds support for parameterization of custom variables in checks scripts [PRHOUSTON-327].
 - Feature(Checks): Adds check for active alerts in WhiteMon [PRHOUSTON-72].
-
+- Feature(Checks): Adds check for sysctl limits in WhiteMist workers [PRHOUSTON-126].

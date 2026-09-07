@@ -104,6 +104,58 @@ checks:
       provisioning-server: {}
       hybrid-provisioning-server: {}
 
+  - path: check-shell/sysctl_parameters.sh
+    schedule: "30 6 * * *"
+    options:
+    - name: sysctl_parameters
+      description: List of sysctl parameters whose values are to be validated
+      required: true
+      default: "fs.inotify.max_user_watches,fs.inotify.max_user_instances,fs.inotify.max_user_queued_events"
+
+    - name: min_sysctl_values
+      description: Expected minimum values for sysctl_parameters, in order
+      required: true
+      default: "2099999999,2099999999,2099999999"
+
+    - name: max_sysctl_values
+      description: Expected maximum values for sysctl_parameters, in order
+      required: true
+      default: "2099999999,2099999999,2099999999"
+
+    groups:
+      kubernetes-worker: {}
+
+  - path: check-shell/sysctl_parameters_nodeconfig.sh
+    schedule: "30 6 * * *"
+    options:
+    - name: sysctl_parameters
+      description: List of sysctl parameters whose values are to be validated
+      required: true
+      default: "fs.inotify.max_user_watches,fs.inotify.max_user_instances,fs.inotify.max_user_queued_events"
+
+    - name: min_sysctl_values
+      description: Expected minimum values for sysctl_parameters, in order
+      required: true
+      default: "2099999999,2099999999,2099999999"
+
+    - name: max_sysctl_values
+      description: Expected maximum values for sysctl_parameters, in order
+      required: true
+      default: "2099999999,2099999999,2099999999"
+
+    - name: nodeconfig_name
+      description: Name of the NodeConfig resource
+      required: true
+      default: "nodeconfig-kernel-params"
+
+    - name: nodeconfig_namespace
+      description: Namespace of the NodeConfig resource
+      required: true
+      default: "default"
+
+    groups:
+      kubernetes-cluster: {}
+
   - path: check-shell/grub_needs_reboot.sh
     schedule: "45 6 * * *"
     groups:

@@ -88,7 +88,15 @@ all:
       hosts:
         deployer:
           hostname:
+    kubernetes-master:
+      vars: {}
+      hosts: {}
+    kubernetes-worker:
+      vars: {}
+      hosts: {}
   vars:
     node_username: whitestack
     local_only_groups:
       - kubernetes-cluster
+      - kubernetes-master
+      - kubernetes-worker
