@@ -17,3 +17,4 @@ All noteworthy changes to the `collins` release should be documented in this fil
 - Feature(Provisioning): Adds support for parameterization of custom variables in checks scripts [PRHOUSTON-327].
 - Feature(Checks): Adds check for active alerts in WhiteMon [PRHOUSTON-72].
 - Feature(Checks): Adds check for sysctl limits in WhiteMist workers [PRHOUSTON-126].
+- Feature(Checks): Adds a parameterized NFS read/write/delete check [PRHOUSTON-223].

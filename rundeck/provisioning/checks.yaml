@@ -94,6 +94,25 @@ checks:
     groups:
       kubernetes-cluster: {}
 
+  - path: check-shell/nfs_read_write.sh
+    schedule: "*/15 * * * *"
+    grace: 900
+    options:
+    - name: nfs_paths
+      description: Comma-separated absolute NFS mount paths
+      required: true
+      default: "/data/nfs_1,/data/nfs_2"
+    - name: dummy_file_size_mb
+      description: Dummy file size in MiB
+      required: true
+      default: "1"
+    - name: nfs_io_timeout_seconds
+      description: Timeout in seconds for each NFS I/O operation
+      required: true
+      default: "120"
+    groups:
+      storage-server: {}
+
   - path: check-shell/server_needs_reboot.sh
     schedule: "30 6 * * *"
     groups:
