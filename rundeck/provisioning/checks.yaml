@@ -250,6 +250,35 @@ checks:
       border-leaf-switch: {}
       server-leaf-switch: {}
 
+  - path: check-shell/tzdata_freshness.sh
+    schedule: "0 8 * * *"
+    options:
+    - name: minimum_tzdata_version
+      description: Minimum IANA tzdata version (YYYYx) or auto for the annual policy
+      required: true
+      default: "auto"
+    groups:
+      provisioning-server: {}
+      hybrid-provisioning-server: {}
+      control-server: {}
+      infra-server: {}
+      tenant-server: {}
+      storage-server: {}
+
+  - path: check-shell/tzdata_freshness_k8tz.sh
+    schedule: "15 8 * * *"
+    options:
+    - name: minimum_tzdata_version
+      description: Minimum IANA tzdata version (YYYYx) or auto for the annual policy
+      required: true
+      default: "auto"
+    - name: k8tz_init_container_name
+      description: Name of the init container injected by k8tz
+      required: true
+      default: "k8tz"
+    groups:
+      kubernetes-cluster: {}
+
   - path: check-python/lscpu_vulnerabilities.py
     schedule: "0 7 * * *"
     groups:
