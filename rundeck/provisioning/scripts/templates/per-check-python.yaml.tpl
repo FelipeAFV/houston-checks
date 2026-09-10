@@ -7,6 +7,7 @@
   nodeFilterEditable: false
 __SCHEDULE_BLOCK__
   timeout: __JOB_TIMEOUT__
+  __JOB_OPTIONS__
   nodefilters:
     dispatch:
       excludePrecedence: true
@@ -77,6 +78,7 @@ __SCHEDULE_BLOCK__
           chmod +x "${NODE_BASE}/scripts/run-check-step.sh" 2>/dev/null || true
           export NODE_NAME='@node.name@'
           export JOB_EXECID='@job.execid@'
+          __JOB_EXPORTS__
           set +e
           bash "${NODE_BASE}/scripts/run-check-step.sh" python __CHECK_ID__ "${NODE_BASE}/check-python"
           CHECK_RC=$?

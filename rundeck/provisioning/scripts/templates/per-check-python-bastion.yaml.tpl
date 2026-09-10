@@ -7,6 +7,7 @@
   nodeFilterEditable: false
 __SCHEDULE_BLOCK__
   timeout: __JOB_TIMEOUT__
+  __JOB_OPTIONS__
   nodefilters:
     dispatch:
       excludePrecedence: true
@@ -84,6 +85,7 @@ __SCHEDULE_BLOCK__
           export TARGET_HOST='@node.target_host@'
           export TARGET_USER='@node.target_user@'
           export TARGET_PORT='@node.target_port@'
+          __JOB_EXPORTS__
           set +e
           bash /tmp/rundeck/scripts/run-check-step.sh python __CHECK_ID__ /tmp/rundeck/check-python
           CHECK_RC=$?

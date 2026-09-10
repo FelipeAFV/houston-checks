@@ -19,3 +19,5 @@ All noteworthy changes to the `collins` release should be documented in this fil
 - Feature(Checks): Adds check for sysctl limits in WhiteMist workers [PRHOUSTON-126].
 - Feature(Checks): Adds a parameterized NFS read/write/delete check [PRHOUSTON-223].
 - Feature(Checks): Adds checks for validating timezone data freshness [PRHOUSTON-45].
+- Feature(Checks): Adds check for active alerts in Prometheus' Alertmanager and Keep [PRHOUSTON-329].
+- Bugfix(Checks): Adds missing configurations for dynamic environment variables parameterization to job definition templates [PRHOUSTON-329].

@@ -7,6 +7,7 @@
   nodeFilterEditable: false
 __SCHEDULE_BLOCK__
   timeout: __JOB_TIMEOUT__
+  __JOB_OPTIONS__
   options:
     - name: SWITCH_PASSWORD
       description: Switch SSH password (Key Storage). Used for shell_bastion switch checks via TARGET_PASSWORD.
@@ -105,6 +106,7 @@ __SCHEDULE_BLOCK__
           export TARGET_USER='@node.target_user@'
           export TARGET_PORT='@node.target_port@'
           export TARGET_PASSWORD='@option.SWITCH_PASSWORD@'
+          __JOB_EXPORTS__
           set +e
           bash "${NODE_BASE}/scripts/run-check-step.sh" shell __CHECK_ID__ "${NODE_BASE}"
           CHECK_RC=$?

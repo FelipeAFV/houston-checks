@@ -300,3 +300,25 @@ checks:
     schedule: "*/15 * * * *"
     groups:
       kubernetes-cluster: {}
+
+  - path: check-python/active_alerts_sync_status.py
+    schedule: "*/5 * * * *"
+    options:
+    - name: whitemon_namespace
+      description: Namespace to check for active alerts sync status in Whitemon
+      required: true
+      default: "whitemon"
+    - name: whitemon_pod_prefix
+      description: Prefix of pod to check for active alerts sync status in Whitemon
+      required: true
+      default: "whitemon-grafana"
+    - name: whitemon_container
+      description: Container to check for active alerts sync status in Whitemon
+      required: true
+      default: "grafana"
+    - name: keep_noc_api_key
+      description: Keep NOC API key for gathering active alerts in Whitemon
+      required: true
+      default: "keep-noc-api-key"
+    groups:
+      kubernetes-cluster: {}
