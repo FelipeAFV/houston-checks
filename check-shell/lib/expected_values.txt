@@ -1,0 +1,3 @@
+max_number_of_vp_lags_brlf=2000
+max_number_of_vp_lags_leaf=1000
+max_vp_lag_usage_ratio=80%

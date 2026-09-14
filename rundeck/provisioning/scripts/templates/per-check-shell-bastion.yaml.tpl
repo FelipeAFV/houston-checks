@@ -85,7 +85,7 @@ __SCHEDULE_BLOCK__
         description: 'Copy check-shell/lib/ contents into lib/ on the bastion (recursive copies folder contents, not the folder name).'
         configuration:
           sourcePath: __SCM_BASE_DIR__/check-shell/lib/
-          destinationPath: '__CHECK_SCRIPT_BASE__/lib/'
+          destinationPath: '__CHECK_SCRIPT_BASE__/'
           recursive: 'true'
           echo: 'true'
         errorhandler:

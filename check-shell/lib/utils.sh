@@ -19,7 +19,7 @@ make_temp_file() {
 }
 
 load_expected_values() {
-    local target_file="${1:-$SCRIPT_DIR/../expected_values.txt}"
+    local target_file="${1:-$SCRIPT_DIR/../lib/expected_values.txt}"
 
     if [ ! -f "$target_file" ]; then
         echo "Error: File '$target_file' does not exist." >&2
