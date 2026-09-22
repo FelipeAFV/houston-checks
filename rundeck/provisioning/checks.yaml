@@ -129,7 +129,7 @@ checks:
     - name: sysctl_parameters
       description: List of sysctl parameters whose values are to be validated
       required: true
-      default: "fs.inotify.max_user_watches,fs.inotify.max_user_instances,fs.inotify.max_user_queued_events"
+      default: "fs.inotify.max_user_watches,fs.inotify.max_user_instances,fs.inotify.max_queued_events"
 
     - name: min_sysctl_values
       description: Expected minimum values for sysctl_parameters, in order
@@ -150,7 +150,7 @@ checks:
     - name: sysctl_parameters
       description: List of sysctl parameters whose values are to be validated
       required: true
-      default: "fs.inotify.max_user_watches,fs.inotify.max_user_instances,fs.inotify.max_user_queued_events"
+      default: "fs.inotify.max_user_watches,fs.inotify.max_user_instances,fs.inotify.max_queued_events"
 
     - name: min_sysctl_values
       description: Expected minimum values for sysctl_parameters, in order

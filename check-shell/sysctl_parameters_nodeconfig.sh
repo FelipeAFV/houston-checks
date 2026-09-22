@@ -5,7 +5,7 @@
 # Description: Check sysctl parameters are configured in NodeConfig resource.
 #
 
-SYSCTL_PARAMETERS="${SYSCTL_PARAMETERS:-fs.inotify.max_user_watches,fs.inotify.max_user_instances,fs.inotify.max_user_queued_events}"
+SYSCTL_PARAMETERS="${SYSCTL_PARAMETERS:-fs.inotify.max_user_watches,fs.inotify.max_user_instances,fs.inotify.max_queued_events}"
 MIN_SYSCTL_VALUES="${MIN_SYSCTL_VALUES:-2099999999,2099999999,2099999999}"
 MAX_SYSCTL_VALUES="${MAX_SYSCTL_VALUES:-2099999999,2099999999,2099999999}"
 

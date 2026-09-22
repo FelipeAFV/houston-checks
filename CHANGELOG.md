@@ -23,3 +23,4 @@ All noteworthy changes to the `collins` release should be documented in this fil
 - Bugfix(Checks): Adds missing configurations for dynamic environment variables parameterization to job definition templates [PRHOUSTON-329].
 - Bugfix(Provisioning): Fixes `lib` dir recursive copy [PRHOUSTON-340].
 - Feature(Checks): Adds check for chronyc sources [PRHOUSTON-330].
+- Bugfix(Checks): Fixes `max_queued_events` param name in sysctl checks [PRHOUSTON-352].
