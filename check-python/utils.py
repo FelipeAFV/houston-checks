@@ -1,6 +1,8 @@
 from __future__ import annotations
 from pathlib import Path
 
+import csv
+import io
 import os
 import subprocess
 
@@ -30,3 +32,21 @@ def get_whitemon_pod(root_cmd: str, whitemon_pod_prefix: str) -> str:
     cmd = f"{root_cmd} get pods --no-headers -o custom-columns=':metadata.name' | grep '^{whitemon_pod_prefix}' | head -n 1"
     proc = kubectl_exec_cmd(cmd)
     return proc.stdout.strip()
+
+
+def exec_cmd(cmd: str) -> subprocess.CompletedProcess:
+    proc = subprocess.run(
+        cmd,
+        shell=True,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if proc.returncode != 0:
+        err = (proc.stderr or proc.stdout or "").strip()
+        raise RuntimeError(f"{err}. Command: {cmd}, failed.")
+    return proc.stdout.strip()
+
+
+def parse_csv_str(csv_str_header: str, csv_str_rows: str) -> list[dict]:
+    return csv.DictReader(io.StringIO(csv_str_rows.strip()), fieldnames=csv_str_header.strip().split(","))

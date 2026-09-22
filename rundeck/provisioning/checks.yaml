@@ -322,3 +322,13 @@ checks:
       default: "keep-noc-api-key"
     groups:
       kubernetes-cluster: {}
+
+  - path: check-python/chronyc_sources_status.py
+    schedule: "*/5 * * * *"
+    groups:
+      provisioning-server: {}
+      hybrid-provisioning-server: {}
+      control-server: {}
+      infra-server: {}
+      tenant-server: {}
+      storage-server: {}

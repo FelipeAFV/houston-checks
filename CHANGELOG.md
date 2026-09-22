@@ -22,3 +22,4 @@ All noteworthy changes to the `collins` release should be documented in this fil
 - Feature(Checks): Adds check for active alerts in Prometheus' Alertmanager and Keep [PRHOUSTON-329].
 - Bugfix(Checks): Adds missing configurations for dynamic environment variables parameterization to job definition templates [PRHOUSTON-329].
 - Bugfix(Provisioning): Fixes `lib` dir recursive copy [PRHOUSTON-340].
+- Feature(Checks): Adds check for chronyc sources [PRHOUSTON-330].
