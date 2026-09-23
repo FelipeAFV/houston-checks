@@ -279,6 +279,25 @@ checks:
     groups:
       kubernetes-cluster: {}
 
+  - path: check-shell/du_folder_size.sh
+    schedule: "30 8 * * *"
+    options:
+    - name: folder_paths
+      description: Comma-separated absolute directory paths (no commas or control characters in paths)
+      required: true
+      default: "/home/whitestack"
+    - name: folder_limit_sizes
+      description: Comma-separated exclusive size limits for FOLDER_PATHS in the same order; use IEC binary size such as 1Gi, 10.7Mi, 50Ki, or integer byte values. Suffixes are case-sensitive.
+      required: true
+      default: "1Gi"
+    groups:
+      provisioning-server: {}
+      hybrid-provisioning-server: {}
+      control-server: {}
+      tenant-server: {}
+      infra-server: {}
+      storage-server: {}
+
   - path: check-python/lscpu_vulnerabilities.py
     schedule: "0 7 * * *"
     groups:
