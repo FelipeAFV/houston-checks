@@ -4,7 +4,7 @@
 """Check active alerts in Prometheus' Alertmanager and Keep via kubectl on this host."""
 
 from __future__ import annotations
-from utils import resolve_kubeconfig, kubectl_exec_cmd, get_whitemon_pod
+from utils import exec_cmd, resolve_kubeconfig, get_whitemon_pod
 
 import json
 import os
@@ -20,21 +20,22 @@ KEEP_NOC_API_KEY = os.environ.get("KEEP_NOC_API_KEY", "keep-noc-api-key")
 
 ROOT_CMD = f"kubectl --kubeconfig {KUBECONFIG} -n {WHITEMON_NAMESPACE}"
 
+PROMETHEUS_ALERTMANAGER_POD_PREFIX = "alertmanager-whitemon-alertmanager"
+KEEP_BACKEND_POD_PREFIX = "whitemon-keep-backend"
+
 
 def get_prometheus_alertmanager_active_alerts(whitemon_pod: str) -> list[json]:
     cmd = f"""{ROOT_CMD} exec {whitemon_pod} -c {WHITEMON_CONTAINER} -- sh -c 'curl -s "http://whitemon-alertmanager:9093/api/v2/alerts?active=true&silenced=false"'"""
-    proc = kubectl_exec_cmd(cmd)
     try:
-        return json.loads(proc.stdout)
+        return json.loads(exec_cmd(cmd))
     except json.JSONDecodeError as exc:
         raise RuntimeError(f"kubectl returned invalid JSON: {exc}") from exc
 
 
 def get_keep_active_alerts(whitemon_pod: str) -> list[json]:
     cmd = f"""{ROOT_CMD} exec {whitemon_pod} -c {WHITEMON_CONTAINER} -- sh -c 'curl -s "http://whitemon-keep-backend:8080/alerts" -H "X-API-KEY: {KEEP_NOC_API_KEY}"'"""
-    proc = kubectl_exec_cmd(cmd)
     try:
-        return json.loads(proc.stdout)
+        return json.loads(exec_cmd(cmd))
     except json.JSONDecodeError as exc:
         raise RuntimeError(f"kubectl returned invalid JSON: {exc}") from exc
 
@@ -48,26 +49,36 @@ def active_alerts_synced(prometheus_alertmanager_active_alerts: list[dict], keep
 def main() -> int:
 
     try:
-        whitemon_pod = get_whitemon_pod(ROOT_CMD, WHITEMON_POD_PREFIX)
-        if not whitemon_pod:
-            print("Pod doesn't exist")
-            return 1
-    except RuntimeError as exc:
-        print(exc, file=sys.stderr)
-        return 1
 
-    try:
-        prometheus_alertmanager_active_alerts = get_prometheus_alertmanager_active_alerts(whitemon_pod)
-        if not isinstance(prometheus_alertmanager_active_alerts, list):
-            print(f"Prometheus' Alertmanager API: {prometheus_alertmanager_active_alerts}")
-            return 1
-        keep_active_alerts = get_keep_active_alerts(whitemon_pod)
-        if not isinstance(keep_active_alerts, list):
-            print(f"Keep API: {keep_active_alerts}")
-            return 1
-        if not active_alerts_synced(prometheus_alertmanager_active_alerts, keep_active_alerts):
-            print("Active alerts are not synced")
-            return 1
+        prometheus_alertmanager_pod = get_whitemon_pod(ROOT_CMD, PROMETHEUS_ALERTMANAGER_POD_PREFIX)
+        keep_backend_pod = get_whitemon_pod(ROOT_CMD, KEEP_BACKEND_POD_PREFIX)
+
+        if prometheus_alertmanager_pod and keep_backend_pod:
+
+            whitemon_pod = get_whitemon_pod(ROOT_CMD, WHITEMON_POD_PREFIX)
+            if not whitemon_pod:
+                print("Pod doesn't exist")
+                return 1
+
+            prometheus_alertmanager_active_alerts = get_prometheus_alertmanager_active_alerts(whitemon_pod)
+            if not isinstance(prometheus_alertmanager_active_alerts, list):
+                print(f"Prometheus' Alertmanager API: {prometheus_alertmanager_active_alerts}")
+                return 1
+
+            keep_active_alerts = get_keep_active_alerts(whitemon_pod)
+            if not isinstance(keep_active_alerts, list):
+                print(f"Keep API: {keep_active_alerts}")
+                return 1
+            if not active_alerts_synced(prometheus_alertmanager_active_alerts, keep_active_alerts):
+                print("Active alerts are not synced")
+                return 1
+
+        elif not prometheus_alertmanager_pod:
+            print("Prometheus' Alertmanager API pod not found.")
+            return 0
+        elif not keep_backend_pod:
+            print("Keep API pod not found.")
+            return 0
     except RuntimeError as exc:
         print(exc, file=sys.stderr)
         return 1

@@ -376,3 +376,14 @@ checks:
         default: "2"
     groups:
       tenant-server: {}
+
+  - path: check-python/nova_config_trusted_vfs.py
+    schedule: "30 7 * * *"
+    options:
+    - name: nova_config_path
+      description: Nova Compute configuration file path
+      required: true
+      default: "/etc/whitecloud/.kolla/nova-compute/nova.conf"
+    groups:
+      tenant-server: {}
+      infra-server: {}

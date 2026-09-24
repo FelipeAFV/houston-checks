@@ -27,3 +27,5 @@ All noteworthy changes to the `collins` release should be documented in this fil
 - Feature(Checks): Adds a check that verifies directory sizes stay below configurable limits [PRHOUSTON-332].
 - Feature(Checks): Adds password expiration check with a configurable warning window and detection of passwords that never expire [PRHOUSTON-331].
 - Feature(Checks): Adds check for Virsh threads per core [PRHOUSTON-333].
+- Feature(Checks): Adds check for Nova Compute Virtual Functions configuration [PRHOUSTON-334].
+- Bugfix(Checks): Adds Prometheus' Alertmanager and Keep pods existence condition to active alerts check.
