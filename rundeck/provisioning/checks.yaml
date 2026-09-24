@@ -366,3 +366,13 @@ checks:
       infra-server: {}
       tenant-server: {}
       storage-server: {}
+
+  - path: check-python/virsh_threads_per_core.py
+    schedule: "*/5 * * * *"
+    options:
+      - name: threads_per_core
+        description: Threads per core lower threshold
+        required: true
+        default: "2"
+    groups:
+      tenant-server: {}

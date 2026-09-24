@@ -26,3 +26,4 @@ All noteworthy changes to the `collins` release should be documented in this fil
 - Bugfix(Checks): Fixes `max_queued_events` param name in sysctl checks [PRHOUSTON-352].
 - Feature(Checks): Adds a check that verifies directory sizes stay below configurable limits [PRHOUSTON-332].
 - Feature(Checks): Adds password expiration check with a configurable warning window and detection of passwords that never expire [PRHOUSTON-331].
+- Feature(Checks): Adds check for Virsh threads per core [PRHOUSTON-333].

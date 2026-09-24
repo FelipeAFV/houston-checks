@@ -1,9 +1,12 @@
 from __future__ import annotations
+from collections.abc import Generator
 from pathlib import Path
+from xml.etree import ElementTree
 
 import csv
 import io
 import os
+import re
 import subprocess
 
 
@@ -50,3 +53,11 @@ def exec_cmd(cmd: str) -> subprocess.CompletedProcess:
 
 def parse_csv_str(csv_str_header: str, csv_str_rows: str) -> list[dict]:
     return csv.DictReader(io.StringIO(csv_str_rows.strip()), fieldnames=csv_str_header.strip().split(","))
+
+
+def parse_xml_str(xml_str: str, pattern: str) -> Generator[ElementTree]:
+    for raw_xml_substr in re.split(pattern, xml_str):
+        xml_substr = raw_xml_substr.strip()
+        if not xml_substr:
+            continue
+        yield ElementTree.fromstring(xml_substr)
