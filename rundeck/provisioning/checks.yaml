@@ -298,6 +298,21 @@ checks:
       infra-server: {}
       storage-server: {}
 
+  - path: check-shell/password_expiration.sh
+    schedule: "15 7 * * *"
+    options:
+    - name: password_expiration_warning_days
+      description: Non-negative warning window in days for password expiration (inclusive)
+      required: true
+      default: "30"
+    groups:
+      provisioning-server: {}
+      hybrid-provisioning-server: {}
+      control-server: {}
+      infra-server: {}
+      tenant-server: {}
+      storage-server: {}
+
   - path: check-python/lscpu_vulnerabilities.py
     schedule: "0 7 * * *"
     groups:
