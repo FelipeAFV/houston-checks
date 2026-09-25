@@ -9,6 +9,7 @@ import configparser
 import json
 import os
 import sys
+import subprocess
 from collections.abc import Callable
 from pathlib import Path
 
@@ -129,6 +130,13 @@ def read_file_content(path: Path) -> str | None:
 
 
 def main() -> int:
+    if os.geteuid() != 0:
+        result = subprocess.run(
+            ["sudo", sys.executable, *sys.argv],
+            check=False,
+        )
+        return result.returncode
+
     print(f"checking Kolla config under {KOLLA_ROOT}")
 
     if not KOLLA_ROOT.is_dir():
