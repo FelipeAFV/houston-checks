@@ -58,7 +58,7 @@ while IFS= read -r provider_id; do
   fi
   rm -f "$err"
 
-  prov_uuids=$(printf '%s' "$prov_aggs_json" | jq -r '.aggregates[]? // .[]? | .uuid? // .' 2>/dev/null)
+  prov_uuids=$(printf '%s' "$prov_aggs_json" | jq -r '.[] | .uuid // .' 2>/dev/null)
   if [[ -z "$prov_uuids" ]]; then
     if [[ "$has_nova_aggregates" -eq 1 ]]; then
       echo "Host: ${provider_name:-?} | Provider UUID: ${provider_id} | Aggregate UUIDs: N/A" >&2
