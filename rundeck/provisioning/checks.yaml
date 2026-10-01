@@ -250,6 +250,12 @@ checks:
       border-leaf-switch: {}
       server-leaf-switch: {}
 
+  - path: check-shell/sonic_show_running_config.py
+    schedule: "40 */6 * * *"
+    groups:
+      border-leaf-switch: {}
+      server-leaf-switch: {}
+
   - path: check-shell/tzdata_freshness.sh
     schedule: "0 8 * * *"
     options:
