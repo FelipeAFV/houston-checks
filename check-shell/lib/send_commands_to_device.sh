@@ -70,6 +70,7 @@ stream_until_prompt() {
                 if [[ "$allow_disconnect" == "allow_disconnect" ]]; then
                     return 0
                 fi
+                printf "Error: SSH session to ${TARGET_USER}@${TARGET_HOST}:${TARGET_PORT} ${TARGET_PASSWORD} terminated unexpectedly.\n" >&2
                 fail_session "SSH connection closed unexpectedly or failed to establish."
             fi
             break
