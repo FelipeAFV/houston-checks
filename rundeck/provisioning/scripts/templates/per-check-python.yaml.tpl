@@ -90,6 +90,7 @@ __SCHEDULE_BLOCK__
       - script: |
           NODE_BASE='__CHECK_SCRIPT_BASE__'
           chmod +x "${NODE_BASE}/scripts/run-check-step.sh" 2>/dev/null || true
+          find "${NODE_BASE}/lib" -type f -name '*.sh' -exec chmod a+x {} + 2>/dev/null || true
           export NODE_NAME='@node.name@'
           export JOB_EXECID='@job.execid@'
           __JOB_EXPORTS__
