@@ -93,6 +93,10 @@ __SCHEDULE_BLOCK__
           find "${NODE_BASE}/lib" -type f -name '*.sh' -exec chmod a+x {} + 2>/dev/null || true
           export NODE_NAME='@node.name@'
           export JOB_EXECID='@job.execid@'
+          export TARGET_HOST='@node.target_host@'
+          export TARGET_USER='@node.target_user@'
+          export TARGET_PORT='@node.target_port@'
+          export TARGET_PASSWORD='@option.SWITCH_PASSWORD@'
           __JOB_EXPORTS__
           set +e
           bash "${NODE_BASE}/scripts/run-check-step.sh" python __CHECK_ID__ "${NODE_BASE}/check-python"
