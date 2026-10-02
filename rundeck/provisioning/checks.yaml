@@ -250,7 +250,7 @@ checks:
       border-leaf-switch: {}
       server-leaf-switch: {}
 
-  - path: check-shell/sonic_show_running_config.py
+  - path: check-python/sonic_show_running_config.py
     schedule: "40 */6 * * *"
     groups:
       border-leaf-switch: {}
