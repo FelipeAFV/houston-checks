@@ -17,18 +17,9 @@
     commands:
       - jobref:
           group: houston
-          name: houston - ocnos_vp_lag
+          name: houston - sonic_show_running_config
           nodefilters:
-            filter: "tags: border-leaf-switch+check-ocnos_vp_lag"
-            dispatch:
-              keepgoing: true
-              threadcount: 1
-
-      - jobref:
-          group: houston
-          name: houston - ocnos_vxlan_mac
-          nodefilters:
-            filter: "tags: border-leaf-switch+check-ocnos_vxlan_mac"
+            filter: "tags: border-leaf-switch+check-sonic_show_running_config"
             dispatch:
               keepgoing: true
               threadcount: 1
