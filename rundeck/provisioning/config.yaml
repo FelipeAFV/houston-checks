@@ -40,8 +40,8 @@ netbox:
 
 python_bastion:
   username: houston
-  hostname: python_bastion
-  port: 22
+  hostname: 127.0.0.1
+  port: 8022
   ssh_key_storage_path: keys/project/houston/python-bastion/houston.key
 
 ssh:
