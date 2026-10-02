@@ -26,7 +26,7 @@ deployer:
 
 lab-hns-leaf-01:
   nodename: lab-hns-leaf-01
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,border-leaf-switch
