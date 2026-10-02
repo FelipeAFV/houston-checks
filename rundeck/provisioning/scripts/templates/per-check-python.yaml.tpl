@@ -73,6 +73,20 @@ __SCHEDULE_BLOCK__
           configuration:
             command: >
               __RUNDECK_SCRIPTS_DIR__/curl-step.sh fail "${node.uptime_ping___CHECK_ID__}"
+       - nodeStep: true
+        type: copyfile
+        description: 'Copy check-shell/lib/ contents into lib/ on the bastion (recursive copies folder contents, not the folder name).'
+        configuration:
+          sourcePath: __SCM_BASE_DIR__/check-shell/lib/
+          destinationPath: '__CHECK_SCRIPT_BASE__/'
+          recursive: 'true'
+          echo: 'true'
+        errorhandler:
+          nodeStep: true
+          type: localexec
+          configuration:
+            command: >
+              __RUNDECK_SCRIPTS_DIR__/curl-step.sh fail "${node.uptime_ping___CHECK_ID__}"
       - script: |
           NODE_BASE='__CHECK_SCRIPT_BASE__'
           chmod +x "${NODE_BASE}/scripts/run-check-step.sh" 2>/dev/null || true
