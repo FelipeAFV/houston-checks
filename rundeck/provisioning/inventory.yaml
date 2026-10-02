@@ -27,8 +27,7 @@ all:
       hosts:
         lab-hns-leaf-01:
           nodename: lab-hns-leaf-01
-          hostname: 127.0.0.1:8022
-          target_host: 10.100.2.11
+          hostname: 10.100.2.11
           target_user: ocnos
     control-server:
       vars: {}
