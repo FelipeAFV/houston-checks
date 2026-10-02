@@ -38,7 +38,7 @@ lab-hns-leaf-01:
   ssh-connection-timeout: 60000
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
-  target_host: 127.0.0.1:8022
+  target_host: 10.100.2.11
   target_user: ocnos
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/0e9e4ca3a3fa7aea59df3175484aba61
