@@ -2,7 +2,7 @@
 # Inventory hosts (NetBox import + static all.children hosts).
 python_bastion:
   nodename: python_bastion
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   tags: houston-internal,python-bastion
   username: houston
@@ -105,7 +105,7 @@ tc-cobuit1-back004:
 
 tc-cobuit1-brlf001:
   nodename: tc-cobuit1-brlf001
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,border-leaf-switch
@@ -124,7 +124,7 @@ tc-cobuit1-brlf001:
 
 tc-cobuit1-brlf002:
   nodename: tc-cobuit1-brlf002
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,border-leaf-switch
@@ -263,7 +263,7 @@ tc-cobuit1-infr003:
 
 tc-cobuit1-leaf001:
   nodename: tc-cobuit1-leaf001
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -282,7 +282,7 @@ tc-cobuit1-leaf001:
 
 tc-cobuit1-leaf002:
   nodename: tc-cobuit1-leaf002
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -301,7 +301,7 @@ tc-cobuit1-leaf002:
 
 tc-cobuit1-leaf003:
   nodename: tc-cobuit1-leaf003
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -320,7 +320,7 @@ tc-cobuit1-leaf003:
 
 tc-cobuit1-leaf004:
   nodename: tc-cobuit1-leaf004
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -339,7 +339,7 @@ tc-cobuit1-leaf004:
 
 tc-cobuit1-leaf005:
   nodename: tc-cobuit1-leaf005
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -358,7 +358,7 @@ tc-cobuit1-leaf005:
 
 tc-cobuit1-leaf006:
   nodename: tc-cobuit1-leaf006
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -377,7 +377,7 @@ tc-cobuit1-leaf006:
 
 tc-cobuit1-leaf007:
   nodename: tc-cobuit1-leaf007
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -396,7 +396,7 @@ tc-cobuit1-leaf007:
 
 tc-cobuit1-leaf008:
   nodename: tc-cobuit1-leaf008
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -415,7 +415,7 @@ tc-cobuit1-leaf008:
 
 tc-cobuit1-leaf009:
   nodename: tc-cobuit1-leaf009
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -434,7 +434,7 @@ tc-cobuit1-leaf009:
 
 tc-cobuit1-leaf010:
   nodename: tc-cobuit1-leaf010
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -453,7 +453,7 @@ tc-cobuit1-leaf010:
 
 tc-cobuit1-leaf011:
   nodename: tc-cobuit1-leaf011
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -472,7 +472,7 @@ tc-cobuit1-leaf011:
 
 tc-cobuit1-leaf012:
   nodename: tc-cobuit1-leaf012
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -491,7 +491,7 @@ tc-cobuit1-leaf012:
 
 tc-cobuit1-leaf013:
   nodename: tc-cobuit1-leaf013
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -510,7 +510,7 @@ tc-cobuit1-leaf013:
 
 tc-cobuit1-leaf014:
   nodename: tc-cobuit1-leaf014
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -529,7 +529,7 @@ tc-cobuit1-leaf014:
 
 tc-cobuit1-leaf015:
   nodename: tc-cobuit1-leaf015
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -548,7 +548,7 @@ tc-cobuit1-leaf015:
 
 tc-cobuit1-leaf016:
   nodename: tc-cobuit1-leaf016
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -567,7 +567,7 @@ tc-cobuit1-leaf016:
 
 tc-cobuit1-leaf017:
   nodename: tc-cobuit1-leaf017
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -586,7 +586,7 @@ tc-cobuit1-leaf017:
 
 tc-cobuit1-leaf018:
   nodename: tc-cobuit1-leaf018
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -605,7 +605,7 @@ tc-cobuit1-leaf018:
 
 tc-cobuit1-mgmt001:
   nodename: tc-cobuit1-mgmt001
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,management-switch
@@ -623,7 +623,7 @@ tc-cobuit1-mgmt001:
 
 tc-cobuit1-mgmt002:
   nodename: tc-cobuit1-mgmt002
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,management-switch
@@ -641,7 +641,7 @@ tc-cobuit1-mgmt002:
 
 tc-cobuit1-mgmt003:
   nodename: tc-cobuit1-mgmt003
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,management-switch
@@ -659,7 +659,7 @@ tc-cobuit1-mgmt003:
 
 tc-cobuit1-mgmt004:
   nodename: tc-cobuit1-mgmt004
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,management-switch
@@ -677,7 +677,7 @@ tc-cobuit1-mgmt004:
 
 tc-cobuit1-mgmt005:
   nodename: tc-cobuit1-mgmt005
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,management-switch
@@ -695,7 +695,7 @@ tc-cobuit1-mgmt005:
 
 tc-cobuit1-mgmt006:
   nodename: tc-cobuit1-mgmt006
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,management-switch
@@ -713,7 +713,7 @@ tc-cobuit1-mgmt006:
 
 tc-cobuit1-mgmt007:
   nodename: tc-cobuit1-mgmt007
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,management-switch
@@ -731,7 +731,7 @@ tc-cobuit1-mgmt007:
 
 tc-cobuit1-mgmt008:
   nodename: tc-cobuit1-mgmt008
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,management-switch
@@ -749,7 +749,7 @@ tc-cobuit1-mgmt008:
 
 tc-cobuit1-mgmt009:
   nodename: tc-cobuit1-mgmt009
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,management-switch
@@ -812,7 +812,7 @@ tc-cobuit1-slba002:
 
 tc-cobuit1-spne001:
   nodename: tc-cobuit1-spne001
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,spine-switch
@@ -830,7 +830,7 @@ tc-cobuit1-spne001:
 
 tc-cobuit1-spne002:
   nodename: tc-cobuit1-spne002
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,spine-switch
@@ -848,7 +848,7 @@ tc-cobuit1-spne002:
 
 tc-cobuit1-spne003:
   nodename: tc-cobuit1-spne003
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,spine-switch
@@ -866,7 +866,7 @@ tc-cobuit1-spne003:
 
 tc-cobuit1-spne004:
   nodename: tc-cobuit1-spne004
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,spine-switch
@@ -2789,7 +2789,7 @@ tc-cotobe1-back004:
 
 tc-cotobe1-brlf001:
   nodename: tc-cotobe1-brlf001
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,border-leaf-switch
@@ -2808,7 +2808,7 @@ tc-cotobe1-brlf001:
 
 tc-cotobe1-brlf002:
   nodename: tc-cotobe1-brlf002
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,border-leaf-switch
@@ -2947,7 +2947,7 @@ tc-cotobe1-infr003:
 
 tc-cotobe1-leaf001:
   nodename: tc-cotobe1-leaf001
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -2966,7 +2966,7 @@ tc-cotobe1-leaf001:
 
 tc-cotobe1-leaf002:
   nodename: tc-cotobe1-leaf002
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -2985,7 +2985,7 @@ tc-cotobe1-leaf002:
 
 tc-cotobe1-leaf003:
   nodename: tc-cotobe1-leaf003
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -3004,7 +3004,7 @@ tc-cotobe1-leaf003:
 
 tc-cotobe1-leaf004:
   nodename: tc-cotobe1-leaf004
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -3023,7 +3023,7 @@ tc-cotobe1-leaf004:
 
 tc-cotobe1-leaf005:
   nodename: tc-cotobe1-leaf005
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -3042,7 +3042,7 @@ tc-cotobe1-leaf005:
 
 tc-cotobe1-leaf006:
   nodename: tc-cotobe1-leaf006
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -3061,7 +3061,7 @@ tc-cotobe1-leaf006:
 
 tc-cotobe1-leaf007:
   nodename: tc-cotobe1-leaf007
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -3080,7 +3080,7 @@ tc-cotobe1-leaf007:
 
 tc-cotobe1-leaf008:
   nodename: tc-cotobe1-leaf008
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -3099,7 +3099,7 @@ tc-cotobe1-leaf008:
 
 tc-cotobe1-leaf009:
   nodename: tc-cotobe1-leaf009
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -3118,7 +3118,7 @@ tc-cotobe1-leaf009:
 
 tc-cotobe1-leaf010:
   nodename: tc-cotobe1-leaf010
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -3137,7 +3137,7 @@ tc-cotobe1-leaf010:
 
 tc-cotobe1-leaf011:
   nodename: tc-cotobe1-leaf011
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -3156,7 +3156,7 @@ tc-cotobe1-leaf011:
 
 tc-cotobe1-leaf012:
   nodename: tc-cotobe1-leaf012
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -3175,7 +3175,7 @@ tc-cotobe1-leaf012:
 
 tc-cotobe1-leaf013:
   nodename: tc-cotobe1-leaf013
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -3194,7 +3194,7 @@ tc-cotobe1-leaf013:
 
 tc-cotobe1-leaf014:
   nodename: tc-cotobe1-leaf014
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -3213,7 +3213,7 @@ tc-cotobe1-leaf014:
 
 tc-cotobe1-leaf015:
   nodename: tc-cotobe1-leaf015
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -3232,7 +3232,7 @@ tc-cotobe1-leaf015:
 
 tc-cotobe1-leaf016:
   nodename: tc-cotobe1-leaf016
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -3251,7 +3251,7 @@ tc-cotobe1-leaf016:
 
 tc-cotobe1-leaf017:
   nodename: tc-cotobe1-leaf017
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -3270,7 +3270,7 @@ tc-cotobe1-leaf017:
 
 tc-cotobe1-leaf018:
   nodename: tc-cotobe1-leaf018
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,check-sonic_show_running_config,server-leaf-switch
@@ -3289,7 +3289,7 @@ tc-cotobe1-leaf018:
 
 tc-cotobe1-mgmt001:
   nodename: tc-cotobe1-mgmt001
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,management-switch
@@ -3307,7 +3307,7 @@ tc-cotobe1-mgmt001:
 
 tc-cotobe1-mgmt002:
   nodename: tc-cotobe1-mgmt002
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,management-switch
@@ -3325,7 +3325,7 @@ tc-cotobe1-mgmt002:
 
 tc-cotobe1-mgmt003:
   nodename: tc-cotobe1-mgmt003
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,management-switch
@@ -3343,7 +3343,7 @@ tc-cotobe1-mgmt003:
 
 tc-cotobe1-mgmt004:
   nodename: tc-cotobe1-mgmt004
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,management-switch
@@ -3361,7 +3361,7 @@ tc-cotobe1-mgmt004:
 
 tc-cotobe1-mgmt005:
   nodename: tc-cotobe1-mgmt005
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,management-switch
@@ -3379,7 +3379,7 @@ tc-cotobe1-mgmt005:
 
 tc-cotobe1-mgmt006:
   nodename: tc-cotobe1-mgmt006
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,management-switch
@@ -3397,7 +3397,7 @@ tc-cotobe1-mgmt006:
 
 tc-cotobe1-mgmt007:
   nodename: tc-cotobe1-mgmt007
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,management-switch
@@ -3415,7 +3415,7 @@ tc-cotobe1-mgmt007:
 
 tc-cotobe1-mgmt008:
   nodename: tc-cotobe1-mgmt008
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,management-switch
@@ -3433,7 +3433,7 @@ tc-cotobe1-mgmt008:
 
 tc-cotobe1-mgmt009:
   nodename: tc-cotobe1-mgmt009
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,management-switch
@@ -3496,7 +3496,7 @@ tc-cotobe1-slba002:
 
 tc-cotobe1-spne001:
   nodename: tc-cotobe1-spne001
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,spine-switch
@@ -3514,7 +3514,7 @@ tc-cotobe1-spne001:
 
 tc-cotobe1-spne002:
   nodename: tc-cotobe1-spne002
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,spine-switch
@@ -3532,7 +3532,7 @@ tc-cotobe1-spne002:
 
 tc-cotobe1-spne003:
   nodename: tc-cotobe1-spne003
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,spine-switch
@@ -3550,7 +3550,7 @@ tc-cotobe1-spne003:
 
 tc-cotobe1-spne004:
   nodename: tc-cotobe1-spne004
-  hostname: python_bastion
+  hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
   tags: switch,spine-switch
