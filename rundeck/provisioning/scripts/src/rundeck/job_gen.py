@@ -167,8 +167,10 @@ def emit_per_check(
     tpl = tpl_dir / "per-check.yaml.tpl"
     if executor == "python":
         tpl = tpl_dir / "per-check-python.yaml.tpl"
+        tokens["SWITCH_PASSWORD_KEY_STORAGE"] = jg.switch_password_key_storage
     elif executor == "python_bastion":
         tpl = tpl_dir / "per-check-python-bastion.yaml.tpl"
+        tokens["SWITCH_PASSWORD_KEY_STORAGE"] = jg.switch_password_key_storage
     elif executor == "shell_bastion":
         tpl = tpl_dir / "per-check-shell-bastion.yaml.tpl"
         tokens["SWITCH_PASSWORD_KEY_STORAGE"] = jg.switch_password_key_storage
