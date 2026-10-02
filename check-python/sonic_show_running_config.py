@@ -16,7 +16,6 @@ import subprocess
 import sys
 from json import JSONDecodeError
 
-from jc import parse
 
 from helpers import (
     get_features,
