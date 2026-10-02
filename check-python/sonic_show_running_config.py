@@ -62,6 +62,13 @@ def run_show_runningconfiguration_all() -> object:
 
     output = proc.stdout
 
+
+    print("=== STDOUT ===", file=sys.stderr)
+    print(repr(output), file=sys.stderr)
+    print("=== STDERR ===", file=sys.stderr)
+    print(repr(proc.stderr), file=sys.stderr)
+    print("=== RETURN CODE ===", proc.returncode, file=sys.stderr)
+
     try:
         return json.loads(output)
 
