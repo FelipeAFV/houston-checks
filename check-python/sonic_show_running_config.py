@@ -17,7 +17,7 @@ import sys
 from json import JSONDecodeError
 
 
-from helpers import (
+from lib.helpers import (
     get_features,
     get_telemetry_gnmi_vrf,
     get_syslog_servers,
