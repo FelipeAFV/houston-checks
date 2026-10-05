@@ -16,7 +16,13 @@
     month: '*'
     year: '*'
   timeout: 20m
-  
+  options:
+
+  - name: test_option
+    description: Expected timeout for checking exporter scrapping
+    required: true
+    defaultValue: 60
+
   options:
     - name: SWITCH_PASSWORD
       description: Switch SSH password (Key Storage). Used for shell_bastion switch checks via TARGET_PASSWORD.
@@ -114,6 +120,11 @@
           export TARGET_PORT='@node.target_port@'
           export TARGET_PASSWORD='@option.SWITCH_PASSWORD@'
           
+          export TEST_OPTION='@option.test_option@'
+          if [[ -n "@node.test_option@" ]]; then
+            export TEST_OPTION='@node.test_option@'
+          fi
+
           set +e
           bash "${NODE_BASE}/scripts/run-check-step.sh" python sonic_show_running_config "${NODE_BASE}/check-python"
           CHECK_RC=$?
