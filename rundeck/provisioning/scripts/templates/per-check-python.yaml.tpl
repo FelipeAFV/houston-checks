@@ -7,8 +7,8 @@
   nodeFilterEditable: false
 __SCHEDULE_BLOCK__
   timeout: __JOB_TIMEOUT__
-  __JOB_OPTIONS__
   options:
+    __JOB_OPTIONS__
     - name: SWITCH_PASSWORD
       description: Switch SSH password (Key Storage). Used for shell_bastion switch checks via TARGET_PASSWORD.
       storagePath: __SWITCH_PASSWORD_KEY_STORAGE__

@@ -101,16 +101,16 @@ def render_job_options(options: list[JobOption]) -> str:
     """Render job options for a Rundeck job."""
     if not options:
         return ""
-    lines = ["options:"]
-    for opt in options:
-        lines.append(f"""
-  - name: {opt.name}
-    description: {opt.description}
-    required: {str(opt.required).lower()}
-    {f"defaultValue: {opt.default}" if opt.default else ''}
-""")
-    return "\n".join(lines)
 
+    lines = []
+
+    for opt in options:
+        lines.append(f"""    - name: {opt.name}
+      description: {opt.description}
+      required: {str(opt.required).lower()}
+      {f"defaultValue: {opt.default}" if opt.default else ""}""")
+
+    return "\n".join(lines)
 
 def render_job_exports(options: list[JobOption]) -> str:
     """Render job exports for a Rundeck job"""
