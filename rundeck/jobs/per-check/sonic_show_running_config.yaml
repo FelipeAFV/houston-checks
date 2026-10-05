@@ -17,7 +17,7 @@
     year: '*'
   timeout: 20m
   options:
-        - name: test_option
+    - name: test_option
       description: Expected timeout for checking exporter scrapping
       required: true
       defaultValue: 60
