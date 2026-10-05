@@ -24,8 +24,8 @@ deployer:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
 
-lab-hns-leaf-01:
-  nodename: lab-hns-leaf-01
+ifx-dell-sonic-01:
+  nodename: ifx-dell-sonic-01
   hostname: 127.0.0.1:8022
   osFamily: unix
   kind: switch
@@ -38,10 +38,10 @@ lab-hns-leaf-01:
   ssh-connection-timeout: 60000
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
-  target_host: 10.100.2.11
+  target_host: 10.102.0.21
   target_user: ocnos
   target_port: 22
-  uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/0e9e4ca3a3fa7aea59df3175484aba61
+  uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/a504510e268b6c71d159f59c46749d5a
 
 tc-cobuit1-back001:
   nodename: tc-cobuit1-back001
