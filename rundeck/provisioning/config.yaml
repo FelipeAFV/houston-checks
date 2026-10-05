@@ -51,7 +51,7 @@ ssh:
     cotobe: keys/project/houston/cotobe/prov.key
 
 switch_ssh:
-  username: ocnos
+  username: admin
   port: 22
   request_tty: true
   password_key_storage_path: keys/project/houston/switch/ocnos.password
