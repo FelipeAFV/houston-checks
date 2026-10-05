@@ -15,3 +15,8 @@ checks:
     groups:
       border-leaf-switch: {}
       server-leaf-switch: {}
+    options:
+    - name: test_option
+      description: Expected timeout for checking exporter scrapping
+      required: true
+      default: "60"

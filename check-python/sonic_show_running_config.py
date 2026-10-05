@@ -16,6 +16,7 @@ import subprocess
 import sys
 from json import JSONDecodeError
 
+TEST_OPTION = os.environ.get("TEST_OPTION", "70")
 
 from lib.helpers import (
     get_features,
