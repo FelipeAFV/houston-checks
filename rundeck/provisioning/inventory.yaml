@@ -25,10 +25,10 @@ all:
       vars:
         netbox_kind: switch
       hosts:
-        lab-hns-leaf-01:
-          nodename: lab-hns-leaf-01
-          hostname: 10.100.2.11
-          target_user: ocnos
+        ifx-dell-sonic-01:
+          nodename: ifx-dell-sonic-01
+          hostname: 10.102.0.21
+          target_user: admin
     control-server:
       vars: {}
       hosts: {}
