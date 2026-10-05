@@ -39,7 +39,7 @@ ifx-dell-sonic-01:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: 10.102.0.21
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/a504510e268b6c71d159f59c46749d5a
 
@@ -118,7 +118,7 @@ tc-cobuit1-brlf001:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-BRLF001
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/b926d1deff1795b7cff40cbf90ef6ba2
 
@@ -137,7 +137,7 @@ tc-cobuit1-brlf002:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-BRLF002
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/9dffcbb00f7e564852e6102ff14ce586
 
@@ -276,7 +276,7 @@ tc-cobuit1-leaf001:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-LEAF001
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/7fabcd65fef0c7013648fda8c8dc01d1
 
@@ -295,7 +295,7 @@ tc-cobuit1-leaf002:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-LEAF002
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/93593a72d28f6c194429317499fcc309
 
@@ -314,7 +314,7 @@ tc-cobuit1-leaf003:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-LEAF003
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/25215beabef32fe2a9156258f66dabcc
 
@@ -333,7 +333,7 @@ tc-cobuit1-leaf004:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-LEAF004
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/c286dc99985c445e3e0bca33eb4fc062
 
@@ -352,7 +352,7 @@ tc-cobuit1-leaf005:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-LEAF005
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/b206c6139572414d63dfee06ba724150
 
@@ -371,7 +371,7 @@ tc-cobuit1-leaf006:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-LEAF006
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/55f9240b822f6fd7c3d65e43660de461
 
@@ -390,7 +390,7 @@ tc-cobuit1-leaf007:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-LEAF007
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/7d2c48d92d3f794452322424877a20c5
 
@@ -409,7 +409,7 @@ tc-cobuit1-leaf008:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-LEAF008
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/1ce3227a169ccbfe65f04f86e35a795e
 
@@ -428,7 +428,7 @@ tc-cobuit1-leaf009:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-LEAF009
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/29c16b8023b578b69f1fcf10027202fb
 
@@ -447,7 +447,7 @@ tc-cobuit1-leaf010:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-LEAF010
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/cfc5d067979d8883967bee8ceb52a42b
 
@@ -466,7 +466,7 @@ tc-cobuit1-leaf011:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-LEAF011
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/aece0a76e7a2d818e1fec3e30886bd65
 
@@ -485,7 +485,7 @@ tc-cobuit1-leaf012:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-LEAF012
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/bbce20e31a326568cfd778f98ae305a8
 
@@ -504,7 +504,7 @@ tc-cobuit1-leaf013:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-LEAF013
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/ae992d9f39c3a12a99120c84cecdd899
 
@@ -523,7 +523,7 @@ tc-cobuit1-leaf014:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-LEAF014
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/9b8ef3eeff14568bd29716cf0b050139
 
@@ -542,7 +542,7 @@ tc-cobuit1-leaf015:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-LEAF015
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/7eda4906ae4ddb1f6dff3e85930cb492
 
@@ -561,7 +561,7 @@ tc-cobuit1-leaf016:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-LEAF016
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/79fb57db388333c9e9b937370bce1ff1
 
@@ -580,7 +580,7 @@ tc-cobuit1-leaf017:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-LEAF017
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/497713b77f0115abae4da57c45f5dacc
 
@@ -599,7 +599,7 @@ tc-cobuit1-leaf018:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-LEAF018
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/86eded26f50b32d4c32ca53c9ea96447
 
@@ -618,7 +618,7 @@ tc-cobuit1-mgmt001:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-MGMT001
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cobuit1-mgmt002:
@@ -636,7 +636,7 @@ tc-cobuit1-mgmt002:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-MGMT002
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cobuit1-mgmt003:
@@ -654,7 +654,7 @@ tc-cobuit1-mgmt003:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-MGMT003
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cobuit1-mgmt004:
@@ -672,7 +672,7 @@ tc-cobuit1-mgmt004:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-MGMT004
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cobuit1-mgmt005:
@@ -690,7 +690,7 @@ tc-cobuit1-mgmt005:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-MGMT005
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cobuit1-mgmt006:
@@ -708,7 +708,7 @@ tc-cobuit1-mgmt006:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-MGMT006
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cobuit1-mgmt007:
@@ -726,7 +726,7 @@ tc-cobuit1-mgmt007:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-MGMT007
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cobuit1-mgmt008:
@@ -744,7 +744,7 @@ tc-cobuit1-mgmt008:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-MGMT008
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cobuit1-mgmt009:
@@ -762,7 +762,7 @@ tc-cobuit1-mgmt009:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-MGMT009
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cobuit1-prov001:
@@ -825,7 +825,7 @@ tc-cobuit1-spne001:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-SPNE001
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cobuit1-spne002:
@@ -843,7 +843,7 @@ tc-cobuit1-spne002:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-SPNE002
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cobuit1-spne003:
@@ -861,7 +861,7 @@ tc-cobuit1-spne003:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-SPNE003
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cobuit1-spne004:
@@ -879,7 +879,7 @@ tc-cobuit1-spne004:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COBUIT1-SPNE004
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cobuit1-strg001:
@@ -2802,7 +2802,7 @@ tc-cotobe1-brlf001:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-BRLF001
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/e2baaa6a5815b1dee1417a4fd4d388cc
 
@@ -2821,7 +2821,7 @@ tc-cotobe1-brlf002:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-BRLF002
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/8d412c0d701aa78af87f20e2c994ef8e
 
@@ -2960,7 +2960,7 @@ tc-cotobe1-leaf001:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-LEAF001
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/61be382ecb18ed13198829d0d99cb573
 
@@ -2979,7 +2979,7 @@ tc-cotobe1-leaf002:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-LEAF002
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/b4ad40b38338a861f5769344a6fe7e5d
 
@@ -2998,7 +2998,7 @@ tc-cotobe1-leaf003:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-LEAF003
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/6e9a88579b0a223069b4a2a3e2928d95
 
@@ -3017,7 +3017,7 @@ tc-cotobe1-leaf004:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-LEAF004
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/8bd3aa3f2cc3e885ad7d00937c8c076a
 
@@ -3036,7 +3036,7 @@ tc-cotobe1-leaf005:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-LEAF005
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/fe183a24d6ab4eaf9f2e64f7169f9228
 
@@ -3055,7 +3055,7 @@ tc-cotobe1-leaf006:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-LEAF006
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/3d00d44e5d9432cea219601e574516a0
 
@@ -3074,7 +3074,7 @@ tc-cotobe1-leaf007:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-LEAF007
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/189993ffd58a7f84e2e7b2c52d1a38b6
 
@@ -3093,7 +3093,7 @@ tc-cotobe1-leaf008:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-LEAF008
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/665ebd4ed958a28bf4a82245ebe6e69f
 
@@ -3112,7 +3112,7 @@ tc-cotobe1-leaf009:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-LEAF009
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/ba8fa810fc7dd0d160bbac90b5b6c4b0
 
@@ -3131,7 +3131,7 @@ tc-cotobe1-leaf010:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-LEAF010
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/31e52ea4895130827b5397bbb6bcced6
 
@@ -3150,7 +3150,7 @@ tc-cotobe1-leaf011:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-LEAF011
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/c90cbbf7de4c511bc54295fe0d415821
 
@@ -3169,7 +3169,7 @@ tc-cotobe1-leaf012:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-LEAF012
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/ed0122eb68559a139d03e1d708ac9a29
 
@@ -3188,7 +3188,7 @@ tc-cotobe1-leaf013:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-LEAF013
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/922960aaf38d9fbe44f9d12ecd3bd40a
 
@@ -3207,7 +3207,7 @@ tc-cotobe1-leaf014:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-LEAF014
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/361313329e413c6d803b1c10f706f3ba
 
@@ -3226,7 +3226,7 @@ tc-cotobe1-leaf015:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-LEAF015
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/c6b71ea9b24b51eceb271b845dc1263e
 
@@ -3245,7 +3245,7 @@ tc-cotobe1-leaf016:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-LEAF016
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/52183fc739928a98feb2be3830683410
 
@@ -3264,7 +3264,7 @@ tc-cotobe1-leaf017:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-LEAF017
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/258bf248c5ac960210592d28afaa9add
 
@@ -3283,7 +3283,7 @@ tc-cotobe1-leaf018:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-LEAF018
-  target_user: ocnos
+  target_user: admin
   target_port: 22
   uptime_ping_sonic_show_running_config: http://127.0.0.1:3000/ping/62599ce96f564cdc6e6cab8205612481
 
@@ -3302,7 +3302,7 @@ tc-cotobe1-mgmt001:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-MGMT001
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cotobe1-mgmt002:
@@ -3320,7 +3320,7 @@ tc-cotobe1-mgmt002:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-MGMT002
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cotobe1-mgmt003:
@@ -3338,7 +3338,7 @@ tc-cotobe1-mgmt003:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-MGMT003
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cotobe1-mgmt004:
@@ -3356,7 +3356,7 @@ tc-cotobe1-mgmt004:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-MGMT004
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cotobe1-mgmt005:
@@ -3374,7 +3374,7 @@ tc-cotobe1-mgmt005:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-MGMT005
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cotobe1-mgmt006:
@@ -3392,7 +3392,7 @@ tc-cotobe1-mgmt006:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-MGMT006
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cotobe1-mgmt007:
@@ -3410,7 +3410,7 @@ tc-cotobe1-mgmt007:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-MGMT007
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cotobe1-mgmt008:
@@ -3428,7 +3428,7 @@ tc-cotobe1-mgmt008:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-MGMT008
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cotobe1-mgmt009:
@@ -3446,7 +3446,7 @@ tc-cotobe1-mgmt009:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-MGMT009
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cotobe1-prov001:
@@ -3509,7 +3509,7 @@ tc-cotobe1-spne001:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-SPNE001
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cotobe1-spne002:
@@ -3527,7 +3527,7 @@ tc-cotobe1-spne002:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-SPNE002
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cotobe1-spne003:
@@ -3545,7 +3545,7 @@ tc-cotobe1-spne003:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-SPNE003
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cotobe1-spne004:
@@ -3563,7 +3563,7 @@ tc-cotobe1-spne004:
   ssh-command-timeout: 300000
   check_script_base: /var/tmp/rundeck
   target_host: TC-COTOBE1-SPNE004
-  target_user: ocnos
+  target_user: admin
   target_port: 22
 
 tc-cotobe1-strg001:
