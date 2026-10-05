@@ -41,9 +41,8 @@ EXCLUDED_FEATURES = {
 }
 
 
-def run_show_runningconfiguration_all() -> object:
+def run_show_runningconfiguration_all() -> dict:
     """Run show runningconfiguration all on the remote switch."""
-
     proc = subprocess.run(
         [RUN_SWITCH_COMMAND],
         input="show runningconfiguration all\nexit\n",
@@ -54,7 +53,6 @@ def run_show_runningconfiguration_all() -> object:
 
     if proc.returncode != 0:
         error = (proc.stderr or proc.stdout or "").strip()
-
         raise RuntimeError(
             "Failed to execute 'show runningconfiguration all'"
             + (f": {error}" if error else "")
@@ -62,24 +60,29 @@ def run_show_runningconfiguration_all() -> object:
 
     output = proc.stdout
 
-
     print("=== STDOUT ===", file=sys.stderr)
     print(repr(output), file=sys.stderr)
     print("=== STDERR ===", file=sys.stderr)
     print(repr(proc.stderr), file=sys.stderr)
     print("=== RETURN CODE ===", proc.returncode, file=sys.stderr)
 
+    # The SSH wrapper may include the SSH banner, prompt, or other
+    # terminal output before the command's JSON response.
+    json_start = output.find("{")
+
+    if json_start == -1:
+        raise RuntimeError(
+            "Unable to find JSON in 'show runningconfiguration all' output"
+        )
+
+    json_output = output[json_start:]
+
     try:
-        return json.loads(output)
-
-    except JSONDecodeError:
-        try:
-            return parse("asciitable", output)[1:]
-        except Exception as exc:
-            raise RuntimeError(
-                "Unable to parse 'show runningconfiguration all' output"
-            ) from exc
-
+        return json.JSONDecoder().raw_decode(json_output)[0]
+    except JSONDecodeError as exc:
+        raise RuntimeError(
+            "Unable to parse JSON from 'show runningconfiguration all' output"
+        ) from exc
 
 def check_features(status: object) -> bool:
     """Check that all required features are up and enabled."""

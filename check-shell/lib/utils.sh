@@ -8,7 +8,6 @@ send_commands_to_device() {
 
     SESSION_SHA=`echo ${JOB_EXECID}_${TARGET_USER}_${TARGET_HOST}_${TARGET_HOST} | sha1sum | awk '{print $1}'`
     export SESSION_ID="session_${SESSION_SHA}"
-    printf "TARGET_PASSWORD: $TARGET_PASSWORD"
     $SCRIPT_DIR/../lib/send_commands_to_device.sh "$TARGET_USER" "$TARGET_HOST" "$TARGET_PORT" "$TARGET_PASSWORD"
 }
 
