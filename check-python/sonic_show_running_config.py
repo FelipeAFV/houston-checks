@@ -17,7 +17,7 @@ import sys
 from json import JSONDecodeError
 
 TEST_OPTION = os.environ.get("TEST_OPTION", "70")
-print(f"TEST_OPTION: {TEST_OPTION}", file=sys.stderr)
+print(f"TEST_OPTION: {TEST_OPTION}")
 
 from lib.helpers import (
     get_features,
