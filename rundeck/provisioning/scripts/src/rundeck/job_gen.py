@@ -105,7 +105,7 @@ def render_job_options(options: list[JobOption]) -> str:
     lines = []
 
     for opt in options:
-        lines.append(f"""    - name: {opt.name}
+        lines.append(f"""- name: {opt.name}
       description: {opt.description}
       required: {str(opt.required).lower()}
       {f"defaultValue: {opt.default}" if opt.default else ""}""")
